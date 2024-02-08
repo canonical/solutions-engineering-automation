@@ -59,6 +59,54 @@ jobs:
           ref: master
           wait_interval: 60
 
+      - name: Tests for hardware-observer-operator
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: hardware-observer-operator
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: hardware-observer-operator
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-juju-backup-all
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-juju-backup-all
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-juju-backup-all
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-juju-local
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-juju-local
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-juju-local
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-kubernetes-service-checks
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-kubernetes-service-checks
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-kubernetes-service-checks
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
       - name: Tests for charm-local-users
         uses: convictional/trigger-workflow-and-wait@v1.6.1
         id: charm-local-users
@@ -83,6 +131,42 @@ jobs:
           ref: master
           wait_interval: 60
 
+      - name: Tests for charm-nginx
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-nginx
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-nginx
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for charm-openstack-service-checks
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-openstack-service-checks
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-openstack-service-checks
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-prometheus-blackbox-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-prometheus-blackbox-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-prometheus-blackbox-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
       - name: Collect failed tests
         id: collect-failed-tests
         if: ${{ failure() }}
@@ -100,11 +184,35 @@ jobs:
           if [ "${{ steps.charm-duplicity.outcome }}" != "success" ]; then
             failed_tests+="[charm-duplicity](https://github.com/canonical/charm-duplicity/actions), "
           fi
+          if [ "${{ steps.hardware-observer-operator.outcome }}" != "success" ]; then
+            failed_tests+="[hardware-observer-operator](https://github.com/canonical/hardware-observer-operator/actions), "
+          fi
+          if [ "${{ steps.charm-juju-backup-all.outcome }}" != "success" ]; then
+            failed_tests+="[charm-juju-backup-all](https://github.com/canonical/charm-juju-backup-all/actions), "
+          fi
+          if [ "${{ steps.charm-juju-local.outcome }}" != "success" ]; then
+            failed_tests+="[charm-juju-local](https://github.com/canonical/charm-juju-local/actions), "
+          fi
+          if [ "${{ steps.charm-kubernetes-service-checks.outcome }}" != "success" ]; then
+            failed_tests+="[charm-kubernetes-service-checks](https://github.com/canonical/charm-kubernetes-service-checks/actions), "
+          fi
           if [ "${{ steps.charm-local-users.outcome }}" != "success" ]; then
             failed_tests+="[charm-local-users](https://github.com/canonical/charm-local-users/actions), "
           fi
           if [ "${{ steps.charm-logrotated.outcome }}" != "success" ]; then
             failed_tests+="[charm-logrotated](https://github.com/canonical/charm-logrotated/actions), "
+          fi
+          if [ "${{ steps.charm-nginx.outcome }}" != "success" ]; then
+            failed_tests+="[charm-nginx](https://github.com/canonical/charm-nginx/actions), "
+          fi
+          if [ "${{ steps.charm-nrpe.outcome }}" != "success" ]; then
+            failed_tests+="[charm-nrpe](https://github.com/canonical/charm-nrpe/actions), "
+          fi
+          if [ "${{ steps.charm-openstack-service-checks.outcome }}" != "success" ]; then
+            failed_tests+="[charm-openstack-service-checks](https://github.com/canonical/charm-openstack-service-checks/actions), "
+          fi
+          if [ "${{ steps.charm-prometheus-blackbox-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[charm-prometheus-blackbox-exporter](https://github.com/canonical/charm-prometheus-blackbox-exporter/actions), "
           fi
           # Set the output variable to pass the failed tests to the next job
           echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"

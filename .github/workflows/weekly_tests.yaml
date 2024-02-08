@@ -1,0 +1,126 @@
+name: Weekly Tests
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * SAT"
+
+jobs:
+  tests:
+    name: Run all tests
+    runs-on: ubuntu-latest
+    outputs:
+      failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
+    steps:
+      - name: Tests for charm-advanced-routing
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-advanced-routing
+        with:
+          owner: canonical
+          repo: charm-advanced-routing
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+      
+      - name: Tests for charm-apt-mirror
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-apt-mirror
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-apt-mirror
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for charm-cloudsupport
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-cloudsupport
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-cloudsupport
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for charm-duplicity
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-duplicity
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-duplicity
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-local-users
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-local-users
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-local-users
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for charm-logrotated
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-logrotated
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-logrotated
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Collect failed tests
+        id: collect-failed-tests
+        if: ${{ failure() }}
+        run: |
+          failed_tests=""
+          if [ "${{ steps.charm-advanced-routing.outcome }}" != "success" ]; then
+            failed_tests+="[charm-advanced-routing](https://github.com/canonical/charm-advanced-routing/actions), "
+          fi
+          if [ "${{ steps.charm-apt-mirror.outcome }}" != "success" ]; then
+            failed_tests+="[charm-apt-mirror](https://github.com/canonical/charm-apt-mirror/actions), "
+          fi
+          if [ "${{ steps.charm-cloudsupport.outcome }}" != "success" ]; then
+            failed_tests+="[charm-cloudsupport](https://github.com/canonical/charm-cloudsupport/actions), "
+          fi
+          if [ "${{ steps.charm-duplicity.outcome }}" != "success" ]; then
+            failed_tests+="[charm-duplicity](https://github.com/canonical/charm-duplicity/actions), "
+          fi
+          if [ "${{ steps.charm-local-users.outcome }}" != "success" ]; then
+            failed_tests+="[charm-local-users](https://github.com/canonical/charm-local-users/actions), "
+          fi
+          if [ "${{ steps.charm-logrotated.outcome }}" != "success" ]; then
+            failed_tests+="[charm-logrotated](https://github.com/canonical/charm-logrotated/actions), "
+          fi
+          # Set the output variable to pass the failed tests to the next job
+          echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"
+
+  notify-on-failure:
+    needs: tests
+    if: ${{ failure() }}
+    name: Notify Mattermost Channel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create the Mattermost Message
+        env:
+          FAILED_TESTS: ${{ needs.tests.outputs.failed_tests }}
+        run: |
+          echo "{\"text\":\":robot_face: Weekly tests have failed for these projects: $FAILED_TESTS\"}" > mattermost.json
+
+      - uses: mattermost/action-mattermost-notify@master
+        env:
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}

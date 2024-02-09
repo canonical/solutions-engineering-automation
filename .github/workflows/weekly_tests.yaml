@@ -167,6 +167,114 @@ jobs:
           ref: master
           wait_interval: 60
 
+      - name: Tests for charm-prometheus-libvirt-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-prometheus-libvirt-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-prometheus-libvirt-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-storage-connector
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-storage-connector
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-storage-connector
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-sysconfig
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-sysconfig
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-sysconfig
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-userdir-ldap
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charm-userdir-ldap
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-userdir-ldap
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for prometheus-hardware-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: prometheus-hardware-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: prometheus-hardware-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for prometheus-juju-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: prometheus-juju-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: prometheus-juju-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: pr.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for prometheus-juju-backup-all-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: prometheus-juju-backup-all-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: prometheus-juju-backup-all-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for snap-tempest
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: snap-tempest
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: snap-tempest
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: pr.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for charmed-openstack-upgrader
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: charmed-openstack-upgrader
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charmed-openstack-upgrader
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
       - name: Collect failed tests
         id: collect-failed-tests
         if: ${{ failure() }}
@@ -213,6 +321,36 @@ jobs:
           fi
           if [ "${{ steps.charm-prometheus-blackbox-exporter.outcome }}" != "success" ]; then
             failed_tests+="[charm-prometheus-blackbox-exporter](https://github.com/canonical/charm-prometheus-blackbox-exporter/actions), "
+          fi
+          if [ "${{ steps.charm-prometheus-libvirt-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[charm-prometheus-libvirt-exporter](https://github.com/canonical/charm-prometheus-libvirt-exporter/actions), "
+          fi
+          if [ "${{ steps.charm-simple-streams.outcome }}" != "success" ]; then
+            failed_tests+="[charm-simple-streams](https://github.com/canonical/charm-simple-streams/actions), "
+          fi
+          if [ "${{ steps.charm-storage-connector.outcome }}" != "success" ]; then
+            failed_tests+="[charm-storage-connector](https://github.com/canonical/charm-storage-connector/actions), "
+          fi
+          if [ "${{ steps.charm-sysconfig.outcome }}" != "success" ]; then
+            failed_tests+="[charm-sysconfig](https://github.com/canonical/charm-sysconfig/actions), "
+          fi
+          if [ "${{ steps.charm-userdir-ldap.outcome }}" != "success" ]; then
+            failed_tests+="[charm-userdir-ldap](https://github.com/canonical/charm-userdir-ldap/actions), "
+          fi
+          if [ "${{ steps.prometheus-hardware-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[prometheus-hardware-exporter](https://github.com/canonical/prometheus-hardware-exporter/actions), "
+          fi
+          if [ "${{ steps.prometheus-juju-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[prometheus-juju-exporter](https://github.com/canonical/prometheus-juju-exporter/actions), "
+          fi
+          if [ "${{ steps.prometheus-juju-backup-all-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[prometheus-juju-backup-all-exporter](https://github.com/canonical/prometheus-juju-backup-all-exporter/actions), "
+          fi
+          if [ "${{ steps.snap-tempest.outcome }}" != "success" ]; then
+            failed_tests+="[snap-tempest](https://github.com/canonical/snap-tempest/actions), "
+          fi
+          if [ "${{ steps.charmed-openstack-upgrader.outcome }}" != "success" ]; then
+            failed_tests+="[charmed-openstack-upgrader](https://github.com/canonical/charmed-openstack-upgrader/actions), "
           fi
           # Set the output variable to pass the failed tests to the next job
           echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"

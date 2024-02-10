@@ -13,7 +13,7 @@ jobs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
     steps:
       - name: Tests for charm-advanced-routing
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-advanced-routing
         with:
           owner: canonical
@@ -24,7 +24,7 @@ jobs:
           wait_interval: 60
       
       - name: Tests for charm-apt-mirror
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-apt-mirror
         if: ${{ always() }}
         with:
@@ -36,7 +36,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-cloudsupport
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-cloudsupport
         if: ${{ always() }}
         with:
@@ -48,7 +48,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-duplicity
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-duplicity
         if: ${{ always() }}
         with:
@@ -60,7 +60,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for hardware-observer-operator
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: hardware-observer-operator
         if: ${{ always() }}
         with:
@@ -72,7 +72,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-juju-backup-all
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-juju-backup-all
         if: ${{ always() }}
         with:
@@ -84,7 +84,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-juju-local
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-juju-local
         if: ${{ always() }}
         with:
@@ -96,7 +96,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-kubernetes-service-checks
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-kubernetes-service-checks
         if: ${{ always() }}
         with:
@@ -108,7 +108,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-local-users
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-local-users
         if: ${{ always() }}
         with:
@@ -120,7 +120,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-logrotated
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-logrotated
         if: ${{ always() }}
         with:
@@ -132,7 +132,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-nginx
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-nginx
         if: ${{ always() }}
         with:
@@ -144,7 +144,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-openstack-service-checks
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-openstack-service-checks
         if: ${{ always() }}
         with:
@@ -156,7 +156,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-prometheus-blackbox-exporter
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-prometheus-blackbox-exporter
         if: ${{ always() }}
         with:
@@ -168,7 +168,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-prometheus-libvirt-exporter
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-prometheus-libvirt-exporter
         if: ${{ always() }}
         with:
@@ -180,7 +180,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-storage-connector
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-storage-connector
         if: ${{ always() }}
         with:
@@ -192,7 +192,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-sysconfig
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-sysconfig
         if: ${{ always() }}
         with:
@@ -204,7 +204,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charm-userdir-ldap
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-userdir-ldap
         if: ${{ always() }}
         with:
@@ -216,7 +216,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for prometheus-hardware-exporter
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: prometheus-hardware-exporter
         if: ${{ always() }}
         with:
@@ -228,7 +228,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for prometheus-juju-exporter
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: prometheus-juju-exporter
         if: ${{ always() }}
         with:
@@ -240,7 +240,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for prometheus-juju-backup-all-exporter
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: prometheus-juju-backup-all-exporter
         if: ${{ always() }}
         with:
@@ -252,7 +252,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for snap-tempest
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: snap-tempest
         if: ${{ always() }}
         with:
@@ -264,7 +264,7 @@ jobs:
           wait_interval: 60
 
       - name: Tests for charmed-openstack-upgrader
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charmed-openstack-upgrader
         if: ${{ always() }}
         with:

@@ -20,7 +20,7 @@ jobs:
           repo: charm-simple-streams
           github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
           workflow_file_name: check.yaml
-          ref: master
+          ref: main
           wait_interval: 60
 
       - name: Tests for charm-storage-connector

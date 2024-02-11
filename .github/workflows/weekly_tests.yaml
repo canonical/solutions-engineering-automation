@@ -8,7 +8,7 @@ on:
 jobs:
   tests:
     name: Run all tests
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, large]
     outputs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
     steps:

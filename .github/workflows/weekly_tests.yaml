@@ -1,4 +1,4 @@
-name: Weekly Tests Batch 1
+name: Weekly Tests
 
 on:
   workflow_dispatch:
@@ -6,8 +6,8 @@ on:
     - cron: "0 0 * * SAT"
 
 jobs:
-  tests:
-    name: Run tests for batch 1 
+  tests-1:
+    name: Run first set of tests
     runs-on: [self-hosted, large]
     outputs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
@@ -167,18 +167,6 @@ jobs:
           ref: master
           wait_interval: 60
 
-      - name: Tests for charm-prometheus-libvirt-exporter
-        uses: convictional/trigger-workflow-and-wait@v1.6.5
-        id: charm-prometheus-libvirt-exporter
-        if: ${{ always() }}
-        with:
-          owner: canonical
-          repo: charm-prometheus-libvirt-exporter
-          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
-          workflow_file_name: check.yaml
-          ref: master
-          wait_interval: 60
-
       - name: Collect failed tests
         id: collect-failed-tests
         if: ${{ failure() }}
@@ -226,23 +214,185 @@ jobs:
           if [ "${{ steps.charm-prometheus-blackbox-exporter.outcome }}" != "success" ]; then
             failed_tests+="[charm-prometheus-blackbox-exporter](https://github.com/canonical/charm-prometheus-blackbox-exporter/actions), "
           fi
+          # Set the output variable to pass the failed tests to the next job
+          echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"
+
+  # need second job due to 360 minute execution time limit for single job
+  tests-2:
+    name: Run second set of tests
+    runs-on: [self-hosted, large]
+    outputs:
+      failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
+    steps:
+      - name: Tests for charm-prometheus-libvirt-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: charm-prometheus-libvirt-exporter
+        with:
+          owner: canonical
+          repo: charm-prometheus-libvirt-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-simple-streams
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: charm-simple-streams
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-simple-streams
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for charm-storage-connector
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: charm-storage-connector
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-storage-connector
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-sysconfig
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: charm-sysconfig
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-sysconfig
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for charm-userdir-ldap
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: charm-userdir-ldap
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charm-userdir-ldap
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: master
+          wait_interval: 60
+
+      - name: Tests for prometheus-hardware-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: prometheus-hardware-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: prometheus-hardware-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for prometheus-juju-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: prometheus-juju-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: prometheus-juju-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: pr.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for prometheus-juju-backup-all-exporter
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: prometheus-juju-backup-all-exporter
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: prometheus-juju-backup-all-exporter
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for snap-tempest
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: snap-tempest
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: snap-tempest
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: pr.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Tests for charmed-openstack-upgrader
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: charmed-openstack-upgrader
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: charmed-openstack-upgrader
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: check.yaml
+          ref: main
+          wait_interval: 60
+
+      - name: Collect failed tests
+        id: collect-failed-tests
+        if: ${{ failure() }}
+        run: |
+          failed_tests=""
           if [ "${{ steps.charm-prometheus-libvirt-exporter.outcome }}" != "success" ]; then
             failed_tests+="[charm-prometheus-libvirt-exporter](https://github.com/canonical/charm-prometheus-libvirt-exporter/actions), "
+          fi
+          if [ "${{ steps.charm-simple-streams.outcome }}" != "success" ]; then
+            failed_tests+="[charm-simple-streams](https://github.com/canonical/charm-simple-streams/actions), "
+          fi
+          if [ "${{ steps.charm-storage-connector.outcome }}" != "success" ]; then
+            failed_tests+="[charm-storage-connector](https://github.com/canonical/charm-storage-connector/actions), "
+          fi
+          if [ "${{ steps.charm-sysconfig.outcome }}" != "success" ]; then
+            failed_tests+="[charm-sysconfig](https://github.com/canonical/charm-sysconfig/actions), "
+          fi
+          if [ "${{ steps.charm-userdir-ldap.outcome }}" != "success" ]; then
+            failed_tests+="[charm-userdir-ldap](https://github.com/canonical/charm-userdir-ldap/actions), "
+          fi
+          if [ "${{ steps.prometheus-hardware-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[prometheus-hardware-exporter](https://github.com/canonical/prometheus-hardware-exporter/actions), "
+          fi
+          if [ "${{ steps.prometheus-juju-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[prometheus-juju-exporter](https://github.com/canonical/prometheus-juju-exporter/actions), "
+          fi
+          if [ "${{ steps.prometheus-juju-backup-all-exporter.outcome }}" != "success" ]; then
+            failed_tests+="[prometheus-juju-backup-all-exporter](https://github.com/canonical/prometheus-juju-backup-all-exporter/actions), "
+          fi
+          if [ "${{ steps.snap-tempest.outcome }}" != "success" ]; then
+            failed_tests+="[snap-tempest](https://github.com/canonical/snap-tempest/actions), "
+          fi
+          if [ "${{ steps.charmed-openstack-upgrader.outcome }}" != "success" ]; then
+            failed_tests+="[charmed-openstack-upgrader](https://github.com/canonical/charmed-openstack-upgrader/actions), "
           fi
           # Set the output variable to pass the failed tests to the next job
           echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"
 
   notify-on-failure:
-    needs: tests
+    needs: [tests-1, tests-2]
     if: ${{ failure() }}
     name: Notify Mattermost Channel
     runs-on: ubuntu-latest
     steps:
       - name: Create the Mattermost Message
         env:
-          FAILED_TESTS: ${{ needs.tests.outputs.failed_tests }}
+          FAILED_TESTS_1: ${{ needs.tests-1.outputs.failed_tests }}
+          FAILED_TESTS_2: ${{ needs.tests-2.outputs.failed_tests }}
         run: |
-          echo "{\"text\":\":robot_face: Batch 1 weekly test failures: $FAILED_TESTS\"}" > mattermost.json
+          echo "{\"text\":\":robot_face: Weekly tests have failed for these projects: $FAILED_TESTS_1 $FAILED_TESTS_2\"}" > mattermost.json
 
       - uses: mattermost/action-mattermost-notify@master
         env:

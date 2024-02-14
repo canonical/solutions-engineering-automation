@@ -8,7 +8,8 @@ on:
 jobs:
   tests-1:
     name: Run first set of tests
-    runs-on: [self-hosted, large]
+    runs-on: [self-hosted, small]
+    timeout-minutes: 1440
     outputs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
     steps:
@@ -217,10 +218,10 @@ jobs:
           # Set the output variable to pass the failed tests to the next job
           echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"
 
-  # need second job due to 360 minute execution time limit for single job
   tests-2:
     name: Run second set of tests
-    runs-on: [self-hosted, large]
+    runs-on: [self-hosted, small]
+    timeout-minutes: 1440
     outputs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
     steps:

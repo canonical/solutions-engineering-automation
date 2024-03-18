@@ -72,6 +72,18 @@ jobs:
           ref: master
           wait_interval: 60
 
+      - name: COS integration tests for hardware-observer-operator
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        id: hardware-observer-operator-integration
+        if: ${{ always() }}
+        with:
+          owner: canonical
+          repo: hardware-observer-operator
+          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+          workflow_file_name: cos_integration.yaml
+          ref: master
+          wait_interval: 60
+
       - name: Tests for charm-juju-backup-all
         uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: charm-juju-backup-all
@@ -187,6 +199,9 @@ jobs:
           fi
           if [ "${{ steps.hardware-observer-operator.outcome }}" != "success" ]; then
             failed_tests+="[hardware-observer-operator](https://github.com/canonical/hardware-observer-operator/actions), "
+          fi
+          if [ "${{ steps.hardware-observer-operator-integration.outcome }}" != "success" ]; then
+            failed_tests+="[hardware-observer-operator-integration](https://github.com/canonical/hardware-observer-operator/actions), "
           fi
           if [ "${{ steps.charm-juju-backup-all.outcome }}" != "success" ]; then
             failed_tests+="[charm-juju-backup-all](https://github.com/canonical/charm-juju-backup-all/actions), "

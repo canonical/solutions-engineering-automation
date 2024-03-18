@@ -201,7 +201,7 @@ jobs:
             failed_tests+="[hardware-observer-operator](https://github.com/canonical/hardware-observer-operator/actions), "
           fi
           if [ "${{ steps.hardware-observer-operator-integration.outcome }}" != "success" ]; then
-            failed_tests+="[hardware-observer-operator](https://github.com/canonical/hardware-observer-operator/actions), "
+            failed_tests+="[hardware-observer-operator-integration](https://github.com/canonical/hardware-observer-operator/actions), "
           fi
           if [ "${{ steps.charm-juju-backup-all.outcome }}" != "success" ]; then
             failed_tests+="[charm-juju-backup-all](https://github.com/canonical/charm-juju-backup-all/actions), "

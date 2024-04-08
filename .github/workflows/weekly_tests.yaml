@@ -8,7 +8,6 @@ on:
 jobs:
   tests-1:
     name: Run first set of tests
-    runs-on: [self-hosted, small, jammy, x64]
     timeout-minutes: 1440
     outputs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
@@ -235,7 +234,6 @@ jobs:
 
   tests-2:
     name: Run second set of tests
-    runs-on: [self-hosted, small, jammy, x64]
     timeout-minutes: 1440
     outputs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}

@@ -104,11 +104,13 @@ jobs:
 
       - name: Collect failed tests
         id: collect-failed-tests
+        env:
+          WORKFLOW_URL: ${{ steps.dispatched-test.outputs.workflow_url }}
         if: ${{ failure() }}
         run: |
           failed_tests=""
           if [ "${{ steps.dispatched-tests.outcome }}" != "success" ]; then
-            failed_tests+="[${{ matrix.repo }}](https://github.com/canonical/${{ matrix.repo }}/actions), "
+            failed_tests+="[${{ matrix.repo }}]($WORKFLOW_URL), "
           fi
           # Set the output variable to pass the failed tests to the next job
           echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"

@@ -6,7 +6,7 @@ on:
     - cron: "0 0 * * SAT"
 
 jobs:
-  weekle-tests:
+  weekly-tests:
     name: Run weekly tests
     runs-on: ubuntu-latest
     timeout-minutes: 1440
@@ -114,16 +114,16 @@ jobs:
           echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"
 
   notify-on-failure:
-    needs: [weekle-tests]
+    needs: [weekly-tests]
     if: ${{ failure() }}
     name: Notify Mattermost Channel
     runs-on: ubuntu-latest
     steps:
       - name: Create the Mattermost Message
         env:
-          WEEKLE_TESTS: ${{ needs.weekle-tests.outputs.failed_tests }}
+          WEEKLY_TESTS: ${{ needs.weekly-tests.outputs.failed_tests }}
         run: |
-          echo "{\"text\":\":robot_face: [Weekly tests]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) have failed for these projects: $WEEKLE_TESTS\"}" > mattermost.json
+          echo "{\"text\":\":robot_face: [Weekly tests]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) have failed for these projects: $WEEKLY_TESTS\"}" > mattermost.json
 
       - uses: mattermost/action-mattermost-notify@master
         env:

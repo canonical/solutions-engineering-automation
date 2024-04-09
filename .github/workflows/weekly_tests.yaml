@@ -40,7 +40,7 @@ jobs:
             branch: master
           - repo: charm-juju-local
             workflow_file_name: check.yaml
-            branch: main
+            branch: master
           - repo: charm-kubernetes-service-checks
             workflow_file_name: check.yaml
             branch: master
@@ -81,7 +81,7 @@ jobs:
             workflow_file_name: pr.yaml
             branch: main
           - repo: prometheus-juju-backup-all-exporter
-            workflow_file_name: pr.yaml
+            workflow_file_name: check.yaml
             branch: main
           - repo: snap-tempest
             workflow_file_name: pr.yaml

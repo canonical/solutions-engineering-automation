@@ -14,6 +14,7 @@ jobs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
     strategy:
       max-parallel: 3
+      fail-fast: false
       matrix:
         include:
           - repo: charm-advanced-routing

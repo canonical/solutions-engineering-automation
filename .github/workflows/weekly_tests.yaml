@@ -13,8 +13,8 @@ jobs:
     outputs:
       failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
     strategy:
+      max-parallel: 3
       matrix:
-        max-parallel: 3
         include:
           - repo: charm-advanced-routing
             workflow_file_name: check.yaml

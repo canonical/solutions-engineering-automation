@@ -105,7 +105,7 @@ jobs:
       - name: Collect failed tests
         id: collect-failed-tests
         env:
-          WORKFLOW_URL: ${{ steps.dispatched-test.outputs.workflow_url }}
+          WORKFLOW_URL: ${{ steps.dispatched-tests.outputs.workflow_url }}
         if: ${{ failure() }}
         run: |
           failed_tests=""

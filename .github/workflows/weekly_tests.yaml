@@ -16,86 +16,86 @@ jobs:
       matrix:
         max-parallel: 3
         include:
-          - charm: charm-advanced-routing
+          - repo: charm-advanced-routing
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-apt-mirror
+          - repo: charm-apt-mirror
             workflow_file_name: check.yaml
             branch: main
-          - charm: charm-cloudsupport
+          - repo: charm-cloudsupport
             workflow_file_name: check.yaml
             branch: main
-          - charm: charm-duplicity
+          - repo: charm-duplicity
             workflow_file_name: check.yaml
             branch: master
-          - charm: hardware-observer-operator
+          - repo: hardware-observer-operator
             workflow_file_name: check.yaml
             branch: master
-          - charm: hardware-observer-operator-integration
+          - repo: hardware-observer-operator
+            workflow_file_name: cos_integration.yaml
+            branch: master
+          - repo: charm-juju-backup-all
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-juju-backup-all
-            workflow_file_name: check.yaml
-            branch: master
-          - charm: charm-juju-local
+          - repo: charm-juju-local
             workflow_file_name: check.yaml
             branch: main
-          - charm: charm-kubernetes-service-checks
+          - repo: charm-kubernetes-service-checks
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-local-users
+          - repo: charm-local-users
             workflow_file_name: check.yaml
             branch: main
-          - charm: charm-logrotated
+          - repo: charm-logrotated
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-nginx
+          - repo: charm-nginx
             workflow_file_name: check.yaml
             branch: main
-          - charm: charm-openstack-service-checks
+          - repo: charm-openstack-service-checks
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-prometheus-blackbox-exporter
+          - repo: charm-prometheus-blackbox-exporter
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-prometheus-libvirt-exporter
+          - repo: charm-prometheus-libvirt-exporter
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-simple-streams
+          - repo: charm-simple-streams
             workflow_file_name: check.yaml
             branch: main
-          - charm: charm-storage-connector
+          - repo: charm-storage-connector
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-sysconfig
+          - repo: charm-sysconfig
             workflow_file_name: check.yaml
             branch: master
-          - charm: charm-userdir-ldap
+          - repo: charm-userdir-ldap
             workflow_file_name: check.yaml
             branch: master
-          - charm: prometheus-hardware-exporter
+          - repo: prometheus-hardware-exporter
             workflow_file_name: check.yaml
             branch: main
-          - charm: prometheus-juju-exporter
+          - repo: prometheus-juju-exporter
             workflow_file_name: pr.yaml
             branch: main
-          - charm: prometheus-juju-backup-all-exporter
+          - repo: prometheus-juju-backup-all-exporter
             workflow_file_name: pr.yaml
             branch: main
-          - charm: snap-tempest
+          - repo: snap-tempest
             workflow_file_name: pr.yaml
             branch: main
-          - charm: charmed-openstack-upgrader
+          - repo: charmed-openstack-upgrader
             workflow_file_name: check.yaml
             branch: main
 
     steps:
-      - name: Tests for ${{ matrix.charm }}
+      - name: Running ${{ matrix.workflow_file_name }} tests for ${{ matrix.repo }}
         uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: dispatched-tests
         with:
           owner: canonical
-          repo: ${{ matrix.charm }}
+          repo: ${{ matrix.repo }}
           github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
           workflow_file_name: ${{ matrix.workflow_file_name }}
           ref: ${{ matrix.branch }}
@@ -107,23 +107,22 @@ jobs:
         run: |
           failed_tests=""
           if [ "${{ steps.dispatched-tests.outcome }}" != "success" ]; then
-            failed_tests+="[${{ matrix.charm }}](https://github.com/canonical/${{ matrix.charm }}/actions), "
+            failed_tests+="[${{ matrix.repo }}](https://github.com/canonical/${{ matrix.repo }}/actions), "
           fi
           # Set the output variable to pass the failed tests to the next job
           echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"
 
   notify-on-failure:
-    needs: [tests-1, tests-2]
+    needs: [weekle-tests]
     if: ${{ failure() }}
     name: Notify Mattermost Channel
     runs-on: ubuntu-latest
     steps:
       - name: Create the Mattermost Message
         env:
-          FAILED_TESTS_1: ${{ needs.tests-1.outputs.failed_tests }}
-          FAILED_TESTS_2: ${{ needs.tests-2.outputs.failed_tests }}
+          WEEKLE_TESTS: ${{ needs.weekle-tests.outputs.failed_tests }}
         run: |
-          echo "{\"text\":\":robot_face: Weekly tests have failed for these projects: $FAILED_TESTS_1 $FAILED_TESTS_2\"}" > mattermost.json
+          echo "{\"text\":\":robot_face: [Weekly tests]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) have failed for these projects: $WEEKLE_TESTS\"}" > mattermost.json
 
       - uses: mattermost/action-mattermost-notify@master
         env:

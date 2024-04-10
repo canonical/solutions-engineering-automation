@@ -10,8 +10,6 @@ jobs:
     name: Run weekly tests
     runs-on: ubuntu-latest
     timeout-minutes: 1440
-    outputs:
-      failed_tests: ${{ steps.collect-failed-tests.outputs.failed_tests }}
     strategy:
       max-parallel: 3
       fail-fast: false
@@ -102,31 +100,48 @@ jobs:
           ref: ${{ matrix.branch }}
           wait_interval: 60
 
-      - name: Collect failed tests
-        id: collect-failed-tests
-        env:
-          WORKFLOW_URL: ${{ steps.dispatched-tests.outputs.workflow_url }}
-        if: ${{ failure() }}
+      - name: Collect result
+        id: collect-result
+        if: always()
         run: |
-          failed_tests=""
-          if [ "${{ steps.dispatched-tests.outcome }}" != "success" ]; then
-            failed_tests+="[${{ matrix.repo }}]($WORKFLOW_URL), "
-          fi
-          # Set the output variable to pass the failed tests to the next job
-          echo "failed_tests=$failed_tests" >> "$GITHUB_OUTPUT"
+          result=$(cat <<-END
+              {
+                  "job-index": "${{ strategy.job-index }}",
+                  "repo": "${{ matrix.repo }}",
+                  "branch": "${{ matrix.branch }}",
+                  "workflow_file_name":"${{ matrix.workflow_file_name }}",
+                  "conclusion": "${{ steps.dispatched-tests.outcome }}",
+                  "workflow_url": "${{ steps.dispatched-tests.outputs.workflow_url }}"
+              }
+          END
+          )
+          echo $result > "result-${{ strategy.job-index }}.json"
 
-  notify-on-failure:
-    needs: [weekly-tests]
-    if: ${{ failure() }}
-    name: Notify Mattermost Channel
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "result-${{ strategy.job-index }}"
+          path: "result-${{ strategy.job-index }}.json"
+
+  notify:
+    needs: weekly-tests
+    if: always()  # these needs to be run always
+    name: Notify SolEng with results
     runs-on: ubuntu-latest
     steps:
-      - name: Create the Mattermost Message
-        env:
-          WEEKLY_TESTS: ${{ needs.weekly-tests.outputs.failed_tests }}
+      - name: Collect results
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+      - name: Install jq
         run: |
-          echo "{\"text\":\":robot_face: [Weekly tests]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) have failed for these projects: $WEEKLY_TESTS\"}" > mattermost.json
-
+           sudo apt update
+           sudo apt install jq -y
+      - name: Create the Mattermost Message
+        run: |
+          url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          results=$(jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")')
+          jq -n --arg url "$url" --arg results "$results" '{text: ":robot_face: @soleng results from [Weekly tests](\($url)):\n\($results)"}' > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}

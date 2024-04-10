@@ -6,7 +6,7 @@ Repo for automating tasks for Solutions Engineering Team.
 
 The weekly_tests workflow lists all repos on GitHub maintained by the Solutions Engineering Team, and the job for dispatching test on top of those repos remotely.
 The configuration description:
- - `repo` is name repo in canonical organization, e.g. https://github.com/canonical/charm-apt-mirror/
+ - `repo` is the name of a repository in canonical organization, e.g. charm-apt-mirror
  - `workflow_file_name` is name of workflow file which should be triggered, e.g. check.yaml
  - `branch` name of branch from which tests should be executed, e.g. main
 

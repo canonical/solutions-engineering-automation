@@ -125,7 +125,7 @@ jobs:
 
   notify:
     needs: weekly-tests
-    if: always()  # these needs to be run always
+    if: always()  # these need to be run always
     name: Notify SolEng with results
     runs-on: ubuntu-latest
     steps:

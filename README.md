@@ -10,9 +10,13 @@ The configuration description:
  - `workflow_file_name` is name of workflow file which should be triggered, e.g. check.yaml
  - `branch` name of branch from which tests should be executed, e.g. main
 
-Jobs are running in parallel with the maximum number of concurrency defined by the `max-parallel` strategy parameter,
+Jobs are running in parallel with the maximum number of concurrency defined by the [`max-parallel`] strategy parameter,
 we can control how many jobs can be run simultaneously using this parameter.
 This is important for us because we don't want to allow all jobs to run simultaneously. Some of them are
 running on top of self-hosted runners, and we could hit quota limits.
 
 The results of each run are collected, aggregated, and then sent via MM bot to our channel as notifications.
+
+
+---
+[`max-parallel`]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#defining-the-maximum-number-of-concurrent-jobs

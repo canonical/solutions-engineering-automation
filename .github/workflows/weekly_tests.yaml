@@ -143,5 +143,5 @@ jobs:
           results=$(jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")')
           jq -n --arg url "$url" --arg results "$results" '{text: ":robot_face: @soleng results from [Weekly tests](\($url)):\n\($results)"}' > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
-        env:
+        with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}

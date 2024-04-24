@@ -15,6 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - repo: bootstack-actions
+            workflow_file_name: pull-request.yaml
+            branch: main
           - repo: charm-advanced-routing
             workflow_file_name: check.yaml
             branch: master
@@ -26,12 +29,6 @@ jobs:
             branch: main
           - repo: charm-duplicity
             workflow_file_name: check.yaml
-            branch: master
-          - repo: hardware-observer-operator
-            workflow_file_name: check.yaml
-            branch: master
-          - repo: hardware-observer-operator
-            workflow_file_name: cos_integration.yaml
             branch: master
           - repo: charm-juju-backup-all
             workflow_file_name: check.yaml
@@ -51,12 +48,18 @@ jobs:
           - repo: charm-nginx
             workflow_file_name: check.yaml
             branch: main
+          - repo: charm-nrpe
+            workflow_file_name: check.yaml
+            branch: master
           - repo: charm-openstack-service-checks
             workflow_file_name: check.yaml
             branch: master
           - repo: charm-prometheus-blackbox-exporter
             workflow_file_name: check.yaml
             branch: master
+          - repo: charm-prometheus-juju-exporter
+            workflow_file_name: check.yaml
+            branch: main
           - repo: charm-prometheus-libvirt-exporter
             workflow_file_name: check.yaml
             branch: master
@@ -72,20 +75,32 @@ jobs:
           - repo: charm-userdir-ldap
             workflow_file_name: check.yaml
             branch: master
+          - repo: charmed-openstack-upgrader
+            workflow_file_name: check.yaml
+            branch: main
+          - repo: hardware-observer-operator
+            workflow_file_name: check.yaml
+            branch: master
+          - repo: hardware-observer-operator
+            workflow_file_name: cos_integration.yaml
+            branch: master
+          - repo: layer-beats-base 
+            workflow_file_name: ci.yaml
+            branch: master
+          - repo: openstack-exporter-operator 
+            workflow_file_name: pull-request.yaml
+            branch: main
           - repo: prometheus-hardware-exporter
+            workflow_file_name: check.yaml
+            branch: main
+          - repo: prometheus-juju-backup-all-exporter
             workflow_file_name: check.yaml
             branch: main
           - repo: prometheus-juju-exporter
             workflow_file_name: pr.yaml
             branch: main
-          - repo: prometheus-juju-backup-all-exporter
-            workflow_file_name: check.yaml
-            branch: main
           - repo: snap-tempest
             workflow_file_name: pr.yaml
-            branch: main
-          - repo: charmed-openstack-upgrader
-            workflow_file_name: check.yaml
             branch: main
 
     steps:

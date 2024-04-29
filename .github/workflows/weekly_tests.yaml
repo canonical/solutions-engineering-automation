@@ -146,4 +146,4 @@ jobs:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
           TEXT: |
             :robot_face: @soleng Results from [Weekly tests](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}):
-            $results
+            ${{ env.results }}

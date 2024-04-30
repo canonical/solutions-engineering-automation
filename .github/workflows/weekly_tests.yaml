@@ -152,11 +152,13 @@ jobs:
         run: |
            sudo apt update
            sudo apt install jq -y
-      - name: Create the Mattermost Message
+      - name: Concatenate results
         run: |
-          url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          results=$(jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")')
-          jq -n --arg url "$url" --arg results "$results" '{text: ":robot_face: @soleng results from [Weekly tests](\($url)):\n\($results)"}' > mattermost.json
-      - uses: mattermost/action-mattermost-notify@master
+           echo "results=$(jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")')" >> "$GITHUB_ENV"
+      - name: Send the Mattermost Message
+        uses: mattermost/action-mattermost-notify@master
         with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
+          TEXT: |
+            :robot_face: @soleng Results from [Weekly tests](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}):
+            ${{ env.results }}

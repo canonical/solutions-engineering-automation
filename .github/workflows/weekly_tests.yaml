@@ -154,7 +154,11 @@ jobs:
            sudo apt install jq -y
       - name: Concatenate results
         run: |
-           echo "results=$(jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")')" >> "$GITHUB_ENV"
+          {
+           echo 'results<<EOF'
+           jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")'
+           echo EOF
+          } >> "$GITHUB_ENV"
       - name: Send the Mattermost Message
         uses: mattermost/action-mattermost-notify@master
         with:

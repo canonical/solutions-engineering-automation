@@ -1,0 +1,51 @@
+name: Apply new changes to SolEng repositories
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - terraform-plans/**
+  on:
+    push:
+      branches:
+        - main
+      paths:
+        - terraform-plans/**
+
+jobs:
+  runs-on: ubuntu-latest
+  env:
+    GITHUB_APP_ID: ${{ secrets.SOLENG_APP_ID }}
+    GITHUB_APP_INSTALLATION_ID: ${{ secrets.SOLENG_APP_INSTALLATION_ID }}
+    GITHUB_APP_PEM_FILE: ${{ secrets.SOLENG_APP_PEM_FILE }}
+  strategy:
+      fail-fast: false
+      matrix:
+        repository:
+          - soleng-tf-test-repo
+  steps:
+    - name: Checkout branch
+      uses: actions/checkout@v4
+    - name: Install Terraform
+      uses: sudo snap install terraform
+    - name: Terraform init
+      working-directory: ./terraform-plans
+      run: terraform init
+    - name: Terraform validate
+      working-directory: ./terraform-plans
+      run: terraform validate --no-color
+    - name: Terraform plan
+      working-directory: ./terraform-plans
+      run: |
+        terraform plan -no-color \
+        -var-file=configs/github.tfvars \
+        -var-file=configs/${{ matrix.repository }}.tfvars
+    - name: Terraform Apply only on merge to main
+      if: ${{ github.event_name == 'push' }}
+      working-directory: ./terraform-plans
+      run: |
+        terraform apply -no-color -auto-approve \
+        -var-file=configs/github.tfvars \
+        -var-file=configs/${{ matrix.repository }}.tfvars

@@ -17,7 +17,7 @@ jobs:
         include:
           - repo: charm-advanced-routing
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-apt-mirror
             workflow_file_name: check.yaml
             branch: main
@@ -26,65 +26,80 @@ jobs:
             branch: main
           - repo: charm-duplicity
             workflow_file_name: check.yaml
-            branch: master
-          - repo: hardware-observer-operator
-            workflow_file_name: check.yaml
-            branch: master
-          - repo: hardware-observer-operator
-            workflow_file_name: cos_integration.yaml
-            branch: master
+            branch: main
           - repo: charm-juju-backup-all
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-juju-local
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-kubernetes-service-checks
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-local-users
             workflow_file_name: check.yaml
             branch: main
           - repo: charm-logrotated
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-nginx
+            workflow_file_name: check.yaml
+            branch: main
+          - repo: charm-nrpe
             workflow_file_name: check.yaml
             branch: main
           - repo: charm-openstack-service-checks
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-prometheus-blackbox-exporter
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
+          - repo: charm-prometheus-juju-exporter
+            workflow_file_name: check.yaml
+            branch: main
           - repo: charm-prometheus-libvirt-exporter
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-simple-streams
             workflow_file_name: check.yaml
             branch: main
           - repo: charm-storage-connector
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-sysconfig
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
           - repo: charm-userdir-ldap
             workflow_file_name: check.yaml
-            branch: master
+            branch: main
+          - repo: charmed-openstack-upgrader
+            workflow_file_name: check.yaml
+            branch: main
+          - repo: hardware-observer-operator
+            workflow_file_name: check.yaml
+            branch: main
+          - repo: hardware-observer-operator
+            workflow_file_name: cos_integration.yaml
+            branch: main
+          - repo: openstack-exporter-operator 
+            workflow_file_name: pull-request.yaml
+            branch: main
           - repo: prometheus-hardware-exporter
+            workflow_file_name: check.yaml
+            branch: main
+          - repo: prometheus-juju-backup-all-exporter
             workflow_file_name: check.yaml
             branch: main
           - repo: prometheus-juju-exporter
             workflow_file_name: pr.yaml
             branch: main
-          - repo: prometheus-juju-backup-all-exporter
-            workflow_file_name: check.yaml
-            branch: main
           - repo: snap-tempest
             workflow_file_name: pr.yaml
             branch: main
-          - repo: charmed-openstack-upgrader
+          - repo: juju-lint
+            workflow_file_name: check.yaml
+            branch: main
+          - repo: juju-backup-all
             workflow_file_name: check.yaml
             branch: main
 
@@ -139,7 +154,11 @@ jobs:
            sudo apt install jq -y
       - name: Concatenate results
         run: |
-           echo "results=$(jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")')" >> "$GITHUB_ENV"
+          {
+           echo 'results<<EOF'
+           jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")'
+           echo EOF
+          } >> "$GITHUB_ENV"
       - name: Send the Mattermost Message
         uses: mattermost/action-mattermost-notify@master
         with:

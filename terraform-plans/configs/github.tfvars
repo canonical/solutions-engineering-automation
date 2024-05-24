@@ -1,1 +1,1 @@
-owner = "Canonical"
+owner = "canonical"

@@ -70,7 +70,7 @@ resource "github_branch_protection" "branch_protection" {
   require_conversation_resolution = true
   allows_deletions                = false
 
-  allows_force_pushes  = true
+  allows_force_pushes  = false
   force_push_bypassers = var.force_push_bypassers
 
   required_status_checks {

@@ -52,7 +52,7 @@ locals {
 locals {
   changed_files = {
     for file_key, file_info in var.workflow_files : file_key => file_info
-    if file(file_info.source) != local.repository_files_content[file_info.destination]
+    if templatefile(file_info.source, { vars = file_info.variables }) != local.repository_files_content[file_info.destination]
   }
 }
 

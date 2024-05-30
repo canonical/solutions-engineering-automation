@@ -8,6 +8,11 @@ variable "repository" {
   description = "GitHub repository name"
 }
 
+variable "repository_description" {
+  type        = string
+  description = "GitHub repository description"
+}
+
 variable "branch" {
   type        = string
   description = "git branch name"
@@ -18,6 +23,7 @@ variable "workflow_files" {
   type = map(object({
     source      = string
     destination = string
+    variables   = map(string)
   }))
   description = "GitHub workflow files"
 }

@@ -15,3 +15,7 @@ module "github_workflow_files" {
   branch         = var.branch
   workflow_files = var.workflow_files
 }
+
+output "changed_files" {
+  value = module.github_workflow_files.changed_files
+}

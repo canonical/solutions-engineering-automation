@@ -19,3 +19,9 @@ The permissions required for the github application are:
 > This Github Application need to be installed on every repositories we want to manage. Please ask people who has Github Organization permission for help.
 > 
 > For how to create the github application, please check [Creating Github Apps](https://docs.github.com/en/apps/creating-github-apps)
+
+## Issues
+
+### branch_protection
+
+The Terraform Github provider does not support creating a branch protection rule if it does not already exist. Initially, an admin user must manually create the branch protection rule.

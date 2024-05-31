@@ -16,6 +16,22 @@ module "github_workflow_files" {
   workflow_files = var.workflow_files
 }
 
+output "repository" {
+  value = module.github_workflow_files.repository
+}
+
+output "branch" {
+  value = module.github_workflow_files.branch
+}
+
+output "pr_branch" {
+  value = module.github_workflow_files.pr_branch
+}
+
+output "pr_created" {
+  value = module.github_workflow_files.pr_created
+}
+
 output "changed_files" {
   value = module.github_workflow_files.changed_files
 }

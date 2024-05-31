@@ -9,15 +9,17 @@ terraform {
 
 provider "github" {
   owner = var.owner
-  app_auth {} # using environment variables for auth
+  app_auth {} # using environment variables for authentication
 }
 
+# Generate a unique string to append to the branch name
 resource "random_string" "update_uid" {
   length  = 8
   numeric = true
   special = false
 }
 
+# Flatten the repository and file information into a single list of maps based on the workflow_files variable
 locals {
   repo_files = flatten([
     for file_key, file_info in var.workflow_files : {
@@ -27,6 +29,7 @@ locals {
   ])
 }
 
+# Fetch the current content of the files from the repository
 data "github_repository_file" "files" {
   for_each = {
     for item in local.repo_files : "${item.file}" => item
@@ -37,6 +40,7 @@ data "github_repository_file" "files" {
   branch     = var.branch
 }
 
+# Store the fetched content in a local variable, defaulting to an empty string if the file does not exist
 locals {
   repository_files_content = {
     for file_key, file_info in var.workflow_files : file_info.destination =>
@@ -44,6 +48,7 @@ locals {
   }
 }
 
+# Compare the fetched content with the local content to create a map of changed files
 locals {
   changed_files = {
     for file_key, file_info in var.workflow_files : file_key => file_info
@@ -51,6 +56,7 @@ locals {
   }
 }
 
+# Create a new branch only if there are changed files
 resource "github_branch" "workflows_branch" {
   count = length(local.changed_files) > 0 ? 1 : 0
 
@@ -59,6 +65,7 @@ resource "github_branch" "workflows_branch" {
   source_branch = var.branch
 }
 
+# Create or update files in the repository only if they have changed
 resource "github_repository_file" "workflows_files" {
   for_each = local.changed_files
 
@@ -72,6 +79,7 @@ resource "github_repository_file" "workflows_files" {
   depends_on = [github_branch.workflows_branch]
 }
 
+# Create a pull request only if there are changed files
 resource "github_repository_pull_request" "workflows_update_pr" {
   count = length(local.changed_files) > 0 ? 1 : 0
 
@@ -87,11 +95,29 @@ resource "github_repository_pull_request" "workflows_update_pr" {
   ]
 }
 
+# Outputs for debugging and verification
+output "repository" {
+  value = var.repository
+}
+
+output "branch" {
+  value = var.branch
+}
+
 output "changed_files" {
-  description = "Execute result: [repository, branch, changed_files]"
-  value = [
-      var.repository,
-      var.branch,
-      local.changed_files
+  value = local.changed_files
+}
+
+# Output to indicate if PR was created
+output "pr_created" {
+  value = length(local.changed_files) > 0 ? true : false
+}
+
+# Output the PR branch if PR was created
+output "pr_branch" {
+  value = length(local.changed_files) > 0 ? github_repository_pull_request.workflows_update_pr[0].head_ref : "No PR created"
+
+  depends_on = [
+    github_repository_pull_request.workflows_update_pr
   ]
 }

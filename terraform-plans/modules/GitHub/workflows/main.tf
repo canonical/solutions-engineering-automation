@@ -123,7 +123,7 @@ output "pr_branch" {
 }
 
 output "pr_url" {
-  value = length(local.changed_files) > 0 ? "https://github.com/${var.owner}/${var.repo}/pull/${github_repository_pull_request.workflows_update_pr[0].number}" : "No PR created"
+  value = length(local.changed_files) > 0 ? "https://github.com/${var.owner}/${var.repository}/pull/${github_repository_pull_request.workflows_update_pr[0].number}" : "No PR created"
 
   depends_on = [
     github_repository_pull_request.workflows_update_pr

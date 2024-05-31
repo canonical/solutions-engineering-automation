@@ -21,7 +21,6 @@ resource "random_string" "update_uid" {
 locals {
   repo_files = flatten([
     for file_key, file_info in var.workflow_files : {
-      repo = var.repository
       file = file_info.destination
       source = file_info.source
     }
@@ -30,10 +29,10 @@ locals {
 
 data "github_repository_file" "files" {
   for_each = {
-    for item in local.repo_files : "${item.repo}-${item.file}" => item
+    for item in local.repo_files : "${item.file}" => item
   }
 
-  repository = each.value.repo
+  repository = var.repository
   file       = each.value.file
   branch     = var.branch
 }
@@ -41,7 +40,7 @@ data "github_repository_file" "files" {
 locals {
   repository_files_content = {
     for file_key, file_info in var.workflow_files : file_info.destination =>
-      try(data.github_repository_file.files["${var.repository}-${file_info.destination}"].content, "")
+      try(data.github_repository_file.files["${file_info.destination}"].content, "")
   }
 }
 

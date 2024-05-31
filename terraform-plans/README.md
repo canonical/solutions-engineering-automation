@@ -20,7 +20,7 @@ The permissions required for the github application are:
 > 
 > For how to create the github application, please check [Creating Github Apps](https://docs.github.com/en/apps/creating-github-apps)
 
-## Issues
+## Known limitation
 
 ### branch_protection
 

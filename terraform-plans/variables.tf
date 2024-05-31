@@ -18,6 +18,7 @@ variable "workflow_files" {
   type = map(object({
     source      = string
     destination = string
+    variables   = map(string)
   }))
   description = "GitHub workflow files"
 }

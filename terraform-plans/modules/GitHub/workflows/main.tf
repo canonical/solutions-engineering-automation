@@ -52,7 +52,7 @@ locals {
 locals {
   changed_files = {
     for file_key, file_info in var.workflow_files : file_key => file_info
-      if file(file_info.source) != local.repository_files_content[file_info.destination]
+      if templatefile(file_info.source, {vars = file_info.variables}) != local.repository_files_content[file_info.destination]
   }
 }
 
@@ -72,7 +72,7 @@ resource "github_repository_file" "workflows_files" {
   repository          = var.repository
   branch              = github_branch.workflows_branch[0].branch
   file                = each.value.destination
-  content             = file(each.value.source)
+  content             = templatefile(each.value.source, {vars = each.value.variables})
   commit_message      = "update ${each.value.destination}"
   overwrite_on_create = true
 

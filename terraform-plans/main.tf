@@ -32,6 +32,10 @@ output "pr_created" {
   value = module.github_workflow_files.pr_created
 }
 
+output "pr_url" {
+  value = module.github_workflow_files.pr_url
+}
+
 output "changed_files" {
   value = module.github_workflow_files.changed_files
 }

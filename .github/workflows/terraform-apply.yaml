@@ -21,6 +21,7 @@ jobs:
         fail-fast: false
         matrix:
           repository:
+            - hardware-observer-operator_main
             - charmed-openstack-upgrader_main
             # The snapcraft channel for 3.x is not ready
             # - charmed-openstack-upgrader_3.x

@@ -1,4 +1,4 @@
-repository = "charmed-openstack-upgrader"
+repository = "openstack-exporter-operator"
 branch     = "main"
 workflow_files = {
   codeowners = {
@@ -7,12 +7,12 @@ workflow_files = {
     variables   = {}
   }
   promote = {
-    source      = "./files/github/snap_promote.yaml"
+    source      = "./files/github/charm_promote.yaml"
     destination = ".github/workflows/promote.yaml"
     variables   = {}
   }
   release = {
-    source      = "./files/github/snap_release.yaml"
+    source      = "./files/github/charm_release.yaml"
     destination = ".github/workflows/release.yaml"
     variables = {
       branch = "main"

@@ -23,7 +23,7 @@ resource "random_string" "update_uid" {
 locals {
   repo_files = flatten([
     for file_key, file_info in var.workflow_files : {
-      file = file_info.destination
+      file   = file_info.destination
       source = file_info.source
     }
   ])
@@ -44,7 +44,7 @@ data "github_repository_file" "files" {
 locals {
   repository_files_content = {
     for file_key, file_info in var.workflow_files : file_info.destination =>
-      try(data.github_repository_file.files["${file_info.destination}"].content, "")
+    try(data.github_repository_file.files["${file_info.destination}"].content, "")
   }
 }
 
@@ -52,7 +52,7 @@ locals {
 locals {
   changed_files = {
     for file_key, file_info in var.workflow_files : file_key => file_info
-      if templatefile(file_info.source, {vars = file_info.variables}) != local.repository_files_content[file_info.destination]
+    if templatefile(file_info.source, { vars = file_info.variables }) != local.repository_files_content[file_info.destination]
   }
 }
 
@@ -72,7 +72,7 @@ resource "github_repository_file" "workflows_files" {
   repository          = var.repository
   branch              = github_branch.workflows_branch[0].branch
   file                = each.value.destination
-  content             = templatefile(each.value.source, {vars = each.value.variables})
+  content             = templatefile(each.value.source, { vars = each.value.variables })
   commit_message      = "update ${each.value.destination}"
   overwrite_on_create = true
 

@@ -14,7 +14,7 @@ workflow_files = {
   release = {
     source      = "./files/github/snap_release.yaml"
     destination = ".github/workflows/release.yaml"
-    variables   = {
+    variables = {
       branch = "3.x"
     }
   }

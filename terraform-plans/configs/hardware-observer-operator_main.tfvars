@@ -14,7 +14,7 @@ workflow_files = {
   release = {
     source      = "./files/github/charm_release.yaml"
     destination = ".github/workflows/release.yaml"
-    variables   = {
+    variables = {
       branch = "main"
     }
   }

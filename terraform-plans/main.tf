@@ -4,8 +4,6 @@ module "github_settings" {
   repository             = var.repository
   repository_description = var.repository_description
   branch                 = var.branch
-  force_push_bypassers   = ["${var.owner}/soleng-admin"]
-  dismissal_restrictions = ["${var.owner}/soleng-admin", "${var.owner}/soleng-reviewers"]
   pull_request_bypassers = ["${var.owner}/soleng-admin"]
 }
 

@@ -21,7 +21,8 @@ jobs:
         fail-fast: false
         matrix:
           repository:
-            - soleng-tf-test-repo
+            # The naming of the files should be $REPO_$BRANCH.tfvars
+            - charmed-openstack-upgrader_main
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4

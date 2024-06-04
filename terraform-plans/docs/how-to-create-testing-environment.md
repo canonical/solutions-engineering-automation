@@ -71,13 +71,14 @@ Follow these steps:
 
 > Follow [Authorizing GitHub Apps](https://docs.github.com/en/apps/using-github-apps/authorizing-github-apps#difference-between-authorization-and-installation) to grant the application permission to access the organization and repository resources.
 
-## Step 4: Create Automation Repository
+## Step 4: Create Terraform Automation Repository
 
-### Step 4.1: Create Repository
+### Step 4.1: Create a new Terraform automation repository
 
-- Create a Terraform automation repository under the organization.
-- Copy the `terraform-plans` folder to the repository.
-- Copy the `./github/workflows/terraform-apply.yaml` file to the repository.
+- Create a new Terraform automation repository under the testing organization. So you can verify github action is working by submit a PR to this repository.
+- Copy files from *solutions-engineering-automation repository*
+    - Copy the `terraform-plans` folder.
+    - Copy the `./github/workflows/terraform-apply.yaml` file.
 
 ### Step 4.2: Add GitHub App Secrets
 
@@ -98,6 +99,8 @@ Update the `.tfvars` files for your testing repositories and add them to `./.git
 ## Step 5: Run Locally (Optional)
 
 If you prefer to verify things locally instead of on the CI, you can do so.
+
+> Verify on the CI means you have to create a PR to the new testing terraform automation repository, which we created on step4 and check the github action output.
 
 ### Step 5.1: Install Terraform
 
@@ -126,6 +129,6 @@ Navigate to the `terraform-plans` directory and run the following commands:
 cd ./terraform-plans
 terraform init
 terraform validate
-terraform plan -var-file=configs/github.tfvars -var-file=configs/${your-testing-repo}.tfvars -out ./tf.plan
+terraform plan -var-file=configs/github.tfvars -var-file=configs/$YOUR_TESTING_REPO.tfvars -out ./tf.plan
 terraform apply ./tf.plan
 ```

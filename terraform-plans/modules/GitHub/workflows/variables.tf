@@ -38,5 +38,5 @@ variable "workflow_files" {
     destination = string
     variables   = map(string)
   }))
-  description = "GitHub workflow files"
+  description = "GitHub workflow file. The source is the file path of the template file."
 }

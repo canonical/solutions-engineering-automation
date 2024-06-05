@@ -28,6 +28,7 @@ resource "github_repository" "repo" {
 
   allow_update_branch    = true
   delete_branch_on_merge = false
+  vulnerability_alerts   = true
 
 }
 
@@ -71,8 +72,7 @@ resource "github_branch_protection" "branch_protection" {
   require_conversation_resolution = true
   allows_deletions                = false
 
-  allows_force_pushes  = false
-  force_push_bypassers = var.force_push_bypassers
+  allows_force_pushes = false
 
   required_status_checks {
     strict = true
@@ -80,8 +80,6 @@ resource "github_branch_protection" "branch_protection" {
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
-    dismissal_restrictions          = var.dismissal_restrictions
-    pull_request_bypassers          = var.pull_request_bypassers
     require_code_owner_reviews      = true
     required_approving_review_count = 2
   }

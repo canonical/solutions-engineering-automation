@@ -80,7 +80,6 @@ resource "github_branch_protection" "branch_protection" {
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
-    pull_request_bypassers          = var.pull_request_bypassers
     require_code_owner_reviews      = true
     required_approving_review_count = 2
   }

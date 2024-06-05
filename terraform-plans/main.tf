@@ -4,7 +4,6 @@ module "github_settings" {
   repository             = var.repository
   repository_description = var.repository_description
   branch                 = var.branch
-  pull_request_bypassers = ["${var.owner}/soleng-admin"]
 }
 
 module "github_workflow_files" {

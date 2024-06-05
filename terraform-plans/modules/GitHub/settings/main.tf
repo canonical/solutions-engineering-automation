@@ -13,7 +13,8 @@ provider "github" {
 }
 
 resource "github_repository" "repo" {
-  name = var.repository
+  name        = var.repository
+  description = var.repository_description
 
   has_issues      = true
   has_projects    = false

@@ -129,6 +129,7 @@ Navigate to the `terraform-plans` directory and run the following commands:
 cd ./terraform-plans
 terraform init
 terraform validate
-terraform plan -var-file=configs/github.tfvars -var-file=configs/$YOUR_TESTING_REPO.tfvars -out ./tf.plan
+# Replace <YOUR_TESTING_REPO> to real file path
+terraform plan -var-file=configs/github.tfvars -var-file=configs/<YOUR_TESTING_REPO>.tfvars -out ./tf.plan
 terraform apply ./tf.plan
 ```

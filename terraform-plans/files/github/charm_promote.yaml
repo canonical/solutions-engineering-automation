@@ -1,4 +1,4 @@
-name: Promote charm to other tracks and channels
+name: Promote charm to default track, standard risk levels.
 
 on:
   workflow_dispatch:
@@ -6,9 +6,17 @@ on:
       destination-channel:
         description: 'Destination Channel, e.g. latest/candidate'
         required: true
+        type: choice
+        options:
+          - 'latest/candidate'
+          - 'latest/stable'
       origin-channel:
         description: 'Origin Channel, e.g. latest/edge'
         required: true
+        type: choice
+        options:
+          - 'latest/edge'
+          - 'latest/candidate'
 
 jobs:
   promote-charm:

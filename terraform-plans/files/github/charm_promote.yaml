@@ -21,14 +21,14 @@ jobs:
         id: set-channels
         run: |
           channel_promotion="$${{ github.event.inputs.channel-promotion }}"
-          origin=$(echo "$channel_promotion" | sed 's/ ->.*//')
-          destination=$(echo "$channel_promotion" | sed 's/.* -> //')
-          echo "DESTINATION_CHANNEL=$destination" >> $GITHUB_ENV
-          echo "ORIGIN_CHANNEL=$origin" >> $GITHUB_ENV
+          origin=$(echo "$channel_promotion" | sed 's/\s*->.*//')
+          destination=$(echo "$channel_promotion" | sed 's/.*->\s*//')
+          echo "destination-channel=$destination" >> $GITHUB_OUTPUT
+          echo "origin-channel=$origin" >> $GITHUB_OUTPUT
       - name: Release charm to channel
         uses: canonical/charming-actions/release-charm@2.4.0
         with:
           credentials: $${{ secrets.CHARMHUB_TOKEN }}
           github-token: $${{ secrets.GITHUB_TOKEN }}
-          destination-channel: $${{ env.DESTINATION_CHANNEL }}
-          origin-channel: $${{ env.ORIGIN_CHANNEL }}
+          destination-channel: $${{ steps.set-channels.outputs.destination-channel }}
+          origin-channel: $${{ steps.set-channels.outputs.origin-channel }}

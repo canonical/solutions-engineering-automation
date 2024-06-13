@@ -23,13 +23,13 @@ variable "pr_branch" {
 variable "pr_title" {
   type        = string
   description = "Pull request title."
-  default     = "Updating workflows files"
+  default     = "Update workflow files"
 }
 
 variable "pr_body" {
   type        = string
   description = "Pull request body message."
-  default     = "Updates workflows files by SolEng bot."
+  default     = "This is an automated pull request to update workflow files from https://github.com/canonical/solutions-engineering-automation."
 }
 
 variable "workflow_files" {

@@ -55,7 +55,7 @@ jobs:
             workflow_file_name: pr.yaml
 
     steps:
-      - name: Running ${{ matrix.workflow_file_name }} tests for ${{ matrix.repo }}
+      - name: Run ${{ matrix.workflow_file_name }} tests for ${{ matrix.repo }}
         uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: dispatched-tests
         with:
@@ -66,11 +66,11 @@ jobs:
           ref: main
           wait_interval: 60
 
-      - name: Collect result
+      - name: Collect results
         id: collect-result
         if: always()
         run: |
-          result=$(cat <<-END
+          cat <<-END > "result-${{ strategy.job-index }}.json"
               {
                   "job-index": "${{ strategy.job-index }}",
                   "repo": "${{ matrix.repo }}",
@@ -80,8 +80,6 @@ jobs:
                   "workflow_url": "${{ steps.dispatched-tests.outputs.workflow_url }}"
               }
           END
-          )
-          echo $result > "result-${{ strategy.job-index }}.json"
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -91,29 +89,22 @@ jobs:
 
   notify:
     needs: weekly-tests
-    if: always()  # these need to be run always
+    if: always()  # always send the summary to mattermost
     name: Notify SolEng with results
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Collect results
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
-      - name: Install jq
-        run: |
-           sudo apt update
-           sudo apt install jq -y
-      - name: Concatenate results
-        run: |
-          {
-           echo 'results<<EOF'
-           jq -s '.[] | ["- [\(.repo) (\(.branch), \(.workflow_file_name))](\(.workflow_url)) \(if .conclusion == "success" then ":gh-success-octicon-checkcirclefillicon:" else ":gh-failure-octicon-xcirclefillicon:" end)"]' result-*.json | jq -r 'join("\n")'
-           echo EOF
-          } >> "$GITHUB_ENV"
+
+      - name: Generate summary message
+        run: python3 ./scripts/weekly-tests-summary.py "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$GITHUB_ENV"
+
       - name: Send the Mattermost Message
         uses: mattermost/action-mattermost-notify@master
         with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
-          TEXT: |
-            :robot_face: @soleng Results from [Weekly tests](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}):
-            ${{ env.results }}
+          TEXT: ${{ env.results }}

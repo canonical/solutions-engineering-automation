@@ -101,7 +101,13 @@ jobs:
           merge-multiple: true
 
       - name: Generate summary message
-        run: python3 ./scripts/weekly-tests-summary.py "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$GITHUB_ENV"
+        run: |
+          {
+            echo "results<<EOF"
+            python3 ./scripts/weekly-tests-summary.py "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo EOF
+          } >> "$GITHUB_ENV"
+
 
       - name: Send the Mattermost Message
         uses: mattermost/action-mattermost-notify@master

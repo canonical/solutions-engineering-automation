@@ -37,7 +37,6 @@ jobs:
           - charmed-openstack-upgrader
           - juju-backup-all
           - juju-lint
-          - openstack-exporter-operator
           - prometheus-hardware-exporter
           - prometheus-juju-backup-all-exporter
         workflow_file_name:

@@ -24,6 +24,7 @@ jobs:
             # The naming of the files should be $REPO_$BRANCH.tfvars
             - charmed-openstack-upgrader_main
             - hardware-observer-operator_main
+            - charm-local-users_main
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4

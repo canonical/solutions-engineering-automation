@@ -6,34 +6,34 @@ module "github_settings" {
   branch                 = var.branch
 }
 
-module "github_workflow_files" {
-  source         = "./modules/GitHub/workflows"
+module "github_templates" {
+  source         = "./modules/GitHub/templates"
   owner          = var.owner
   repository     = var.repository
   branch         = var.branch
-  workflow_files = var.workflow_files
+  templates = var.templates
 }
 
 output "repository" {
-  value = module.github_workflow_files.repository
+  value = module.github_templates.repository
 }
 
 output "branch" {
-  value = module.github_workflow_files.branch
+  value = module.github_templates.branch
 }
 
 output "pr_branch" {
-  value = module.github_workflow_files.pr_branch
+  value = module.github_templates.pr_branch
 }
 
 output "pr_created" {
-  value = module.github_workflow_files.pr_created
+  value = module.github_templates.pr_created
 }
 
 output "pr_url" {
-  value = module.github_workflow_files.pr_url
+  value = module.github_templates.pr_url
 }
 
 output "changed_files" {
-  value = module.github_workflow_files.changed_files
+  value = module.github_templates.changed_files
 }

@@ -9,7 +9,7 @@ terraform {
 
 provider "github" {
   owner = var.owner
-  app_auth {} # using environmet variables for auth
+  app_auth {} # using environment variables for auth
 }
 
 resource "github_repository" "repo" {

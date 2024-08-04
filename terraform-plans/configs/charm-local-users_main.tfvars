@@ -20,7 +20,7 @@ templates = {
   release = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
-    vars      = {
+    vars        = {
       branch = "main"
     }
   }

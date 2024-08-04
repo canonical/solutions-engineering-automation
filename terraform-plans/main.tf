@@ -11,7 +11,7 @@ module "github_templates" {
   owner          = var.owner
   repository     = var.repository
   branch         = var.branch
-  templates = var.templates
+  templates      = var.templates
 }
 
 output "repository" {

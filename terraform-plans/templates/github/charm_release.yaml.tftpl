@@ -18,7 +18,7 @@ jobs:
 
   release:
     needs: check
-    runs-on: ${{ matrix.runs-on }}
+    runs-on: $${{ matrix.runs-on }}
     strategy:
       fail-fast: false
       matrix:
@@ -38,7 +38,7 @@ jobs:
       - name: Pack and upload to charmhub
         uses: canonical/charming-actions/upload-charm@2.6.2
         with:
-          credentials: "${{ secrets.CHARMHUB_TOKEN }}"
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          credentials: "$${{ secrets.CHARMHUB_TOKEN }}"
+          github-token: "$${{ secrets.GITHUB_TOKEN }}"
           # Ensure the charm is built in an isolated environment and on the correct base in an lxd container.
           destructive-mode: false

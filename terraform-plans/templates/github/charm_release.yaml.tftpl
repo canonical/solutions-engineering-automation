@@ -22,10 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on:
-          %{ for entry in runs_on ~}
-          - ${entry}
-          %{ endfor ~}
+        runs-on: ${runs_on}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

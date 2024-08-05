@@ -64,6 +64,7 @@ jobs:
         with:
           provider: "lxd"
           juju-channel: $${{ matrix.juju-channel }}
+          charmcraft-channel: "2.x/stable"
 
       - name: Install latest tox version
         run: |

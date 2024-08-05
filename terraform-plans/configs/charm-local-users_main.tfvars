@@ -22,14 +22,12 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars        = {
       branch = "main",
-      runs_on = [
-        # github hosted runners are amd64
-        "[ubuntu-latest]",
-        # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
-        # We prefer the github runners because they are smaller machines and save resources.
-        # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
-        # - runs-on: [self-hosted, jammy, ARM64]
-        "[Ubuntu_ARM64_4C_16G_01]",
+      # github hosted runners are amd64
+      # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
+      # We prefer the github runners because they are smaller machines and save resources.
+      # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
+      # - runs-on: [self-hosted, jammy, ARM64]
+      runs_on = "[[ubuntu-latest], [Ubuntu_ARM64_4C_16G_01]]",
       ],
     }
   }

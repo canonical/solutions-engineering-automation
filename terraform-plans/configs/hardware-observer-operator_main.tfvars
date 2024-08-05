@@ -17,9 +17,7 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars        = {
       branch = "main",
-      runs_on = [
-        "[ubuntu-latest]",
-      ],
+      runs_on = "ubuntu-latest",
     }
   }
 }

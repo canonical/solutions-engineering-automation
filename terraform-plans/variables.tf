@@ -19,11 +19,15 @@ variable "branch" {
   default     = "main"
 }
 
-variable "workflow_files" {
+variable "templates" {
   type = map(object({
+    # Path to the template file in this repository.
     source      = string
+    # Path to the target file in the target repository.
     destination = string
-    variables   = map(string)
+    # Variables used in the template,
+    # expected to be variables as passed as the second argument to `templatefile()`.
+    vars        = any
   }))
-  description = "GitHub workflow file. The source is the file path of the template file."
+  description = "Files to be templated into the target GitHub repository."
 }

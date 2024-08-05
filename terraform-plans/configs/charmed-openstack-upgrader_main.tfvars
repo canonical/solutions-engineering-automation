@@ -1,21 +1,21 @@
 repository             = "charmed-openstack-upgrader"
 repository_description = "Automatic upgrade tool for Charmed Openstack"
 branch                 = "main"
-workflow_files = {
+templates = {
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"
-    variables   = {}
+    vars        = {}
   }
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    variables   = {}
+    vars        = {}
   }
   release = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
-    variables = {
+    vars        = {
       branch = "main"
     }
   }

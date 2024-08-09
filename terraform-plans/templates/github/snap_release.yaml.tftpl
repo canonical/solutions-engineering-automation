@@ -10,15 +10,19 @@ on:
     branches: [ ${branch} ]
   release:
     types: [ published ]
+  workflow_dispatch:
 
 jobs:
+{{ if include_check_job }}
   check:
     uses: ./.github/workflows/check.yaml
     secrets: inherit
-
+{{ endif }}
   release:
     runs-on: ubuntu-latest
+{{ if include_check_job }}
     needs: check
+{{ endif }}
     outputs:
       snap: $${{ steps.build.outputs.snap }}
     steps:

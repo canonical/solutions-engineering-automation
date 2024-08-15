@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
-    branches: [master, main]
+    branches: [main]
     paths-ignore:
       - "**.md"
       - "**.rst"
@@ -28,26 +28,18 @@ jobs:
         python-version: ["3.8", "3.10"]
     with:
       python-version: $${{ matrix.python-version }}
-      tox-version: "<4"
 
   func:
     needs: lint-unit
     name: functional tests
-    runs-on: $${{ matrix.architecture.runs-on }}
+    runs-on: $${{ matrix.runs-on }}
     timeout-minutes: 120
     strategy:
       fail-fast: false
       matrix:
-        juju-channel: ["3.4/stable"]
-        architecture:
-          - runs-on: [ubuntu-latest]  # github hosted runners are amd64
-            model-constraints: ""
-            # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
-            # We prefer the github runners because they are smaller machines and save resources.
-            # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
-            # - runs-on: [self-hosted, jammy, ARM64]
-          - runs-on: [Ubuntu_ARM64_4C_16G_01]
-            model-constraints: arch=arm64
+        runs-on:
+          - [ubuntu-latest]  # github hosted runners are amd64
+          - ['Ubuntu_ARM64_4C_16G_01']
     steps:
 
       - uses: actions/checkout@v4
@@ -63,21 +55,22 @@ jobs:
         uses: charmed-kubernetes/actions-operator@main
         with:
           provider: "lxd"
-          juju-channel: $${{ matrix.juju-channel }}
+          juju-channel: "3.4/stable"
           charmcraft-channel: "2.x/stable"
-
-      - name: Install latest tox version
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install tox
 
       - name: Show juju information
         run: |
           juju version
           juju controllers | grep Version -A 1 | awk '{print $9}'
 
+        # this is used by zaza in the functional tests
+      - name: Set zaza juju model constraints for architecture
+        run: |
+          if [ "$(uname -m)" = "aarch64" ]; then
+            echo "TEST_MODEL_CONSTRAINTS=arch=arm64" >> "$GITHUB_ENV"
+          fi
+
       - name: Run tests
         run: "make functional"
         env:
           TEST_JUJU3: "1"  # https://github.com/openstack-charmers/zaza/pull/653
-          TEST_MODEL_CONSTRAINTS: $${{ matrix.architecture.model-constraints }}

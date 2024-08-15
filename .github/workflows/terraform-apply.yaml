@@ -26,6 +26,8 @@ jobs:
             - hardware-observer-operator_main
             - charm-local-users_main
             - charmed-openstack-exporter-snap_main
+            - charm-userdir-ldap_main
+            - charm-nrpe_main
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4

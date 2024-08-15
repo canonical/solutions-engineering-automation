@@ -37,6 +37,7 @@ jobs:
           - charmed-openstack-upgrader
           - juju-backup-all
           - juju-lint
+          - openstack-exporter-operator
           - prometheus-hardware-exporter
           - prometheus-juju-backup-all-exporter
         workflow_file_name:
@@ -46,8 +47,6 @@ jobs:
             workflow_file_name: check.yaml
           - repo: hardware-observer-operator
             workflow_file_name: cos_integration.yaml
-          - repo: openstack-exporter-operator
-            workflow_file_name: pull-request.yaml
           - repo: prometheus-juju-exporter
             workflow_file_name: pr.yaml
           - repo: snap-tempest

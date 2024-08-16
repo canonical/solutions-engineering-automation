@@ -27,6 +27,7 @@ jobs:
             - charm-local-users_main
             - charm-userdir-ldap_main
             - charm-nrpe_main
+            - charm-prometheus-libvirt-exporter_main
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4

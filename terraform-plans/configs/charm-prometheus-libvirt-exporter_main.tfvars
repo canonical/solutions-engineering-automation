@@ -21,7 +21,6 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars        = {
-      branch = "main",
       # github hosted runners are amd64
       # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
       # We prefer the github runners because they are smaller machines and save resources.

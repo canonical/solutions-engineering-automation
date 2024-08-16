@@ -15,8 +15,6 @@ templates = {
   release = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
-    vars        = {
-      branch = "main"
-    }
+    vars        = {}
   }
 }

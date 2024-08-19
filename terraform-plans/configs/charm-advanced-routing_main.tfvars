@@ -1,5 +1,5 @@
-repository             = "charm-userdir-ldap"
-repository_description = "A charm to install and configured userdir-ldap"
+repository             = "charm-advanced-routing"
+repository_description = "This subordinate charm allows for the configuration of policy routing rules on the deployed host, as well as routes to configured services."
 branch                 = "main"
 templates = {
   codeowners = {
@@ -11,12 +11,7 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars        = {
-      # github hosted runners are amd64
-      # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
-      # We prefer the github runners because they are smaller machines and save resources.
-      # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
-      # - runs-on: [self-hosted, jammy, ARM64]
-      runs_on = "[[ubuntu-latest], [Ubuntu_ARM64_4C_16G_01]]",
+      runs_on = "[[ubuntu-latest]]",
     }
   }
   promote = {

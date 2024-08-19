@@ -12,6 +12,7 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars        = {
       runs_on = "[[ubuntu-latest]]",
+      test_commands = "['make functional']",
     }
   }
   promote = {

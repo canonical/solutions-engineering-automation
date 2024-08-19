@@ -23,6 +23,7 @@ jobs:
           repository:
             # The naming convention of the files is $REPO_$BRANCH.tfvars
             - charm-advanced-routing_main
+            - charm-apt-mirror_main
             - charm-local-users_main
             - charm-nrpe_main
             - charm-prometheus-libvirt-exporter_main

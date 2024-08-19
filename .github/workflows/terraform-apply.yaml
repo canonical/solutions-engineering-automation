@@ -21,14 +21,15 @@ jobs:
         fail-fast: false
         matrix:
           repository:
-            # The naming of the files should be $REPO_$BRANCH.tfvars
-            - charmed-openstack-upgrader_main
-            - hardware-observer-operator_main
+            # The naming convention of the files is $REPO_$BRANCH.tfvars
+            - charm-advanced-routing_main
             - charm-local-users_main
-            - charmed-openstack-exporter-snap_main
-            - charm-userdir-ldap_main
             - charm-nrpe_main
             - charm-prometheus-libvirt-exporter_main
+            - charm-userdir-ldap_main
+            - charmed-openstack-exporter-snap_main
+            - charmed-openstack-upgrader_main
+            - hardware-observer-operator_main
             - prometheus-openstack-exporter_main
     steps:
       - name: Checkout branch

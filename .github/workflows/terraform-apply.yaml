@@ -31,6 +31,7 @@ jobs:
             - charmed-openstack-upgrader_main
             - hardware-observer-operator_main
             - prometheus-openstack-exporter_main
+            - charm-sysconfig_main
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4

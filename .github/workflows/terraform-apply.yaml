@@ -25,6 +25,7 @@ jobs:
             - charmed-openstack-upgrader_main
             - hardware-observer-operator_main
             - charm-local-users_main
+            - charmed-openstack-exporter-snap_main
             - charm-userdir-ldap_main
             - charm-nrpe_main
             - charm-prometheus-libvirt-exporter_main

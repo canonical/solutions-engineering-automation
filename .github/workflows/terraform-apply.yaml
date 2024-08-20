@@ -7,11 +7,13 @@ on:
       - main
     paths:
       - terraform-plans/**
+      - .github/workflows/terraform-apply.yaml
   push:
     branches:
       - main
     paths:
       - terraform-plans/**
+      - .github/workflows/terraform-apply.yaml
 
 jobs:
   terraform:
@@ -35,11 +37,14 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
+
       - name: Install Terraform
         run: sudo snap install terraform --classic
+
       - name: Terraform init
         working-directory: ./terraform-plans
         run: terraform init
+
       - name: Terraform validate
         working-directory: ./terraform-plans
         env:
@@ -47,6 +52,7 @@ jobs:
           GITHUB_APP_INSTALLATION_ID: ${{ secrets.SOLENG_APP_INSTALLATION_ID }}
           GITHUB_APP_PEM_FILE: ${{ secrets.SOLENG_APP_PEM_FILE }}
         run: terraform validate -no-color
+
       - name: Terraform plan
         working-directory: ./terraform-plans
         env:
@@ -58,8 +64,9 @@ jobs:
           -var-file=configs/github.tfvars \
           -var-file=configs/${{ matrix.repository }}.tfvars \
           -out ./tf.plan
-      - name: Terraform Apply only on merge to main
-        if: ${{ github.event_name == 'push' }}
+
+      - name: Terraform apply (if running from main branch)
+        if: ${{ github.ref_name == 'main' }}
         working-directory: ./terraform-plans
         env:
           GITHUB_APP_ID: ${{ secrets.SOLENG_APP_ID }}

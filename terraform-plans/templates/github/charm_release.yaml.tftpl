@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: ${runs_on}
+        runs-on: [${runs_on}]
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -17,6 +17,7 @@ templates = {
       # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
       # - runs-on: [self-hosted, jammy, ARM64]
       runs_on = "[[ubuntu-latest], [Ubuntu_ARM64_4C_16G_01]]",
+      test_commands = "['make functional']",
     }
   }
   promote = {

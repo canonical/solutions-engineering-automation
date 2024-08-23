@@ -1,5 +1,5 @@
-repository             = "charm-sysconfig"
-repository_description = "A subordinate charm to apply system settings like grub configurations or systemd configurations."
+repository             = "charm-apt-mirror"
+repository_description = "A charm that provides ability to mirror any parts (or even all) of Debian and Ubuntu GNU/Linux distributions or any other apt sources"
 branch                 = "main"
 templates = {
   codeowners = {
@@ -11,10 +11,8 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars        = {
-      # Skip ARM64 check because the functional test runs on lxd VM which is not working
-      # on arm64 right now.
-      runs_on = "[[self-hosted, jammy, X64, large]]",
-      test_commands = "['make functional']",
+      runs_on = "[[ubuntu-latest]]",
+      test_commands = "['FUNC_ARGS=\"--series focal\" make functional', 'FUNC_ARGS=\"--series jammy\" make functional']",
     }
   }
   promote = {
@@ -26,7 +24,7 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars        = {
-      runs_on = "[[ubuntu-latest], [Ubuntu_ARM64_4C_16G_01]]",
+      runs_on = "[[ubuntu-latest]]",
     }
   }
 }

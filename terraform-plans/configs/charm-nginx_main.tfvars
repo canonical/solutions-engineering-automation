@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-nginx"
+repository_description = "Charmed Nginx Web server"
 branch                 = "main"
 templates = {
   codeowners = {

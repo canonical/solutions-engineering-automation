@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "prometheus-juju-exporter"
+repository_description = "prometheus-juju-exporter snap collects machines' running status in all models under a Juju controller."
 branch                 = "main"
 templates = {
   codeowners = {

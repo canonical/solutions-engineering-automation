@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "solutions-engineering-automation"
+repository_description = "Repo for automating tasks for Solutions Engineering Team."
 branch                 = "main"
 templates = {
   codeowners = {

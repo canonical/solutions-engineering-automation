@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-cloudsupport"
+repository_description = "Support charm for OpenStack operations. It's main purpose is to package common tasks into easy-to-use actions."
 branch                 = "main"
 templates = {
   codeowners = {

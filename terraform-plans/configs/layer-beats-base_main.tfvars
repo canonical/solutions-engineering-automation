@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "layer-beats-base"
+repository_description = "Base layer for Elastic Beats. This is a middle layer, and not designed to be self deployable"
 branch                 = "main"
 templates = {
   codeowners = {

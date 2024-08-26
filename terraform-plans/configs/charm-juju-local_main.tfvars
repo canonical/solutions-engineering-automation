@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-juju-local"
+repository_description = "This charm will deploy, configure and bootstrap lxd and juju for use with a local provider."
 branch                 = "main"
 templates = {
   codeowners = {

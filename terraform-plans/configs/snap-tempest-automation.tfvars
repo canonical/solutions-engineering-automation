@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "snap-tempest-automation"
+repository_description = "Automation for snap-tempest updates"
 branch                 = "main"
 templates = {
   codeowners = {

@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "openstack-exporter-operator"
+repository_description = "The openstack-exporter-operator is a machine charm for openstack-exporter."
 branch                 = "main"
 templates = {
   codeowners = {

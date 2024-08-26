@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "prometheus-hardware-exporter"
+repository_description = "Prometheus Hardware Exporter is an exporter for Hardware Observer"
 branch                 = "main"
 templates = {
   codeowners = {

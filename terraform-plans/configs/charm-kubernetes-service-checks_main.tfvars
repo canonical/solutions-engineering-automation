@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-kubernetes-service-checks"
+repository_description = "This charm provides Kubernetes Service checks for Nagios"
 branch                 = "main"
 templates = {
   codeowners = {

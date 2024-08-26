@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-prometheus-blackbox-exporter"
+repository_description = "This charm provides the Prometheus Blackbox exporter, part of the Prometheus monitoring system"
 branch                 = "main"
 templates = {
   codeowners = {

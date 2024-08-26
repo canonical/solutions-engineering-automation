@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "juju-lint"
+repository_description = "Run checks against a juju model"
 branch                 = "main"
 templates = {
   codeowners = {

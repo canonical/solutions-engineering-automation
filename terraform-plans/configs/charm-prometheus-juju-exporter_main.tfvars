@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-prometheus-juju-exporter"
+repository_description = "Charm that deploys exporter, publishing statistics about juju-deployed machines"
 branch                 = "main"
 templates = {
   codeowners = {

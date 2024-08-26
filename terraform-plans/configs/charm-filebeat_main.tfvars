@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "layer-filebeat"
+repository_description = "Filebeat is a lightweight log shipper. This is the source for the filebeat charm in the Juju charm store."
 branch                 = "main"
 templates = {
   codeowners = {

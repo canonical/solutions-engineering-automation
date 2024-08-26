@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "bootstack-actions"
+repository_description = "Actions for unifying lint, unit and functional tests, and charm and snap releases"
 branch                 = "main"
 templates = {
   codeowners = {

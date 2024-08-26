@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "prometheus-juju-backup-all-exporter"
+repository_description = "Prometheus exporter snap for charm-juju-backup-all"
 branch                 = "main"
 templates = {
   codeowners = {

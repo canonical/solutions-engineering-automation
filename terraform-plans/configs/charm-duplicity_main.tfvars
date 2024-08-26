@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-duplicity"
+repository_description = "A charm that provides functionality for both manual and automatic backups for a deployed application"
 branch                 = "main"
 templates = {
   codeowners = {

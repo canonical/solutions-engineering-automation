@@ -1,5 +1,5 @@
-repository             = "charmed-openstack-exporter-snap"
-repository_description = "Snap package for the OpenStack exporter"
+repository             = "charm-simple-streams"
+repository_description = "Simple streams charm"
 branch                 = "main"
 templates = {
   codeowners = {

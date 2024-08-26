@@ -29,7 +29,6 @@ jobs:
             - charm-apt-mirror_main
             - charm-cloudsupport_main
             - charm-duplicity_main
-            - charm-filebeat_main
             - charm-juju-backup-all_main
             - charm-juju-local_main
             - charm-kubernetes-service-checks_main
@@ -51,6 +50,7 @@ jobs:
             - juju-backup-all_main
             - juju-lint_main
             - layer-beats-base_main
+            - layer-filebeat_main
             - openstack-exporter-operator_main
             - prometheus-hardware-exporter_main
             - prometheus-juju-backup-all-exporter_main

@@ -10,6 +10,6 @@ templates = {
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    vars        = {}
+    vars   = {}
   }
 }

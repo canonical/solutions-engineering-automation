@@ -48,9 +48,9 @@ jobs:
 
         # arm64 runners don't have make or gcc installed by default
       - name: Install dependencies
-￼        run: |
-￼          sudo apt update
-￼          sudo apt install -y make gcc
+        run: |
+          sudo apt update
+          sudo apt install -y make gcc
 
       - name: Setup Python
         uses: actions/setup-python@v5

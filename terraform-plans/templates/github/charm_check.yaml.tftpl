@@ -39,6 +39,7 @@ jobs:
       matrix:
         runs-on: ${runs_on}
         test-command: ${test_commands}
+        juju-channel: ["3.4/stable"]
     steps:
 
       - uses: actions/checkout@v4
@@ -60,7 +61,7 @@ jobs:
         uses: charmed-kubernetes/actions-operator@main
         with:
           provider: "lxd"
-          juju-channel: "3.4/stable"
+          juju-channel: $${{ matrix.juju-channel }}
           charmcraft-channel: "2.x/stable"
 
         # This is used by zaza in the functional tests for non-amd64 architectures (if applicable)

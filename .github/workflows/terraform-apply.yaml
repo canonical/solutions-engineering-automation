@@ -68,6 +68,7 @@ jobs:
             - snap-tempest_stable_yoga
             - snap-tempest_stable_zed
             - solutions-engineering-automation_main
+            - tailscale-snap_main
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4

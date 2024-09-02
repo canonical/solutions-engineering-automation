@@ -36,9 +36,6 @@ jobs:
         run: |
           yamllint .yamllint snap/snapcraft.yaml
 
-      - name: Verify snap builds successfully
-        uses: snapcore/action-build@v1
-
   build:
     runs-on: ubuntu-latest
     steps:

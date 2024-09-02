@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +35,16 @@ jobs:
       - name: Lint yaml files
         run: |
           yamllint .yamllint snap/snapcraft.yaml
+
+      - name: Verify snap builds successfully
+        uses: snapcore/action-build@v1
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Complete git history is required to generate the version from git tags.
 
       - name: Verify snap builds successfully
         uses: snapcore/action-build@v1

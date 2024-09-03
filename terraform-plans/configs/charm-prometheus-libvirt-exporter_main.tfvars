@@ -16,7 +16,7 @@ templates = {
       # We prefer the github runners because they are smaller machines and save resources.
       # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
       # - runs-on: [self-hosted, jammy, ARM64]
-      runs_on = "[[ubuntu-latest], [Ubuntu_ARM64_4C_16G_01]]",
+      runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
       test_commands = "['make functional']",
     }
   }
@@ -32,7 +32,7 @@ templates = {
       # github hosted runners are amd64
       # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
       # We prefer the github runners because they are smaller machines and save resources.
-      runs_on = "[[ubuntu-latest], [Ubuntu_ARM64_4C_16G_01]]",
+      runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
     }
   }
 }

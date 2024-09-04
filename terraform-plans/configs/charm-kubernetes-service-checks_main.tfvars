@@ -24,7 +24,7 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars        = {
-      runs_on = "[[ubuntu-latest]]",
+      runs_on = "[[ubuntu-22.04]]",
     }
   }
 }

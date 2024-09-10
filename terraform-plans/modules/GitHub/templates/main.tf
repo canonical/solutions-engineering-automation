@@ -12,13 +12,6 @@ provider "github" {
   app_auth {} # using environment variables for authentication
 }
 
-# Generate a unique string to append to the branch name
-resource "random_string" "update_uid" {
-  length  = 8
-  numeric = true
-  special = false
-}
-
 # Flatten the repository and file information into a single list of maps based on the templates variable
 locals {
   repo_files = flatten([

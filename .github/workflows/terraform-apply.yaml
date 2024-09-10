@@ -31,7 +31,6 @@ jobs:
             - charm-duplicity_main
             - charm-juju-backup-all_main
             - charm-juju-local_main
-            - charm-kubernetes-service-checks_main
             - charm-local-users_main
             - charm-logrotated_main
             - charm-nginx_main

@@ -21,7 +21,6 @@ jobs:
           - charm-duplicity
           - charm-juju-backup-all
           - charm-juju-local
-          - charm-kubernetes-service-checks
           - charm-local-users
           - charm-logrotated
           - charm-nginx

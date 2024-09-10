@@ -17,7 +17,7 @@ variable "branch" {
 variable "pr_branch" {
   type        = string
   description = "Pull request branch name."
-  default     = "chore/update-managed-files"
+  default     = "automation/update-managed-files"
 }
 
 variable "pr_title" {

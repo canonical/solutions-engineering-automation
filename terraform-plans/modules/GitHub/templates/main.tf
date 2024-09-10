@@ -61,7 +61,7 @@ resource "github_branch" "managed_files_branch" {
   count = length(local.changed_files) > 0 ? 1 : 0
 
   repository    = var.repository
-  branch        = "${var.pr_branch}-${random_string.update_uid.id}"
+  branch        = var.pr_branch
   source_branch = var.branch
 }
 
@@ -79,9 +79,27 @@ resource "github_repository_file" "managed_files" {
   depends_on = [github_branch.managed_files_branch]
 }
 
-# Create a pull request only if there are changed files
+data "github_repository_pull_requests" "open" {
+  base_repository = var.repository
+  base_ref        = var.branch
+  state           = "open"
+}
+
+locals {
+    pr_exists = length([for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == var.pr_branch]) > 0
+}
+
+locals {
+    existing_pr = local.pr_exists ? [for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == var.pr_branch][0] : null
+}
+
+locals {
+    should_create_pr = length(local.changed_files) > 0 && !local.pr_exists
+}
+
+# Create a pull request only if there are changed files and there isn't already a PR open for the branch
 resource "github_repository_pull_request" "managed_files_update_pr" {
-  count = length(local.changed_files) > 0 ? 1 : 0
+  count = local.should_create_pr ? 1 : 0
 
   base_repository = var.repository
   base_ref        = var.branch
@@ -110,20 +128,23 @@ output "changed_files" {
 
 # Output to indicate if PR was created
 output "pr_created" {
-  value = length(local.changed_files) > 0 ? true : false
+  value = length(github_repository_pull_request.managed_files_update_pr) > 0 ? true : false
 }
 
-# Output the PR branch if PR was created
 output "pr_branch" {
-  value = length(local.changed_files) > 0 ? github_repository_pull_request.managed_files_update_pr[0].head_ref : "No PR created"
-
-  depends_on = [
-    github_repository_pull_request.managed_files_update_pr
-  ]
+  value = var.pr_branch
 }
 
 output "pr_url" {
-  value = length(local.changed_files) > 0 ? "https://github.com/${var.owner}/${var.repository}/pull/${github_repository_pull_request.managed_files_update_pr[0].number}" : "No PR created"
+  value = (
+    length(local.changed_files) > 0 ?
+      (
+        local.should_create_pr ?
+          "https://github.com/${var.owner}/${var.repository}/pull/${github_repository_pull_request.managed_files_update_pr[0].number}" :
+          "https://github.com/${var.owner}/${var.repository}/pull/${local.existing_pr.number}"
+      ) :
+      "No PR created"
+  )
 
   depends_on = [
     github_repository_pull_request.managed_files_update_pr

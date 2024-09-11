@@ -22,4 +22,9 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars        = {}
   }
+  yamllint = {
+    source      = "./templates/github/snap_yamllint.yaml.tftpl"
+    destination = ".yamllint"
+    vars        = {}
+  }
 }

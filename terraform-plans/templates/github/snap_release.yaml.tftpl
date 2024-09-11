@@ -17,8 +17,12 @@ jobs:
     secrets: inherit
 
   release:
-    runs-on: ubuntu-22.04
+    runs-on: $${{ matrix.runs-on }}
     needs: check
+    strategy:
+      fail-fast: false
+      matrix:
+        runs-on: ${runs_on}
     outputs:
       snap: $${{ steps.build.outputs.snap }}
     steps:

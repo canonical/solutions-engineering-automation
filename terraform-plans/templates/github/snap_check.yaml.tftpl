@@ -37,7 +37,11 @@ jobs:
           yamllint .yamllint snap/snapcraft.yaml
 
   build:
-    runs-on: ubuntu-22.04
+    runs-on: $${{ matrix.runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runs-on: ${runs_on}
     steps:
       - uses: actions/checkout@v4
         with:

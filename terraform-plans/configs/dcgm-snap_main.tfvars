@@ -10,7 +10,9 @@ templates = {
   check = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
-    vars        = {}
+    vars        = {
+      runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+    }
   }
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
@@ -20,7 +22,9 @@ templates = {
   release = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
-    vars        = {}
+    vars        = {
+       runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+    }
   }
   yamllint = {
     source      = "./templates/github/snap_yamllint.yaml.tftpl"

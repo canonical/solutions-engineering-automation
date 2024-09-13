@@ -55,6 +55,7 @@ jobs:
             - prometheus-juju-backup-all-exporter_main
             - prometheus-juju-exporter_main
             - prometheus-openstack-exporter_main
+            - smartctl-exporter-snap_main
             - snap-tempest-automation_main
             - snap-tempest_main
             - snap-tempest_stable_antelope

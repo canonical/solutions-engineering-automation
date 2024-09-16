@@ -2,6 +2,11 @@ repository             = "smartctl-exporter-snap"
 repository_description = "Snap package for smartctl_exporter"
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

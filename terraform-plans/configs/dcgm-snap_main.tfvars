@@ -2,6 +2,11 @@ repository             = "dcgm-snap"
 repository_description = "Snap package for NVIDIA DCGM and DCGM exporter"
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

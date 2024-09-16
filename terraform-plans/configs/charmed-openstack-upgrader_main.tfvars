@@ -2,6 +2,11 @@ repository             = "charmed-openstack-upgrader"
 repository_description = "Automatic upgrade tool for Charmed Openstack"
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

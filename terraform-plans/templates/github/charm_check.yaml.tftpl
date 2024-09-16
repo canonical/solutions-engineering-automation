@@ -116,11 +116,15 @@ jobs:
             echo "TEST_MODEL_CONSTRAINTS=arch=arm64" >> "$GITHUB_ENV"
           fi
 
+      - name: Build the charm
+        run: chharmcraft -v pack
+
       - name: Run tests
         run: $${{ matrix.test-command }}
         env:
           TEST_JUJU3: "1"  # https://github.com/openstack-charmers/zaza/pull/653
           TEST_JUJU_CHANNEL: $${{ matrix.juju-channel }}
+          CHARM_PATH: "$${{ github.workspace}}/$${{ matrix.charm-file }}"
 
       # Save output for debugging
 

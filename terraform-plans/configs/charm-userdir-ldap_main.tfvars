@@ -2,6 +2,11 @@ repository             = "charm-userdir-ldap"
 repository_description = "A charm to install and configured userdir-ldap"
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

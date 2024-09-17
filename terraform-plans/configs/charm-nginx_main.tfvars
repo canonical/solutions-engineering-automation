@@ -2,6 +2,11 @@ repository             = "charm-nginx"
 repository_description = "Charmed Nginx Web server"
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

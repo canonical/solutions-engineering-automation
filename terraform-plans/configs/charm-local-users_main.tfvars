@@ -2,6 +2,11 @@ repository             = "charm-local-users"
 repository_description = "A subordinate charm for creating and managing local user accounts and groups on principal units."
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

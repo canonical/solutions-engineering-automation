@@ -2,6 +2,11 @@ repository             = "charm-apt-mirror"
 repository_description = "A charm that provides ability to mirror any parts (or even all) of Debian and Ubuntu GNU/Linux distributions or any other apt sources"
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

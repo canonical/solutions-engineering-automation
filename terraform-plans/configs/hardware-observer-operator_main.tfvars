@@ -7,6 +7,14 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
+  check = {
+    source      = "./templates/github/charm_check.yaml.tftpl"
+    destination = ".github/workflows/check.yaml"
+    vars        = {
+      runs_on = "[[ubuntu-22.04]]",
+      test_commands = "['FUNC_ARGS=\"--series focal\" make functional', 'FUNC_ARGS=\"--series jammy\" make functional']",
+    }
+  }
   promote = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"

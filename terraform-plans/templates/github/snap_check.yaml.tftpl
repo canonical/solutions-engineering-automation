@@ -48,6 +48,7 @@ jobs:
           fetch-depth: 0  # Complete git history is required to generate the version from git tags.
 
       - name: Verify snap builds successfully
+        id: build
         uses: snapcore/action-build@v1
 
       - name: Determine system architecture

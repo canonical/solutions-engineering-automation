@@ -120,11 +120,13 @@ jobs:
         run: chharmcraft -v pack
 
       - name: Run tests
-        run: $${{ matrix.test-command }}
+        run: |
+          export CHARM_PATH="$(pwd)/$(ls | grep '\.charm$')"
+          echo "$CHARM_PATH"
+          $${{ matrix.test-command }}
         env:
           TEST_JUJU3: "1"  # https://github.com/openstack-charmers/zaza/pull/653
           TEST_JUJU_CHANNEL: $${{ matrix.juju-channel }}
-          CHARM_PATH: "$${{ github.workspace}}/$${{ matrix.charm-file }}"
 
       # Save output for debugging
 

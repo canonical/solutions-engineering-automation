@@ -91,11 +91,11 @@ jobs:
         with:
           submodules: true
 
-        # arm64 runners don't have make or gcc installed by default
+        # arm64 runners don't have gcc installed by default
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y make gcc
+          sudo apt install -y gcc
 
       - name: Setup Python
         uses: actions/setup-python@v5

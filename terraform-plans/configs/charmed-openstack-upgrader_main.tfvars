@@ -20,6 +20,8 @@ templates = {
   release = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
-    vars        = {}
+    vars        = {
+      runs_on = "[[ubuntu-22.04]]",
+    }
   }
 }

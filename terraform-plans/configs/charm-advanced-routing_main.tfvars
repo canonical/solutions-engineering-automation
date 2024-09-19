@@ -2,6 +2,11 @@ repository             = "charm-advanced-routing"
 repository_description = "This subordinate charm allows for the configuration of policy routing rules on the deployed host, as well as routes to configured services."
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

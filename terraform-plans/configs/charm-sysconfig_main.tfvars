@@ -2,6 +2,11 @@ repository             = "charm-sysconfig"
 repository_description = "A subordinate charm to apply system settings like grub configurations or systemd configurations."
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

@@ -2,6 +2,11 @@ repository             = "charm-prometheus-libvirt-exporter"
 repository_description = "A charm that provides per-domain metrics related to CPU, memory, disk and network usage using libvirt exporter."
 branch                 = "main"
 templates = {
+  gitignore = {
+    source      = "./templates/github/gitignore.tftpl"
+    destination = ".gitignore"
+    vars   = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

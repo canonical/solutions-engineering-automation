@@ -14,9 +14,9 @@ variable "branch" {
   default     = "main"
 }
 
-variable "pr_branch" {
+variable "pr_branch_prefix" {
   type        = string
-  description = "Pull request branch name."
+  description = "Pull request branch name prefix."
   default     = "automation/update-managed-files"
 }
 

@@ -49,12 +49,16 @@ locals {
   }
 }
 
+locals {
+  pr_branch = "${var.pr_branch_prefix}-${var.branch}"
+}
+
 # Create a new branch only if there are changed files
 resource "github_branch" "managed_files_branch" {
   count = length(local.changed_files) > 0 ? 1 : 0
 
   repository    = var.repository
-  branch        = var.pr_branch
+  branch        = local.pr_branch
   source_branch = var.branch
 }
 
@@ -79,11 +83,11 @@ data "github_repository_pull_requests" "open" {
 }
 
 locals {
-    pr_exists = length([for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == var.pr_branch]) > 0
+    pr_exists = length([for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == local.pr_branch]) > 0
 }
 
 locals {
-    existing_pr = local.pr_exists ? [for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == var.pr_branch][0] : null
+    existing_pr = local.pr_exists ? [for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == local.pr_branch][0] : null
 }
 
 locals {
@@ -125,7 +129,7 @@ output "pr_created" {
 }
 
 output "pr_branch" {
-  value = var.pr_branch
+  value = local.pr_branch
 }
 
 output "pr_url" {

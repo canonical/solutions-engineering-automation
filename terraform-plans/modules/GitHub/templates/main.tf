@@ -50,7 +50,7 @@ locals {
 }
 
 locals {
-  pr_branch = "${var.pr_branch_prefix}-${var.branch}"
+  pr_branch = var.branch == "main" ? var.pr_branch_prefix : "${var.pr_branch_prefix}-${var.branch}"
 }
 
 # Create a new branch only if there are changed files

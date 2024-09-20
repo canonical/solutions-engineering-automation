@@ -19,7 +19,7 @@ templates = {
       # Skip ARM64 check because the functional test runs on lxd VM which is not working
       # on arm64 right now.
       runs_on = "[[self-hosted, jammy, X64, large]]",
-      test_commands = "['make functional']",
+      test_commands = "['tox -e func']",
     }
   }
   promote = {

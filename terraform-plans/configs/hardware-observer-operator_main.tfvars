@@ -17,7 +17,7 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars        = {
       runs_on = "[[ubuntu-22.04]]",
-      test_commands = "['FUNC_ARGS=\"--series focal\" make functional', 'FUNC_ARGS=\"--series jammy\" make functional']",
+      test_commands = "['tox -e func -- -v --series focal', 'tox -e func -- -v --series jammy']",
     }
   }
   promote = {

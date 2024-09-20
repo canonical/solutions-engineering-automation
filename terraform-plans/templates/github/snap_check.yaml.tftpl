@@ -41,6 +41,9 @@ jobs:
           # workflows breaking all at once when a new major version is released.
           python -m pip install 'tox<5'
 
+      - name: Run linters
+        run: tox -e lint
+
       - name: Lint yaml files
         run: |
           yamllint .yamllint snap/snapcraft.yaml

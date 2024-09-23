@@ -39,6 +39,7 @@ jobs:
           - openstack-exporter-operator
           - prometheus-hardware-exporter
           - prometheus-juju-backup-all-exporter
+          - snap-tempest
         workflow_file_name:
           - check.yaml
         include:
@@ -47,8 +48,6 @@ jobs:
           - repo: hardware-observer-operator
             workflow_file_name: cos_integration.yaml
           - repo: prometheus-juju-exporter
-            workflow_file_name: pr.yaml
-          - repo: snap-tempest
             workflow_file_name: pr.yaml
 
     steps:

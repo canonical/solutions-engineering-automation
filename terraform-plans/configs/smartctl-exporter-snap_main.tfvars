@@ -16,7 +16,7 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars        = {
-      runs_on = "[[ubuntu-22.04]]",
+      runs_on = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
     }
   }
   promote = {
@@ -28,7 +28,7 @@ templates = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars        = {
-      runs_on = "[[ubuntu-22.04]]",
+      runs_on = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
     }
   }
   yamllint = {

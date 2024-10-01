@@ -34,7 +34,7 @@ jobs:
       - name: Download the built snap from check workflow
         uses: actions/download-artifact@v4
         with:
-          name: snap_${{ env.SYSTEM_ARCH }}
+          name: snap_$${{ env.SYSTEM_ARCH }}
 
       - name: Find the downloaded snap file
         run: echo "SNAP_FILE=$(find . -name "*.snap")" >> $GITHUB_ENV

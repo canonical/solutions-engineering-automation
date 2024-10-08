@@ -17,4 +17,12 @@ templates = {
     destination = ".github/workflows/promote.yaml"
     vars   = {}
   }
+  jira_sync_config = {
+    source      = "./templates/github/jira_sync_config.yaml.tftpl"
+    destination = ".github/.jira_sync_config.yaml"
+    vars = {
+      component  = "openstack-exporter",
+      epic_key   = "SOLENG-46"
+    }
+  }
 }

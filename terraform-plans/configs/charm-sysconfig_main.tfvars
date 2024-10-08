@@ -34,4 +34,12 @@ templates = {
       runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
     }
   }
+  jira_sync_config = {
+    source      = "./templates/github/jira_sync_config.yaml.tftpl"
+    destination = ".github/.jira_sync_config.yaml"
+    vars = {
+      component  = "sysconfig",
+      epic_key   = "SOLENG-46"
+    }
+  }
 }

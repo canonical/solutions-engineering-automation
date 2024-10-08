@@ -32,4 +32,12 @@ templates = {
       runs_on = "[[ubuntu-22.04]]",
     }
   }
+  jira_sync_config = {
+    source      = "./templates/github/jira_sync_config.yaml.tftpl"
+    destination = ".github/.jira_sync_config.yaml"
+    vars = {
+      component  = "juju-backup-all",
+      epic_key   = "SOLENG-46"
+    }
+  }
 }

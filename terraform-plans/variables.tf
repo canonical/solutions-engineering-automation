@@ -27,7 +27,7 @@ variable "templates" {
     destination = string
     # Variables used in the template,
     # expected to be variables as passed as the second argument to `templatefile()`.
-    vars        = map(any)
+    vars        = any
   }))
   description = "Files to be templated into the target GitHub repository."
 }

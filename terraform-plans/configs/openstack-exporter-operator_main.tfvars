@@ -29,8 +29,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "openstack-exporter",
-      epic_key   = "SOLENG-46"
+      component = "openstack-exporter",
+      epic_key  = "SOLENG-46"
     }
   }
 }

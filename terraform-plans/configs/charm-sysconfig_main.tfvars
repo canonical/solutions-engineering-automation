@@ -38,8 +38,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "sysconfig",
-      epic_key   = "SOLENG-46"
+      component = "sysconfig",
+      epic_key  = "SOLENG-46"
     }
   }
 }

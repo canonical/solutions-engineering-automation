@@ -28,8 +28,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "openstack-service-checks",
-      epic_key   = "SOLENG-46"
+      component = "openstack-service-checks",
+      epic_key  = "SOLENG-46"
     }
   }
 }

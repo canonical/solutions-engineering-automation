@@ -16,8 +16,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "duplicity",
-      epic_key   = "SOLENG-46"
+      component = "duplicity",
+      epic_key  = "SOLENG-46"
     }
   }
 }

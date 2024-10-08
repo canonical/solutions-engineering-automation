@@ -41,8 +41,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "userdir-ldap",
-      epic_key   = "SOLENG-46"
+      component = "userdir-ldap",
+      epic_key  = "SOLENG-46"
     }
   }
 }

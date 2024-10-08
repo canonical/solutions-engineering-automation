@@ -36,8 +36,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "juju-local",
-      epic_key   = "SOLENG-46"
+      component = "juju-local",
+      epic_key  = "SOLENG-46"
     }
   }
 }

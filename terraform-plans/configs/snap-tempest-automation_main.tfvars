@@ -16,8 +16,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "cloud-validation",
-      epic_key   = "SOLENG-80"
+      component = "cloud-validation",
+      epic_key  = "SOLENG-80"
     }
   }
 }

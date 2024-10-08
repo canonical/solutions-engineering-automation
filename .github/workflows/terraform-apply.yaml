@@ -16,8 +16,24 @@ on:
       - .github/workflows/terraform-apply.yaml
 
 jobs:
+  lint:
+    name: Linters
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Install Terraform
+        run: sudo snap install terraform --classic
+
+      - name: Terraform format lint
+        working-directory: ./terraform-plans
+        run: terraform fmt -check -recursive -diff
+
   terraform:
     name: Run Terraform
+    needs:
+      - lint
     runs-on: ubuntu-22.04
     strategy:
         fail-fast: false

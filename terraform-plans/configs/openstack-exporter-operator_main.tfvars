@@ -5,7 +5,7 @@ templates = {
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"
-    vars   = {}
+    vars        = {}
   }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
@@ -21,7 +21,7 @@ templates = {
   release = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
-    vars        = {
+    vars = {
       runs_on = "[[ubuntu-22.04]]",
     }
   }

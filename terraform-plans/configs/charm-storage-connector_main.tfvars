@@ -16,8 +16,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "storage-connector",
-      epic_key   = "SOLENG-46"
+      component = "storage-connector",
+      epic_key  = "SOLENG-46"
     }
   }
 }

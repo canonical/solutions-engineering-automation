@@ -16,8 +16,8 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component  = "simple-streams",
-      epic_key   = "SOLENG-46"
+      component = "simple-streams",
+      epic_key  = "SOLENG-46"
     }
   }
 }

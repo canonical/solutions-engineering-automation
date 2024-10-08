@@ -5,7 +5,7 @@ templates = {
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"
-    vars   = {}
+    vars        = {}
   }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
@@ -15,8 +15,8 @@ templates = {
   check = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
-    vars        = {
-      runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+    vars = {
+      runs_on       = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
       test_commands = "['tox -e func -- -v --series focal --keep-models', 'tox -e func -- -v --series jammy --keep-models']",
     }
   }
@@ -28,7 +28,7 @@ templates = {
   release = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
-    vars        = {
+    vars = {
       runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
     }
   }

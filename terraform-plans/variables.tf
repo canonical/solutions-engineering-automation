@@ -22,12 +22,12 @@ variable "branch" {
 variable "templates" {
   type = map(object({
     # Path to the template file in this repository.
-    source      = string
+    source = string
     # Path to the target file in the target repository.
     destination = string
     # Variables used in the template,
     # expected to be variables as passed as the second argument to `templatefile()`.
-    vars        = any
+    vars = any
   }))
   description = "Files to be templated into the target GitHub repository."
 }

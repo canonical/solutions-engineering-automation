@@ -83,15 +83,15 @@ data "github_repository_pull_requests" "open" {
 }
 
 locals {
-    pr_exists = length([for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == local.pr_branch]) > 0
+  pr_exists = length([for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == local.pr_branch]) > 0
 }
 
 locals {
-    existing_pr = local.pr_exists ? [for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == local.pr_branch][0] : null
+  existing_pr = local.pr_exists ? [for pr in data.github_repository_pull_requests.open.results : pr if pr.head_ref == local.pr_branch][0] : null
 }
 
 locals {
-    should_create_pr = length(local.changed_files) > 0 && !local.pr_exists
+  should_create_pr = length(local.changed_files) > 0 && !local.pr_exists
 }
 
 # Create a pull request only if there are changed files and there isn't already a PR open for the branch
@@ -135,12 +135,12 @@ output "pr_branch" {
 output "pr_url" {
   value = (
     length(local.changed_files) > 0 ?
-      (
-        local.should_create_pr ?
-          "https://github.com/${var.owner}/${var.repository}/pull/${github_repository_pull_request.managed_files_update_pr[0].number}" :
-          "https://github.com/${var.owner}/${var.repository}/pull/${local.existing_pr.number}"
-      ) :
-      "No PR created"
+    (
+      local.should_create_pr ?
+      "https://github.com/${var.owner}/${var.repository}/pull/${github_repository_pull_request.managed_files_update_pr[0].number}" :
+      "https://github.com/${var.owner}/${var.repository}/pull/${local.existing_pr.number}"
+    ) :
+    "No PR created"
   )
 
   depends_on = [

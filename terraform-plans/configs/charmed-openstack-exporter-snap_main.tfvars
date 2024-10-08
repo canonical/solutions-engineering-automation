@@ -5,16 +5,16 @@ templates = {
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"
-    vars   = {}
+    vars        = {}
   }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"
-    vars   = {}
+    vars        = {}
   }
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    vars   = {}
+    vars        = {}
   }
 }

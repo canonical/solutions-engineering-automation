@@ -16,7 +16,7 @@ templates = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component = "layer-beats-base",
+      component = "filebeat",
       epic_key  = "SOLENG-46"
     }
   }

@@ -1,0 +1,24 @@
+# This file is centrally managed as a template file in https://github.com/canonical/solutions-engineering-automation
+# To update the file:
+# - Edit it in the canonical/solutions-engineering-automation repository.
+# - Open a PR with the changes.
+# - When the PR merges, the soleng-terraform bot will open a PR to the target repositories with the changes.
+
+# Security policy
+
+If the vulnerability affects a dependency, a new version of the component including the updated
+dependency will be released in the respective store, meaning that no new feature will be included:
+the update will be built on top of the previously last released stable version.
+
+If the vulnerability affects our charm/snap code itself, a new version will be built including the
+security fix on top of the current main branch, meaning that the security update will potentially
+include new previously unreleased features.
+
+
+## Reporting a vulnerability
+To report a security issue, file a [Private Security Report](https://github.com/canonical/${repository}/security/advisories/new)
+with a description of the issue, the steps you took to create the issue, affected versions, and,
+if known, mitigations for the issue.
+
+The [Ubuntu Security disclosure and embargo policy](https://ubuntu.com/security/disclosure-policy)
+contains more information about what you can expect when you contact us and what we expect from you.

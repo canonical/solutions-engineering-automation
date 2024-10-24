@@ -26,6 +26,8 @@ jobs:
       - name: Install Terraform
         run: sudo snap install terraform --classic
 
+      # To format the repository to pass this lint:
+      # $ cd terraform-plans && terraform fmt -recursive
       - name: Terraform format lint
         working-directory: ./terraform-plans
         run: terraform fmt -check -recursive -diff

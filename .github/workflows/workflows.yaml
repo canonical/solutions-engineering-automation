@@ -1,0 +1,43 @@
+name: Apply new changes to SolEng repositories
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - workflows/**
+
+jobs:
+  workflows:
+    name: Run workflows update
+    needs:
+      - lint
+    runs-on: ubuntu-22.04
+    strategy:
+        fail-fast: false
+        matrix:
+          repository:
+            - charm-advanced-routing_main
+          branch: main
+          check_template: workflows/charm-check.yaml
+          owner: canonical
+
+    steps:
+      - name: Checkout automation repo
+        uses: actions/checkout@v4
+      - name: Checkout ${{ matrix.repository }}
+        uses: actions/checkout@v4
+        with:
+          path: /tmp
+          repository: ${{ matrix.owner }}/${{ matrix.repository }}
+          ref: ${{ matrix.branch }}
+      - name: Rendering check workflow template
+        uses: cuchi/jinja2-action@v1.2.2
+        with:
+          template: ${{ matrix.check_template }}.j2
+          output_file: /tmp/${{ matrix.repository }}/.github/workflows/${{ matrix.check_template }}
+          strict: true
+      - name: Print git diff
+        run: git diff /tmp/${{ matrix.repository }}
+      # TODO: create PR with same branch name as this one is using + mention this PR there

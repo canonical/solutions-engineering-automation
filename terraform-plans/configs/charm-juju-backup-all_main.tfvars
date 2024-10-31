@@ -18,6 +18,7 @@ templates = {
     vars = {
       runs_on       = "[[self-hosted, linux, x64, large, jammy]]",
       test_commands = "['tox -e func']",
+      juju_channels = "[\"3.4/stable\"]",
     }
   }
   promote = {

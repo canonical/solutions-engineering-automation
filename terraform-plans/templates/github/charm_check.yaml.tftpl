@@ -83,8 +83,8 @@ jobs:
       fail-fast: false
       matrix:
         runs-on: ${runs_on}
-        test-command: ${test_commands}
-        juju-channel: ["3.4/stable"]
+        test-command: ${ test_commands }
+        juju-channel: ${ juju_channels }
     steps:
 
       - uses: actions/checkout@v4

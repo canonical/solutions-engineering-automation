@@ -119,7 +119,7 @@ jobs:
           -var="pr_body=This is an automated pull request from https://github.com/${{ github.repository }}/pull/${{ github.event.number }} to update centrally managed files." \
           -out ./tf.plan
 
-      - name: Terraform apply (if running on PR)
+      - name: Terraform apply (if running on non-draft PR)
         if: github.event.pull_request.draft == false
         working-directory: ./terraform-plans
         env:

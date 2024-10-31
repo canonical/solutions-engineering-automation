@@ -31,3 +31,15 @@ variable "templates" {
   }))
   description = "Files to be templated into the target GitHub repository."
 }
+
+variable "pr_branch_prefix" {
+  type        = string
+  description = "Pull request branch name prefix."
+  default     = "automation/update-managed-files"
+}
+
+variable "pr_body" {
+  type        = string
+  description = "Pull request body message."
+  default     = "This is an automated pull request from https://github.com/canonical/solutions-engineering-automation to update centrally managed files."
+}

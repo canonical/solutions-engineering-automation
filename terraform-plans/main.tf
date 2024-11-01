@@ -7,11 +7,13 @@ module "github_settings" {
 }
 
 module "github_templates" {
-  source     = "./modules/GitHub/templates"
-  owner      = var.owner
-  repository = var.repository
-  branch     = var.branch
-  templates  = var.templates
+  source           = "./modules/GitHub/templates"
+  owner            = var.owner
+  repository       = var.repository
+  branch           = var.branch
+  templates        = var.templates
+  pr_branch_prefix = var.pr_branch_prefix
+  pr_body          = var.pr_body
 }
 
 output "repository" {

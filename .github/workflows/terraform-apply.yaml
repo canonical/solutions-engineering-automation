@@ -87,6 +87,8 @@ jobs:
             - snap-tempest_stable_zed
             - solutions-engineering-automation_main
             - tailscale-snap_main
+            - headscale-snap_main
+            - derper-snap_main
             - dcgm-snap_main
     steps:
       - name: Checkout branch

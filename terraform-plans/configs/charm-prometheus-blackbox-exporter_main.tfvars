@@ -33,6 +33,7 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars = {
       runs_on = "[[ubuntu-22.04]]",
+      charmcraft_channel = "2.x/stable",
     }
   }
   jira_sync_config = {

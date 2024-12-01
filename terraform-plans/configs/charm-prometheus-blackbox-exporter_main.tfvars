@@ -24,7 +24,9 @@ templates = {
   promote = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    vars        = {}
+    vars        = {
+      charmcraft_channel = "2.x/stable",
+    }
   }
   release = {
     source      = "./templates/github/charm_release.yaml.tftpl"

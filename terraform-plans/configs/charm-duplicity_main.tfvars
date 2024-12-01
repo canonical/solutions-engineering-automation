@@ -17,7 +17,7 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       runs_on       = "[[ubuntu-22.04]]",
-      test_commands = "['TEST_JUJU3=1 make functional']",
+      test_commands = "['tox -e func']",
       juju_channels = "[\"3.4/stable\"]",
     }
   }

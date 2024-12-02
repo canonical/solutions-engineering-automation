@@ -19,25 +19,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Verify snap builds successfully
-        id: build
-        uses: canonical/action-build@v1
-
-      - name: Upload the built snap
-        uses: actions/upload-artifact@v4
-        with:
-          name: snap_artifact
-          path: $${{ steps.build.outputs.snap }}
-
-  tics-report:
-    needs: build
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Install dependencies
         run: |
           sudo apt update
@@ -49,10 +30,9 @@ jobs:
           # workflows breaking all at once when a new major version is released.
           python -m pip install 'tox<5'
 
-      - name: Get the snap artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: snap_artifact
+      - name: Verify snap builds successfully
+        id: build
+        uses: canonical/action-build@v1
 
       - name: Test with tox and produce coverage report
         run: tox -e tics

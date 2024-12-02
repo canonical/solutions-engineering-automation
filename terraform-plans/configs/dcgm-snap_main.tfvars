@@ -24,6 +24,13 @@ templates = {
     destination = ".github/workflows/promote.yaml"
     vars        = {}
   }
+  tics = {
+    source      = "./templates/github/snap_tics.yaml.tftpl"
+    destination = ".github/workflows/tics.yaml"
+    vars        = {
+        project = "dcgm-snap",
+    }
+  }
   release = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"

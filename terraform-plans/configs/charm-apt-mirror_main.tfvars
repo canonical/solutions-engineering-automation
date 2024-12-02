@@ -18,6 +18,7 @@ templates = {
     vars = {
       runs_on       = "[[ubuntu-22.04]]",
       test_commands = "['tox -e func -- -v --series focal', 'tox -e func -- -v --series jammy']",
+      juju_channels = "[\"3.4/stable\"]",
     }
   }
   promote = {

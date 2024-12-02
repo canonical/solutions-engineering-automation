@@ -1,4 +1,4 @@
-name: Apply new changes to SolEng repositories
+name: Run terraform
 
 on:
   workflow_dispatch:

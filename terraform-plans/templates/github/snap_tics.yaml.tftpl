@@ -30,7 +30,10 @@ jobs:
           # workflows breaking all at once when a new major version is released.
           python -m pip install 'tox<5'
 
-      - name: Verify snap builds successfully
+      # The snap is built already in the check workflow and available as an artifact,
+      # but we want this TICS workflow to be independent,
+      # so we can run the workflow periodically or on demand.
+      - name: Build the snap
         id: build
         uses: canonical/action-build@v1
 

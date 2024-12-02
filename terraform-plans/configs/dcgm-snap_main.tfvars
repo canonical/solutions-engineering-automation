@@ -27,8 +27,8 @@ templates = {
   tics = {
     source      = "./templates/github/snap_tics.yaml.tftpl"
     destination = ".github/workflows/tics.yaml"
-    vars        = {
-        project = "dcgm-snap",
+    vars = {
+      project = "dcgm-snap",
     }
   }
   release = {

@@ -20,8 +20,8 @@ templates = {
   tics = {
     source      = "./templates/github/snap_tics.yaml.tftpl"
     destination = ".github/workflows/tics.yaml"
-    vars        = {
-        project = "charmed-openstack-exporter-snap",
+    vars = {
+      project = "charmed-openstack-exporter-snap",
     }
   }
   jira_sync_config = {

@@ -20,6 +20,7 @@ templates = {
       # on arm64 right now.
       runs_on       = "[[self-hosted, jammy, X64, large]]",
       test_commands = "['tox -e func']",
+      juju_channels = "[\"3.4/stable\"]",
     }
   }
   promote = {

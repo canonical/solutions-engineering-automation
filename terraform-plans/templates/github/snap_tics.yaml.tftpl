@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: snap_artifact
-          path: ${{ steps.build.outputs.snap }}
+          path: $${{ steps.build.outputs.snap }}
 
   tics-report:
     needs: build

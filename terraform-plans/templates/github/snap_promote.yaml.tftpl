@@ -12,7 +12,10 @@ on:
         description: 'Channel Promotion, e.g. latest/edge -> latest/candidate'
         required: true
         type: choice
-        options: ${promote_options}
+        options: 
+          {{- range .promote_options }}
+          - {{ . }}
+          {{- end }}
 
 jobs:
   promote-snap:

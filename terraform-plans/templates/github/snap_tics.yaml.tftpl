@@ -12,7 +12,7 @@ on:
       - main
 
 jobs:
-  build:
+  tics-analysis:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -23,9 +23,9 @@ jobs:
         run: |
           sudo apt update
           python -m pip install --upgrade pip
-          # tics action requires flake8 to be installed on the runner
+          # tics action requires flake8 and pylint to be installed on the runner
           # https://github.com/tiobe/tics-github-action/issues/410
-          python -m pip install flake8
+          python -m pip install flake8 pylint
           # pin tox to the current major version to avoid
           # workflows breaking all at once when a new major version is released.
           python -m pip install 'tox<5'

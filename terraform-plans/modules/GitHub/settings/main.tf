@@ -27,7 +27,7 @@ resource "github_repository" "repo" {
   allow_auto_merge   = false
 
   allow_update_branch    = true
-  delete_branch_on_merge = false
+  delete_branch_on_merge = true
   vulnerability_alerts   = true
 
 }

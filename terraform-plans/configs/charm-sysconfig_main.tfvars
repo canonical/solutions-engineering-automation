@@ -20,18 +20,22 @@ templates = {
       # on arm64 right now.
       runs_on       = "[[self-hosted, jammy, X64, large]]",
       test_commands = "['tox -e func']",
+      juju_channels = "[\"3.4/stable\"]",
     }
   }
   promote = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    vars        = {}
+    vars = {
+      charmcraft_channel = "2.x/stable",
+    }
   }
   release = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+      runs_on            = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+      charmcraft_channel = "2.x/stable",
     }
   }
   jira_sync_config = {

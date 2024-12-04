@@ -1,5 +1,5 @@
-repository             = "charm-storage-connector"
-repository_description = "This subordinate charm configures a unit to connect to a storage endpoint, either iSCSI or Fibre Channel."
+repository             = "headscale-snap"
+repository_description = "A snap package for https://github.com/juanfont/headscale"
 branch                 = "main"
 templates = {
   gitignore = {
@@ -13,34 +13,34 @@ templates = {
     vars        = {}
   }
   check = {
-    source      = "./templates/github/charm_check.yaml.tftpl"
+    source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on       = "[[ubuntu-22.04]]",
-      test_commands = "['TEST_JUJU3=1 make functional']",
-      juju_channels = "[\"3.4/stable\"]",
+      runs_on = "[[ubuntu-22.04]]",
     }
   }
   promote = {
-    source      = "./templates/github/charm_promote.yaml.tftpl"
+    source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    vars = {
-      charmcraft_channel = "2.x/stable",
-    }
+    vars        = {}
   }
   release = {
-    source      = "./templates/github/charm_release.yaml.tftpl"
+    source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on            = "[[ubuntu-22.04]]",
-      charmcraft_channel = "2.x/stable",
+      runs_on = "[[ubuntu-22.04]]",
     }
+  }
+  yamllint = {
+    source      = "./templates/github/snap_yamllint.yaml.tftpl"
+    destination = ".yamllint"
+    vars        = {}
   }
   jira_sync_config = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
     vars = {
-      component = "storage-connector",
+      component = "tailscale",
       epic_key  = "SOLENG-46"
     }
   }

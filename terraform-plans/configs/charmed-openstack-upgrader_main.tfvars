@@ -15,7 +15,9 @@ templates = {
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    vars        = {}
+    vars = {
+      promote_options = "['latest/edge -> latest/candidate', 'latest/candidate -> latest/stable']"
+    }
   }
   release = {
     source      = "./templates/github/snap_release.yaml.tftpl"

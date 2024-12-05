@@ -22,7 +22,9 @@ templates = {
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
-    vars        = {}
+    vars = {
+      promote_options = "['latest/edge -> latest/candidate', 'latest/candidate -> latest/stable', 'core24/edge -> core24/candidate', 'core24/candidate -> core24/stable']"
+    }
   }
   tics = {
     source      = "./templates/github/snap_tics.yaml.tftpl"

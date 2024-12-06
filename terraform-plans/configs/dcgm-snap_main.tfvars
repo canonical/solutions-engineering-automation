@@ -38,6 +38,7 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars = {
       runs_on = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      channels = "core24/edge,latest/edge"
     }
   }
   yamllint = {

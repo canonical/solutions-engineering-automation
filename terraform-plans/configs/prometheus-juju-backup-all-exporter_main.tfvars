@@ -31,6 +31,7 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars = {
       runs_on = "[[ubuntu-22.04]]",
+      channels = "latest/edge"
     }
   }
   jira_sync_config = {

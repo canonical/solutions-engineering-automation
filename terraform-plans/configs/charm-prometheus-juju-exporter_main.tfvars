@@ -12,15 +12,16 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
-  check = {
-    source      = "./templates/github/charm_check.yaml.tftpl"
-    destination = ".github/workflows/check.yaml"
-    vars = {
-      runs_on       = "[[ubuntu-22.04]]",
-      test_commands = "['TEST_JUJU3=1 make functional']",
-      juju_channels = "[\"3.4/stable\", \"3.5/stable\"]",
-    }
-  }
+  # Temporarily disable it since the charm uses a different template
+  # check = {
+  #   source      = "./templates/github/charm_check.yaml.tftpl"
+  #   destination = ".github/workflows/check.yaml"
+  #   vars = {
+  #     runs_on       = "[[ubuntu-22.04]]",
+  #     test_commands = "['TEST_JUJU3=1 make functional']",
+  #     juju_channels = "[\"3.4/stable\", \"3.5/stable\"]",
+  #   }
+  # }
   promote = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"

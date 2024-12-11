@@ -54,4 +54,11 @@ templates = {
       epic_key  = "SOLENG-190"
     }
   }
+  security = {
+    source      = "./templates/github/SECURITY.md.tftpl"
+    destination = "SECURITY.md"
+    vars = {
+      repository = "smartctl-exporter-snap"
+    }
+  }
 }

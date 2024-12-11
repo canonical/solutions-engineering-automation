@@ -36,4 +36,11 @@ templates = {
       epic_key  = "SOLENG-46"
     }
   }
+  security = {
+    source      = "./templates/github/SECURITY.md.tftpl"
+    destination = "SECURITY.md"
+    vars = {
+      repository = "openstack-exporter-operator"
+    }
+  }
 }

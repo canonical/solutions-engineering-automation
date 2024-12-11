@@ -52,4 +52,11 @@ templates = {
       }
     }
   }
+  security = {
+    source      = "./templates/github/SECURITY.md.tftpl"
+    destination = "SECURITY.md"
+    vars = {
+      repository = "charm-prometheus-libvirt-exporter"
+    }
+  }
 }

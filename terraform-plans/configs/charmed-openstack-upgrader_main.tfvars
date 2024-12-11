@@ -35,4 +35,11 @@ templates = {
       epic_key  = "SOLENG-172"
     }
   }
+  security = {
+    source      = "./templates/github/SECURITY.md.tftpl"
+    destination = "SECURITY.md"
+    vars = {
+      repository = "charmed-openstack-upgrader"
+    }
+  }
 }

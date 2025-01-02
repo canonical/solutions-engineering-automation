@@ -18,7 +18,7 @@ templates = {
     vars = {
       # Skip ARM64 check because the functional test runs on lxd VM which is not working
       # on arm64 right now.
-      runs_on       = "[[self-hosted, jammy, X64, large]]",
+      runs_on       = "[[self-hosted-linux-amd64-jammy-large]]",
       test_commands = "['tox -e func']",
       juju_channels = "[\"3.4/stable\"]",
     }

@@ -1,0 +1,65 @@
+# This file is centrally managed as a template file in https://github.com/canonical/solutions-engineering-automation
+# To update the file:
+# - Edit it in the canonical/solutions-engineering-automation repository.
+# - Open a PR with the changes.
+# - When the PR merges, the soleng-terraform bot will open a PR to the target repositories with the changes.
+
+[tool.flake8]
+ignore = ["C901", "D100", "D101", "D102", "D103", "W503", "W504"]
+exclude = ['.eggs', '.git', '.tox', '.venv', '.build', 'build', 'lib', 'report']
+max-line-length = 99
+max-complexity = 10
+
+[tool.black]
+line-length = 99
+exclude = '''
+/(
+    | .eggs
+    | .git
+    | .tox
+    | .venv
+    | .build
+    | build
+    | lib
+    | report
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 99
+skip_glob = [".eggs", ".git", ".tox", ".venv", ".build", "build", "lib", "report"]
+
+[tool.pylint]
+max-line-length = 99
+disable = ["E1102"]
+ignore = ['.eggs', '.git', '.tox', '.venv', '.build', 'lib', 'report', 'tests']
+
+[tool.mypy]
+warn_unused_ignores = true
+warn_unused_configs = true
+warn_unreachable = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+exclude = ['.eggs', '.git', '.tox', '.venv', '.build', 'lib', 'report', 'tests']
+
+## Ignore unsupported imports
+[[tool.mypy.overrides]]
+module = ["charmhelpers.*"]
+ignore_missing_imports = true
+module = ["setuptools"]
+
+[tool.coverage.run]
+relative_files = true
+source = ${coverage_source}
+omit = ${coverage_omit}
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+
+[tool.coverage.html]
+directory = "tests/report/html"
+
+[tool.coverage.xml]
+output = "tests/report/coverage.xml"

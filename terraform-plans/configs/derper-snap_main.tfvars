@@ -59,7 +59,7 @@ templates = {
     destination = "pyproject.tom"
     vars = {
       coverage_source = "['.']"
-      coverage_omit = "['snap/**', 'setup.py']"
+      coverage_omit   = "['snap/**', 'setup.py']"
     }
   }
 }

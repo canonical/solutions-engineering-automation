@@ -22,6 +22,7 @@ exclude = '''
     | build
     | lib
     | report
+    | docs
 )/
 '''
 
@@ -33,7 +34,7 @@ skip_glob = [".eggs", ".git", ".tox", ".venv", ".build", "build", "lib", "report
 [tool.pylint]
 max-line-length = 99
 disable = ["E1102"]
-ignore = ['.eggs', '.git', '.tox', '.venv', '.build', 'lib', 'report', 'tests']
+ignore = ['.eggs', '.git', '.tox', '.venv', '.build', 'lib', 'report', 'tests', 'docs']
 
 [tool.mypy]
 warn_unused_ignores = true
@@ -41,7 +42,14 @@ warn_unused_configs = true
 warn_unreachable = true
 disallow_untyped_defs = true
 ignore_missing_imports = true
-exclude = ['.eggs', '.git', '.tox', '.venv', '.build', 'lib', 'report', 'tests']
+no_namespace_packages = true
+exclude = ['.eggs', '.git', '.tox', '.venv', '.build', 'lib', 'report', 'tests', 'docs']
+
+[tool.codespell]
+skip = ".eggs,.tox,.git,.venv,venv,build,.build,lib,report,docs,poetry.lock,htmlcov"
+quiet-level = 3
+check-filenames = true
+ignore-words-list = "assertIn"
 
 ## Ignore unsupported imports
 [[tool.mypy.overrides]]

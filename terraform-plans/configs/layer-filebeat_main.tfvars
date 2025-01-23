@@ -27,4 +27,9 @@ templates = {
       repository = "layer-filebeat"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.tom"
+    vars        = {}
+  }
 }

@@ -53,4 +53,9 @@ templates = {
       repository = "charm-sysconfig"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.tom"
+    vars        = {}
+  }
 }

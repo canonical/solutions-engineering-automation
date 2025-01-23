@@ -42,4 +42,9 @@ templates = {
       repository = "charm-openstack-service-checks"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.tom"
+    vars        = {}
+  }
 }

@@ -52,9 +52,6 @@ templates = {
   pyproject = {
     source      = "./templates/github/pyproject.toml.tftpl"
     destination = "pyproject.tom"
-    vars = {
-      coverage_source = "['.']"
-      coverage_omit   = "['snap/**', 'setup.py']"
-    }
+    vars        = {}
   }
 }

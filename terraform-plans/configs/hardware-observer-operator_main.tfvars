@@ -52,4 +52,9 @@ templates = {
       repository = "hardware-observer-operator"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.tom"
+    vars        = {}
+  }
 }

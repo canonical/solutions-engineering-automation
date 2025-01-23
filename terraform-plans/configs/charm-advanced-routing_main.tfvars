@@ -51,4 +51,9 @@ templates = {
       repository = "charm-advanced-routing"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.tom"
+    vars        = {}
+  }
 }

@@ -55,7 +55,7 @@ templates = {
   }
   pyproject = {
     source      = "./templates/github/pyproject.toml.tftpl"
-    destination = "pyproject.tom"
+    destination = "pyproject.toml"
     vars        = {}
   }
 }

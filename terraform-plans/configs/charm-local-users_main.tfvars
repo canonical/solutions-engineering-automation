@@ -59,4 +59,9 @@ templates = {
       repository = "charm-local-users"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

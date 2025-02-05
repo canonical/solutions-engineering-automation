@@ -42,4 +42,9 @@ templates = {
       repository = "charmed-openstack-upgrader"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

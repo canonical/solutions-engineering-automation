@@ -27,4 +27,9 @@ templates = {
       repository = "prometheus-openstack-exporter"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

@@ -56,4 +56,9 @@ templates = {
       repository = "charm-userdir-ldap"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

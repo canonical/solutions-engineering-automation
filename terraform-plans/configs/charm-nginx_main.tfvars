@@ -51,4 +51,9 @@ templates = {
       repository = "charm-nginx"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

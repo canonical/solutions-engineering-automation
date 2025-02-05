@@ -61,4 +61,9 @@ templates = {
       repository = "dcgm-snap"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

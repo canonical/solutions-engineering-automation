@@ -27,4 +27,9 @@ templates = {
       repository = "prometheus-hardware-exporter"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

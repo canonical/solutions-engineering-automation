@@ -27,4 +27,9 @@ templates = {
       repository = "juju-lint"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars        = {}
+  }
 }

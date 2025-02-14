@@ -17,7 +17,7 @@ templates = {
     destination = ".github/.jira_sync_config.yaml"
     vars = {
       component = "hardware-observer",
-      epic_key  = "SOLENG-190"
+      epic_key  = "SOLENG-1100"
     }
   }
   security = {
@@ -30,6 +30,8 @@ templates = {
   pyproject = {
     source      = "./templates/github/pyproject.toml.tftpl"
     destination = "pyproject.toml"
-    vars        = {}
+    vars        = {
+        coverage_threshold_percent = "100"
+    }
   }
 }

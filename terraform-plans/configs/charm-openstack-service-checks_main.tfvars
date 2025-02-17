@@ -12,6 +12,17 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
+  check = {
+    source      = "./templates/github/charm_check.yaml.tftpl"
+    destination = ".github/workflows/check.yaml"
+    vars = {
+      runs_on            = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
+      test_commands      = "[ \"TEST_MODEL_SETTINGS='update-status-hook-interval=30s' tox -e func -- --keep-model -b jammy-yoga\", \"TEST_MODEL_SETTINGS='update-status-hook-interval=30s' tox -e func -- --keep-model -b focal-yoga\" ]"
+      juju_channels      = "['3.4/stable']",
+      charmcraft_channel = "2.x/stable",
+      python_versions    = "['3.8', '3.10']",
+    }
+  }
   promote = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"

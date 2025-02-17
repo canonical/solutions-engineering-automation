@@ -21,9 +21,11 @@ templates = {
       # We prefer the github runners because they are smaller machines and save resources.
       # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
       # - runs-on: [self-hosted, jammy, ARM64]
-      runs_on       = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
-      test_commands = "['tox -e func']",
-      juju_channels = "[\"3.4/stable\"]",
+      runs_on            = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+      test_commands      = "['tox -e func']",
+      juju_channels      = "[\"3.4/stable\"]",
+      charmcraft_channel = "2.x/stable",
+      python_versions    = "['3.8', '3.10']",
     }
   }
   promote = {

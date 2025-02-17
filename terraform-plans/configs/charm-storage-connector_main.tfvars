@@ -16,9 +16,10 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on       = "[[ubuntu-22.04]]",
-      test_commands = "['TEST_JUJU3=1 make functional']",
-      juju_channels = "[\"3.4/stable\"]",
+      runs_on            = "[[ubuntu-22.04]]",
+      test_commands      = "['TEST_JUJU3=1 make functional']",
+      juju_channels      = "[\"3.4/stable\"]",
+      charmcraft_channel = "2.x/stable",
     }
   }
   promote = {

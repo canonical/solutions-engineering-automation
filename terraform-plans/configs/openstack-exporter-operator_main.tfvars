@@ -16,9 +16,11 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on       = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
-      test_commands = "['TEST_MODEL_SETTINGS=\"update-status-hook-interval=30s\" tox -e func']",
-      juju_channels = "['3.4/stable']",
+      runs_on            = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
+      test_commands      = "['TEST_MODEL_SETTINGS=\"update-status-hook-interval=30s\" tox -e func']",
+      juju_channels      = "['3.4/stable']",
+      charmcraft_channel = "3.x/stable",
+      python_versions    = "['3.10']",
     }
   }
   promote = {

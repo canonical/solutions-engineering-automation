@@ -16,9 +16,11 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on       = "[[self-hosted, linux, x64, large, jammy]]",
-      test_commands = "['tox -e func']",
-      juju_channels = "[\"3.4/stable\"]",
+      runs_on            = "[[self-hosted, linux, x64, large, jammy]]",
+      test_commands      = "['tox -e func']",
+      juju_channels      = "[\"3.4/stable\"]",
+      charmcraft_channel = "2.x/stable",
+      python_versions    = "['3.8', '3.10']",
     }
   }
   promote = {

@@ -12,7 +12,15 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
-  # check.yaml is not added for now because it has a different format - to use an external juju controller.
+  check = {
+    source      = "./templates/github/charm_check.yaml.tftpl"
+    destination = ".github/workflows/check.yaml"
+    vars = {
+      runs_on       = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
+      test_commands = "['TEST_MODEL_SETTINGS=\"update-status-hook-interval=30s\" tox -e func']",
+      juju_channels = "['3.4/stable']",
+    }
+  }
   promote = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"

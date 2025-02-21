@@ -42,7 +42,6 @@ jobs:
         matrix:
           repository:
             # The naming convention of the files is $REPO_$BRANCH.tfvars
-            - bootstack-actions_main
             - charm-advanced-routing_main
             - charm-apt-mirror_main
             - charm-cloudsupport_main

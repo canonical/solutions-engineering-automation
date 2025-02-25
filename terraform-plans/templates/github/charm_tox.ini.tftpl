@@ -1,0 +1,171 @@
+[tox]
+skipsdist=True
+skip_missing_interpreters = True
+# Run the linters and unit tests by default
+envlist = lint, unit
+
+[testenv]
+basepython = python3
+allowlist_externals =
+  echo
+setenv =
+  # TODO: there are many options for this seen across the projects...
+  PYTHONPATH = {toxinidir}:{toxinidir}/lib/
+  PYTHONPATH = {toxinidir}:{toxinidir}/src/lib/
+  PYTHONPATH = {toxinidir}:{toxinidir}/reactive/
+  PYTHONPATH = {toxinidir}:{toxinidir}/lib/:{toxinidir}/src/
+  PYTHONPATH = {toxinidir}:{toxinidir}/lib/:{toxinidir}/hooks/
+  PYTHONPATH = {toxinidir}:{toxinidir}/lib/:{toxinidir}/hooks/:{toxinidir}/src/
+  PYTHONPATH = {toxinidir}/reactive:{toxinidir}/lib/:{toxinidir}/tests:{toxinidir}/actions:{toxinidir}
+  PYTHONPATH = {toxinidir}:{toxinidir}/lib/:{toxinidir}/hooks/:{toxinidir}/files/:{toxinidir}/files/plugins/
+  PYTHONPATH = .
+
+  # from charm-nrpe - probably not needed, or could be easily refactor out
+  VIRTUAL_ENV={envdir}
+  CHARM_DIR={envdir}
+passenv =
+  CHARM_*
+  HOME
+  HTTPS_PROXY
+  HTTP_PROXY
+  MODEL_SETTINGS
+  NO_PROXY
+  OS_*
+  PATH
+  PYTEST_*
+  SNAP_HTTPS_PROXY
+  SNAP_HTTP_PROXY
+  TEST_*
+  ZAZA_*
+
+  # from charm-prometheus-blackbox-exporter
+  PROJECTPATH
+
+  # from charm-nrpe; not sure why they were needed
+  CS_*
+  TERM
+  # NOTE: we could make this easier by passing through all environment variables... I don't think we need to restrict the env vars?
+
+  # hardware-observer-operator, func tests
+  REDFISH_*
+  # hardware-observer-operator, integration tests
+  K8S_CONTROLLER
+  LXD_CONTROLLER
+
+[testenv:lint]
+commands =
+    flake8
+    black --check --diff --color .
+    isort --check --diff --color .
+
+    pylint --recursive=y .
+    mypy --install-types --non-interactive .
+deps =
+    black
+    colorama
+    flake8
+    flake8-colors
+    flake8-docstrings
+    flake8-import-order
+    flake8-pyproject
+    isort
+    pep8-naming
+
+    pylint
+    mypy
+    # so pylint and mypy can reason about the code
+    {[testenv:unit]deps}
+    {[testenv:func]deps}
+
+[testenv:reformat]
+commands =
+    black .
+    isort .
+deps =
+    black
+    isort
+
+
+# NOTE: openstack-exporter-operator uses codespell, ruff
+[testenv:format]
+description = Apply coding style standards to code
+deps =
+    ruff
+    codespell
+    tomli
+commands =
+    codespell -w .
+    ruff format .
+    ruff check --fix --exit-zero --silent . # we only want --fix feature here
+
+[testenv:lint]
+description = Run static analysis
+deps =
+    ruff
+    codespell
+    isort
+    colorama
+    tomli
+    mypy
+commands =
+    codespell .
+    ruff format --diff .
+    ruff check --no-fix .
+    mypy --install-types --non-interactive .
+# END OF openstack-exporter-operator option
+
+[testenv:unit]
+# NOTE: for some projects it's currently {toxinidir}src/tests/unit, but we should refactor those projects
+# NOTE: for the projects that use `--ignore ...tests/functional`, we can convert that to `tests/unit` and it works.
+commands = pytest {toxinidir}/tests/unit \
+   -v \
+   --cov \
+   --cov-report=term-missing \
+   --cov-report=html \
+   --cov-report=xml
+# TODO: remove the .coveragerc for projects that used it
+
+# some don't have unit tests, but must have the stub for compatibility with the templates
+commands = echo "No unit tests, skipping."
+
+deps =
+  -r {toxinidir}/requirements.txt
+  -r {toxinidir}/tests/unit/requirements.txt
+  pytest
+  pytest-cov
+  ipdb # why is this required? it was in charm-cloudsupport
+
+  # from charm-openstack-service-checks - can probably be refactor out
+  {toxinidir}/tests/nagios_plugin
+
+  # layer-beats-base (this should be added to the unit test requirements.txt)
+  charms.reactive
+
+[testenv:func]
+# for charms that use zaza
+# NOTE: openstack-exporter-operator uses tests/integration - this can be refactored to be consistent with others
+changedir = {toxinidir}/tests/functional
+commands = functest-run-suite {posargs:--keep-model -v}
+
+# for charms that use pytest-operator
+commands = pytest {toxinidir}/tests/functional {posargs:-v}
+
+# for charms that don't have func tests
+commands = echo "No func tests, skipping."
+
+deps =
+  pytest
+  pytest-operator
+  -r {toxinidir}/tests/functional/requirements.txt
+
+  # not sure why charm-nginx needed zaza master? guess we can drop it and use pypi release now
+  # and charm-prometheus-juju-exporter
+  git+https://github.com/openstack-charmers/zaza.git@master#egg=zaza
+
+
+  # for charm-sysconfig
+  pytest
+  pytest-asyncio<0.23  # avoid breaking changes introduced by v0.23
+  -r {toxinidir}/src/tests/functional/requirements.txt
+
+# NOTE: hardware-observer-operator uses a separate integration testenv - need to check if that can be rolled into the func test target

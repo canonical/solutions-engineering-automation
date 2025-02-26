@@ -45,4 +45,11 @@ templates = {
       python_versions    = "['3.10']",
     }
   }
+  tox = {
+    source      = "./templates/github/charm_tox.ini.tftpl"
+    destination = "tox.ini"
+    vars = {
+      functest_type = "zaza"
+    }
+  }
 }

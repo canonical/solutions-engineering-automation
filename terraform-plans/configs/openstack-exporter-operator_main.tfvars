@@ -53,4 +53,11 @@ templates = {
       repository = "openstack-exporter-operator"
     }
   }
+  tox = {
+    source      = "./templates/github/charm_tox.ini.tftpl"
+    destination = "tox.ini"
+    vars = {
+      functest_type = "zaza"
+    }
+  }
 }

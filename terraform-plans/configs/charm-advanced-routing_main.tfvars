@@ -60,4 +60,11 @@ templates = {
       coverage_threshold_percent = "20"
     }
   }
+  tox = {
+    source      = "./templates/github/charm_tox.ini.tftpl"
+    destination = "tox.ini"
+    vars = {
+      functest_type = "pytest"
+    }
+  }
 }

@@ -22,14 +22,12 @@ passenv =
   SNAP_HTTP_PROXY
   TEST_*
   ZAZA_*
-
   # hardware-observer-operator, func tests
   REDFISH_*
   # hardware-observer-operator, integration tests
   K8S_CONTROLLER
   LXD_CONTROLLER
-
-  # TODO: can we just pass through all environment variables? What's the rationale for blocking some?
+# TODO: can we just pass through all environment variables? What's the rationale for blocking some?
 
 [testenv:lint]
 commands =
@@ -63,32 +61,25 @@ deps =
     isort
 
 [testenv:unit]
-# NOTE: for some projects it's currently {toxinidir}src/tests/unit, but we should refactor those projects
+# NOTE: for some projects it's currently {toxinidir}src/tests/unit, but we should refactor those projects (charm-prometheus-libvirt-exporter, charm-sysconfig)
 # NOTE: for the projects that use `--ignore ...tests/functional`, we can convert that to `tests/unit` and it works.
-# NOTE: some projects don't have unit tests, but we can refactor them to include a noop test at least
+# NOTE: some projects don't have unit tests (charm-prometheus-blackbox-exporter, layer-filebeat, charm-juju-local), but we can refactor them to include a noop test at least
 commands = pytest {toxinidir}/tests/unit \
    -v \
    --cov \
    --cov-report=term-missing \
    --cov-report=html \
-   --cov-report=xml
+   --cov-report=xml \
+   {posargs}
 
 deps =
-  -r {toxinidir}/requirements.txt
-  -r {toxinidir}/tests/unit/requirements.txt
   pytest
   pytest-cov
-  ipdb # why is this required? it was in charm-cloudsupport
-
-  # from charm-openstack-service-checks - TODO: refactor it so this isn't required
-  {toxinidir}/tests/nagios_plugin
-
-  # layer-beats-base (TODO: this should be added to the unit test requirements.txt)
-  charms.reactive
+  -r {toxinidir}/requirements.txt
+  -r {toxinidir}/tests/unit/requirements.txt
 
 [testenv:func]
 # TODO: openstack-exporter-operator uses tests/integration - this can be refactored to be consistent with others
-# NOTE: some projects don't have func tests, but we can refactor them to include a noop test at least
 %{ if functest_type == "zaza" ~}
 changedir = {toxinidir}/tests/functional
 commands = functest-run-suite {posargs:--keep-model -v}
@@ -108,15 +99,5 @@ deps =
   pytest-operator
   -r {toxinidir}/tests/functional/requirements.txt
 
-  # not sure why charm-nginx needed zaza master? guess we can drop it and use pypi release now
-  # and charm-prometheus-juju-exporter
-  # TODO
-  git+https://github.com/openstack-charmers/zaza.git@master#egg=zaza
-
-
-  # for charm-sysconfig
-  pytest
-  pytest-asyncio<0.23  # avoid breaking changes introduced by v0.23
-  -r {toxinidir}/src/tests/functional/requirements.txt
-
 # TODO: hardware-observer-operator uses a separate integration testenv - need to check if that can be rolled into the func test target
+# NOTE: charm-sysconfig has several differences, and it's in maintenance mode, so we can probably skip adding this tox.ini to it

@@ -56,4 +56,11 @@ templates = {
       coverage_threshold_percent = "100"
     }
   }
+  tics = {
+    source      = "./templates/github/snap_tics.yaml.tftpl"
+    destination = ".github/workflows/tics.yaml"
+    vars = {
+      project = "prometheus-juju-backup-all-exporter",
+    }
+  }
 }

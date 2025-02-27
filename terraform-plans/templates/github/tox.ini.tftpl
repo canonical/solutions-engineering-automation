@@ -1,0 +1,95 @@
+# This file is centrally managed as a template file in https://github.com/canonical/solutions-engineering-automation
+# To update the file:
+# - Edit it in the canonical/solutions-engineering-automation repository.
+# - Open a PR with the changes.
+# - When the PR merges, the soleng-terraform bot will open a PR to the target repositories with the changes.
+
+[tox]
+skipsdist=True
+skip_missing_interpreters = True
+envlist = lint, unit
+
+[testenv]
+basepython = python3
+setenv =
+  PYTHONPATH = {toxinidir}:{toxinidir}/src/:{toxinidir}/reactive/:{toxinidir}/hooks/:{toxinidir}/lib/:{toxinidir}/actions:{toxinidir}/files/:{toxinidir}/files/plugins/
+passenv = *
+
+[testenv:lint]
+commands =
+    black --check --diff --color .
+    isort --check --diff --color .
+    flake8
+    pylint --recursive=y .
+    mypy --install-types --non-interactive .
+deps =
+    black
+    colorama
+    flake8
+    flake8-colors
+    flake8-docstrings
+    flake8-import-order
+    flake8-pyproject
+    isort
+    mypy
+    pep8-naming
+    pylint
+    # so pylint and mypy can reason about the code
+    {[testenv:unit]deps}
+    {[testenv:func]deps}
+
+[testenv:reformat]
+commands =
+    black .
+    isort .
+deps =
+    black
+    isort
+
+[testenv:unit]
+%{ if unittest_type == "none" ~}
+allowlist_externals =
+    echo
+commands = echo "No unit tests, skipping."
+%{ else ~}
+%{ if unittest_type == "pytest" ~}
+commands = pytest {toxinidir}/tests/unit \
+   -v \
+   --cov \
+   --cov-report=term-missing \
+   --cov-report=html \
+   --cov-report=xml \
+   {posargs}
+
+deps =
+  pytest
+  pytest-cov
+  -r {toxinidir}/requirements.txt
+  -r {toxinidir}/tests/unit/requirements.txt
+%{ else ~}
+ERROR: invalid `unittest_type` value
+%{ endif ~}
+%{ endif ~}
+
+[testenv:func]
+%{ if functest_type == "none" ~}
+allowlist_externals =
+    echo
+commands = echo "No func tests, skipping."
+%{ else ~}
+deps =
+  pytest
+  pytest-cov
+  pytest-operator
+  -r {toxinidir}/requirements.txt
+  -r {toxinidir}/tests/functional/requirements.txt
+%{ if functest_type == "zaza" ~}
+changedir = {toxinidir}/tests/functional
+commands = functest-run-suite {posargs:--keep-model -v}
+%{ else ~}%{ if functest_type == "pytest" ~}
+commands = pytest {toxinidir}/tests/functional {posargs:-v}
+%{ else ~}
+ERROR: invalid `functest_type` value
+%{ endif ~}
+%{ endif ~}
+%{ endif ~}

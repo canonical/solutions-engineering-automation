@@ -54,10 +54,11 @@ templates = {
     }
   }
   tox = {
-    source      = "./templates/github/charm_tox.ini.tftpl"
+    source      = "./templates/github/tox.ini.tftpl"
     destination = "tox.ini"
     vars = {
       functest_type = "zaza"
+      unittest_type = "pytest"
     }
   }
 }

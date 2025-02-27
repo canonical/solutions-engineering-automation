@@ -68,4 +68,12 @@ templates = {
       coverage_threshold_percent = "0"
     }
   }
+  tox = {
+    source      = "./templates/github/tox.ini.tftpl"
+    destination = "tox.ini"
+    vars = {
+      functest_type = "pytest"
+      unittest_type = "none"
+    }
+  }
 }

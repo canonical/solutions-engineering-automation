@@ -80,7 +80,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         if-no-files-found: ignore
-        name: coverage-unit-${{ env.SYSTEM_ARCH }}
+        name: coverage-unit-$${{ env.SYSTEM_ARCH }}
         path: coverage-unit
 
   build:
@@ -150,7 +150,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           if-no-files-found: ignore
-          name: coverage-functional-${{ env.SYSTEM_ARCH }}
+          name: coverage-functional-$${{ env.SYSTEM_ARCH }}
           path: coverage-functional
 
   tics-analysis:

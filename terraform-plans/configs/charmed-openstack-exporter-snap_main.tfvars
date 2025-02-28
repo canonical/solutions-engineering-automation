@@ -39,13 +39,6 @@ templates = {
     destination = ".yamllint"
     vars        = {}
   }
-  tics = {
-    source      = "./templates/github/snap_tics.yaml.tftpl"
-    destination = ".github/workflows/tics.yaml"
-    vars = {
-      project = "charmed-openstack-exporter-snap",
-    }
-  }
   jira_sync_config = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"

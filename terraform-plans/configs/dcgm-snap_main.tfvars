@@ -26,13 +26,6 @@ templates = {
       promote_options = "['latest/edge -> latest/candidate', 'latest/candidate -> latest/stable', 'core24/edge -> core24/candidate', 'core24/candidate -> core24/stable']"
     }
   }
-  tics = {
-    source      = "./templates/github/snap_tics.yaml.tftpl"
-    destination = ".github/workflows/tics.yaml"
-    vars = {
-      project = "dcgm-snap",
-    }
-  }
   release = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"

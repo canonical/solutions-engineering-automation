@@ -12,6 +12,13 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
+  check = {
+    source      = "./templates/github/snap_check.yaml.tftpl"
+    destination = ".github/workflows/check.yaml"
+    vars = {
+      runs_on = "[[ubuntu-22.04]]",
+    }
+  }
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
@@ -47,13 +54,6 @@ templates = {
     destination = "pyproject.toml"
     vars = {
       coverage_threshold_percent = "100"
-    }
-  }
-  tics = {
-    source      = "./templates/github/snap_tics.yaml.tftpl"
-    destination = ".github/workflows/tics.yaml"
-    vars = {
-      project = "charmed-openstack-upgrader",
     }
   }
 }

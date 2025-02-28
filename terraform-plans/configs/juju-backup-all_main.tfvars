@@ -12,6 +12,13 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
+  check = {
+    source      = "./templates/github/snap_check.yaml.tftpl"
+    destination = ".github/workflows/check.yaml"
+    vars = {
+      runs_on = "[['self-hosted', 'linux', 'x64', 'large', 'jammy']]",
+    }
+  }
   jira_sync_config = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"
@@ -32,13 +39,6 @@ templates = {
     destination = "pyproject.toml"
     vars = {
       coverage_threshold_percent = "100"
-    }
-  }
-  tics = {
-    source      = "./templates/github/snap_tics.yaml.tftpl"
-    destination = ".github/workflows/tics.yaml"
-    vars = {
-      project = "juju-backup-all",
     }
   }
 }

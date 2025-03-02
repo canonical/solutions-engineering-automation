@@ -65,7 +65,7 @@ templates = {
     destination = "tox.ini"
     vars = {
       functest_type = "zaza"
-      unittest_type = "pytest"
+      unittest_type = "none"
     }
   }
 }

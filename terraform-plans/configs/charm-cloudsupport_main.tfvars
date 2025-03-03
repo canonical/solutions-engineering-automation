@@ -45,4 +45,19 @@ templates = {
       python_versions    = "['3.10']",
     }
   }
+  promote = {
+    source      = "./templates/github/charm_promote.yaml.tftpl"
+    destination = ".github/workflows/promote.yaml"
+    vars = {
+      charmcraft_channel = "3.x/stable",
+    }
+  }
+  release = {
+    source      = "./templates/github/charm_release.yaml.tftpl"
+    destination = ".github/workflows/release.yaml"
+    vars = {
+      runs_on            = "[[ubuntu-22.04]]",
+      charmcraft_channel = "3.x/stable",
+    }
+  }
 }

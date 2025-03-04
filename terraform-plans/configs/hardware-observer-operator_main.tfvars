@@ -33,7 +33,7 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on            = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+      runs_on            = "[[ubuntu-22.04]]",
       charmcraft_channel = "3.x/stable",
     }
   }

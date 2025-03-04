@@ -82,7 +82,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: ${runs_on}
+        runs-on: ${ runs_on }
     steps:
       - uses: actions/checkout@v4
         with:
@@ -110,11 +110,12 @@ jobs:
     needs:
       - build
     name: functional tests
-    runs-on: ubuntu-24.04
+    runs-on: $${{ matrix.runs-on }}
     timeout-minutes: 120
     strategy:
       fail-fast: false
       matrix:
+        runs-on: ${ runs_on }
         test-command: ${ test_commands }
         juju-channel: ${ juju_channels }
     steps:

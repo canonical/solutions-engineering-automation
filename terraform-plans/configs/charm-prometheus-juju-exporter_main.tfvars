@@ -20,6 +20,7 @@ templates = {
   #     runs_on       = "[[ubuntu-22.04]]",
   #     test_commands = "['TEST_JUJU3=1 make functional']",
   #     juju_channels = "[\"3.4/stable\", \"3.5/stable\"]",
+  #     func_python_version = "3.10",
   #   }
   # }
   promote = {

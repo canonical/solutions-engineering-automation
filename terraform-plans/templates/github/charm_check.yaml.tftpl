@@ -100,7 +100,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: ${ func_python_version }
 
       - name: Setup Juju environment
         uses: charmed-kubernetes/actions-operator@main

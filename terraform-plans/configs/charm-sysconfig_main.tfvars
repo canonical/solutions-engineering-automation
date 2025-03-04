@@ -18,11 +18,12 @@ templates = {
     vars = {
       # Skip ARM64 check because the functional test runs on lxd VM which is not working
       # on arm64 right now.
-      runs_on            = "[[self-hosted, jammy, X64, large]]",
-      test_commands      = "['tox -e func']",
-      juju_channels      = "[\"3.4/stable\"]",
-      charmcraft_channel = "3.x/stable",
-      python_versions    = "['3.8', '3.10']",
+      runs_on             = "[[self-hosted, jammy, X64, large]]",
+      test_commands       = "['tox -e func']",
+      juju_channels       = "[\"3.4/stable\"]",
+      charmcraft_channel  = "3.x/stable",
+      python_versions     = "['3.8', '3.10']",
+      func_python_version = "3.10",
     }
   }
   promote = {

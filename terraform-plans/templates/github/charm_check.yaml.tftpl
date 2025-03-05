@@ -88,14 +88,18 @@ jobs:
         with:
           submodules: true
 
-      - uses: canonical/craft-actions/charmcraft/pack@main
-        id: build
+      - uses: canonical/craft-actions/charmcraft/setup@main
         with:
-          verbosity: verbose
           channel: "${ charmcraft_channel }"
 
+      - name: Pack the charms
+        id: build
+        run: |
+          charmcraft -v pack
+          echo "charms=$(ls -1 *.charm | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+
       - name: List the names of the built charms
-        run: echo "$${{ steps.build.outputs.charms}}"
+        run: echo "::notice::Successfully built $${{ steps.build.outputs.charms}}"
 
       - name: Determine system architecture
         run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV

@@ -60,4 +60,12 @@ templates = {
       charmcraft_channel = "3.x/stable",
     }
   }
+  tox = {
+    source      = "./templates/github/tox.ini.tftpl"
+    destination = "tox.ini"
+    vars = {
+      functest_type = "zaza"
+      unittest_type = "pytest"
+    }
+  }
 }

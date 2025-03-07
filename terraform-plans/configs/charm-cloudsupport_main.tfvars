@@ -2,6 +2,11 @@ repository             = "charm-cloudsupport"
 repository_description = "Support charm for OpenStack operations. It's main purpose is to package common tasks into easy-to-use actions."
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

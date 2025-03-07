@@ -2,6 +2,11 @@ repository             = "charm-prometheus-juju-exporter"
 repository_description = "Charm that deploys exporter, publishing statistics about juju-deployed machines"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

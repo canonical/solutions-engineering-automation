@@ -2,6 +2,11 @@ repository             = "charm-storage-connector"
 repository_description = "This subordinate charm configures a unit to connect to a storage endpoint, either iSCSI or Fibre Channel."
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

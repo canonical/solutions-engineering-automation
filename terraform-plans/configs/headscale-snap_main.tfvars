@@ -2,6 +2,11 @@ repository             = "headscale-snap"
 repository_description = "A snap package for https://github.com/juanfont/headscale"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

@@ -18,6 +18,7 @@ templates = {
     vars = {
       python_versions = "['3.10']",
       runs_on         = "[[ubuntu-22.04]]",
+      project         = "prometheus-juju-backup-all-exporter"
     }
   }
   promote = {

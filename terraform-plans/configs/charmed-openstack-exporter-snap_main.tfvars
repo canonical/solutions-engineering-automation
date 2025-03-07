@@ -16,7 +16,9 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      python_versions = "['3.10']",
+      project         = "charmed-openstack-exporter-snap"
     }
   }
   promote = {
@@ -38,13 +40,6 @@ templates = {
     source      = "./templates/github/snap_yamllint.yaml.tftpl"
     destination = ".yamllint"
     vars        = {}
-  }
-  tics = {
-    source      = "./templates/github/snap_tics.yaml.tftpl"
-    destination = ".github/workflows/tics.yaml"
-    vars = {
-      project = "charmed-openstack-exporter-snap",
-    }
   }
   jira_sync_config = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"

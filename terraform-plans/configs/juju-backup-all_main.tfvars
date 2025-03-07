@@ -12,6 +12,15 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
+  check = {
+    source      = "./templates/github/snap_check.yaml.tftpl"
+    destination = ".github/workflows/check.yaml"
+    vars = {
+      python_versions = "['3.10']",
+      runs_on         = "[['self-hosted', 'linux', 'x64', 'large', 'jammy']]",
+      project         = "juju-backup-all"
+    }
+  }
   jira_sync_config = {
     source      = "./templates/github/jira_sync_config.yaml.tftpl"
     destination = ".github/.jira_sync_config.yaml"

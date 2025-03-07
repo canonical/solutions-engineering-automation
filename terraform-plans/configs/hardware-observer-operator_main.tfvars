@@ -20,7 +20,7 @@ templates = {
       test_commands      = "['tox -e func -- -v --base ubuntu@20.04 --keep-models', 'tox -e func -- -v --base ubuntu@22.04 --keep-models', 'if [ \"$(uname -m)\" = \"aarch64\" ]; then echo \"skipping func tests on ubuntu@24.04/arm64\"; else tox -e func -- -v --base ubuntu@24.04 --keep-models; fi' ]",
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
-      python_versions    = "['3.8', '3.10']",
+      python_versions    = "['3.8', '3.10', '3.12']",
     }
   }
   promote = {

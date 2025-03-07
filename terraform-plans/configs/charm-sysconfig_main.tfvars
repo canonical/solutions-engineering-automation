@@ -16,8 +16,6 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      # Skip ARM64 check because the functional test runs on lxd VM which is not working
-      # on arm64 right now.
       runs_on            = "[[self-hosted, jammy, X64, large], [Ubuntu_ARM64_4C_16G_01]]",
       test_commands      = "['if [ \"$(uname -m)\" = \"aarch64\" ]; then echo \"skipping func tests on arm64\"; else tox -e func; fi']",
       juju_channels      = "[\"3.4/stable\"]",

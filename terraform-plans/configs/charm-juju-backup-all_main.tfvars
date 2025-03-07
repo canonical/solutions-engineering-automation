@@ -20,7 +20,7 @@ templates = {
       test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
-      python_versions    = "['3.8', '3.10']",
+      python_versions    = "['3.8', '3.10', '3.12']",
     }
   }
   promote = {
@@ -34,7 +34,7 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on            = "[[ubuntu-22.04]]",
+      runs_on            = "ubuntu-24.04",
       charmcraft_channel = "3.x/stable",
     }
   }

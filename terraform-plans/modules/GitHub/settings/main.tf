@@ -34,7 +34,7 @@ resource "github_repository" "repo" {
 }
 
 resource "github_actions_repository_permissions" "repo" {
-  repository      =  var.repository
+  repository      = var.repository
   allowed_actions = "selected"
 
   allowed_actions_config {
@@ -43,11 +43,11 @@ resource "github_actions_repository_permissions" "repo" {
     verified_allowed = false
 
     patterns_allowed = [
-      beliaev-maksim/github-to-jira-automation/.github/workflows/issues_to_jira.yaml@master,
-      canonical/*,
-      snapcore/*,
-      charmed-kubernetes/*,
-      tiobe/*,
+      "beliaev-maksim/github-to-jira-automation/.github/workflows/issues_to_jira.yaml@master",
+      "canonical/*",
+      "snapcore/*",
+      "charmed-kubernetes/*",
+      "tiobe/*",
     ]
   }
 }

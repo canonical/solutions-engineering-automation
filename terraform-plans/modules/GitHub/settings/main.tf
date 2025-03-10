@@ -32,6 +32,25 @@ resource "github_repository" "repo" {
 
 }
 
+resource "github_actions_repository_permissions" "repo" {
+  repository      =  var.repository
+  allowed_actions = "selected"
+
+  allowed_actions_config {
+    github_owned_allowed = true
+
+    verified_allowed = false
+
+    patterns_allowed = [
+      beliaev-maksim/github-to-jira-automation/.github/workflows/issues_to_jira.yaml@master,
+      canonical/*,
+      snapcore/*,
+      charmed-kubernetes/*,
+      tiobe/*,
+    ]
+  }
+}
+
 data "github_team" "admins" {
   slug = "soleng-admin"
 }

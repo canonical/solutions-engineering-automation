@@ -21,7 +21,7 @@ templates = {
       runs_on            = "[[self-hosted, jammy, X64, large]]",
       test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.4/stable\"]",
-      charmcraft_channel = "2.x/stable",
+      charmcraft_channel = "3.x/stable",
       python_versions    = "['3.8', '3.10']",
     }
   }
@@ -29,7 +29,7 @@ templates = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
     vars = {
-      charmcraft_channel = "2.x/stable",
+      charmcraft_channel = "3.x/stable",
     }
   }
   release = {
@@ -37,7 +37,7 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars = {
       runs_on            = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
-      charmcraft_channel = "2.x/stable",
+      charmcraft_channel = "3.x/stable",
     }
   }
   jira_sync_config = {

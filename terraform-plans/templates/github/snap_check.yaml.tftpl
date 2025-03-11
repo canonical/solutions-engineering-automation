@@ -81,7 +81,7 @@ jobs:
       with:
         include-hidden-files: true
         if-no-files-found: ignore
-        name: coverage-unit-$${{ env.SYSTEM_ARCH }}
+        name: coverage-unit-$${{ matrix.python-version }}-$${{ env.SYSTEM_ARCH }}
         path: .coverage-unit
 
   build:
@@ -186,7 +186,7 @@ jobs:
           # Create the path that is expected to have a coverage.xml for tics
           mkdir -p tests/report/
 
-          coverage_files=$(echo ./artifacts/.coverage-*)
+          coverage_files=./artifacts/.coverage*
 
           if [ -n "$coverage_files" ]; then
             echo "Merging coverage files: $coverage_files"

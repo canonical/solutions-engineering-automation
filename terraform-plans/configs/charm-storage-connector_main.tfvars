@@ -50,13 +50,6 @@ templates = {
     source      = "./templates/github/SECURITY.md.tftpl"
     destination = "SECURITY.md"
     vars = {
-      repository = ""
-    }
-  }
-  security = {
-    source      = "./templates/github/SECURITY.md.tftpl"
-    destination = "SECURITY.md"
-    vars = {
       repository = "charm-storage-connector"
     }
   }

@@ -13,8 +13,9 @@ provider "github" {
 }
 
 resource "github_repository" "repo" {
-  name        = var.repository
-  description = var.repository_description
+  name         = var.repository
+  description  = var.repository_description
+  homepage_url = var.repository_homepage_url
 
   has_issues      = true
   has_projects    = false
@@ -30,6 +31,25 @@ resource "github_repository" "repo" {
   delete_branch_on_merge = true
   vulnerability_alerts   = true
 
+}
+
+resource "github_actions_repository_permissions" "repo" {
+  repository      = var.repository
+  allowed_actions = "selected"
+
+  allowed_actions_config {
+    github_owned_allowed = true
+
+    verified_allowed = false
+
+    patterns_allowed = [
+      "beliaev-maksim/github-to-jira-automation/.github/workflows/issues_to_jira.yaml@master",
+      "canonical/*",
+      "snapcore/*",
+      "charmed-kubernetes/*",
+      "tiobe/*",
+    ]
+  }
 }
 
 data "github_team" "admins" {

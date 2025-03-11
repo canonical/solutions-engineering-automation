@@ -13,6 +13,12 @@ variable "repository_description" {
   description = "GitHub repository description"
 }
 
+variable "repository_homepage_url" {
+  type        = string
+  description = "GitHub repository homepage url (used for linking to charmhub pages, etc.)"
+  default     = ""
+}
+
 variable "branch" {
   type        = string
   description = "git branch name"

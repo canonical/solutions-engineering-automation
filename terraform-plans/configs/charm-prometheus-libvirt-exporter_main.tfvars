@@ -41,13 +41,13 @@ templates = {
     vars = {
       runs_on = "ubuntu-24.04",
     }
-    jira_sync_config = {
-      source      = "./templates/github/jira_sync_config.yaml.tftpl"
-      destination = ".github/.jira_sync_config.yaml"
-      vars = {
-        component = "libvirt-exporter",
-        epic_key  = "SOLENG-46"
-      }
+  }
+  jira_sync_config = {
+    source      = "./templates/github/jira_sync_config.yaml.tftpl"
+    destination = ".github/.jira_sync_config.yaml"
+    vars = {
+      component = "libvirt-exporter",
+      epic_key  = "SOLENG-46"
     }
   }
   security = {

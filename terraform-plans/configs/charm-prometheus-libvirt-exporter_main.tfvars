@@ -39,10 +39,7 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      # github hosted runners are amd64
-      # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
-      # We prefer the github runners because they are smaller machines and save resources.
-      runs_on            = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+      runs_on            = "ubuntu-24.04",
       charmcraft_channel = "3.x/stable",
     }
     jira_sync_config = {

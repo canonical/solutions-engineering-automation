@@ -39,8 +39,7 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on            = "[[ubuntu-22.04]]",
-      charmcraft_channel = "3.x/stable",
+      runs_on = "ubuntu-24.04",
     }
   }
   jira_sync_config = {
@@ -49,13 +48,6 @@ templates = {
     vars = {
       component = "storage-connector",
       epic_key  = "SOLENG-46"
-    }
-  }
-  security = {
-    source      = "./templates/github/SECURITY.md.tftpl"
-    destination = "SECURITY.md"
-    vars = {
-      repository = ""
     }
   }
   security = {

@@ -49,6 +49,9 @@ deps =
     isort
 
 [testenv:unit]
+setenv =
+    {[testenv]setenv}
+    COVERAGE_FILE = .coverage-unit
 %{ if unittest_type == "none" ~}
 allowlist_externals =
     echo
@@ -74,6 +77,9 @@ ERROR: invalid `unittest_type` value
 %{ endif ~}
 
 [testenv:func]
+setenv =
+    {[testenv]setenv}
+    COVERAGE_FILE = .coverage-func
 %{ if functest_type == "none" ~}
 allowlist_externals =
     echo

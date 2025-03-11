@@ -21,6 +21,7 @@ templates = {
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
       python_versions    = "['3.8', '3.10', '3.12']",
+      project            = "charm-juju-backup-all"
     }
   }
   promote = {

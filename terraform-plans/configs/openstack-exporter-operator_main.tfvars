@@ -1,6 +1,7 @@
-repository             = "openstack-exporter-operator"
-repository_description = "The openstack-exporter-operator is a machine charm for openstack-exporter."
-branch                 = "main"
+repository              = "openstack-exporter-operator"
+repository_description  = "The openstack-exporter-operator is a machine charm for openstack-exporter."
+repository_homepage_url = "https://charmhub.io/openstack-exporter"
+branch                  = "main"
 templates = {
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
@@ -34,7 +35,7 @@ templates = {
     source      = "./templates/github/charm_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on            = "[[ubuntu-22.04]]",
+      runs_on            = "ubuntu-24.04",
       charmcraft_channel = "3.x/stable",
     }
   }

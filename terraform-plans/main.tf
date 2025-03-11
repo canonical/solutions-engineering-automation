@@ -1,9 +1,10 @@
 module "github_settings" {
-  source                 = "./modules/GitHub/settings"
-  owner                  = var.owner
-  repository             = var.repository
-  repository_description = var.repository_description
-  branch                 = var.branch
+  source                  = "./modules/GitHub/settings"
+  owner                   = var.owner
+  repository              = var.repository
+  repository_description  = var.repository_description
+  repository_homepage_url = var.repository_homepage_url
+  branch                  = var.branch
 }
 
 module "github_templates" {

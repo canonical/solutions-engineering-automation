@@ -2,6 +2,11 @@ repository             = "charm-userdir-ldap"
 repository_description = "A charm to install and configured userdir-ldap"
 branch                 = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

@@ -2,6 +2,11 @@ repository             = "charm-simple-streams"
 repository_description = "Simple streams charm"
 branch                 = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

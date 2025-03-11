@@ -2,6 +2,11 @@ repository             = "charm-prometheus-blackbox-exporter"
 repository_description = "This charm provides the Prometheus Blackbox exporter, part of the Prometheus monitoring system"
 branch                 = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

@@ -2,6 +2,11 @@ repository             = "prometheus-juju-backup-all-exporter"
 repository_description = "Prometheus exporter snap for charm-juju-backup-all"
 branch                 = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

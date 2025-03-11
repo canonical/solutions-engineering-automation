@@ -2,6 +2,11 @@ repository             = "layer-beats-base"
 repository_description = "Base layer for Elastic Beats. This is a middle layer, and not designed to be self deployable"
 branch                 = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

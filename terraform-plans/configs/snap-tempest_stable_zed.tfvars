@@ -2,6 +2,11 @@ repository             = "snap-tempest"
 repository_description = "This repository contains the source code of the snap for the OpenStack integration test suite, Tempest."
 branch                 = "stable/zed"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

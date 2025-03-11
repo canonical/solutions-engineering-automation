@@ -2,6 +2,11 @@ repository             = "derper-snap"
 repository_description = "A snap package for Tailscale's DERP server https://tailscale.com/kb/1118/custom-derp-servers"
 branch                 = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

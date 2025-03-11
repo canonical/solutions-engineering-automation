@@ -3,6 +3,11 @@ repository_description  = "The openstack-exporter-operator is a machine charm fo
 repository_homepage_url = "https://charmhub.io/openstack-exporter"
 branch                  = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

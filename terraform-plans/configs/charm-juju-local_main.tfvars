@@ -2,6 +2,11 @@ repository             = "charm-juju-local"
 repository_description = "This charm will deploy, configure and bootstrap lxd and juju for use with a local provider."
 branch                 = "main"
 templates = {
+  contribution = {
+    source      = "./templates/github/CONTRIBUTION.md.tftpl"
+    destination = "CONTRIBUTION.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

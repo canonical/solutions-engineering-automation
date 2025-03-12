@@ -21,7 +21,7 @@ templates = {
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "2.x/stable",
       python_versions    = "['3.8', '3.10']",
-      project            = "charm-juju-local"
+      tics_project       = "charm-juju-local"
     }
   }
   promote = {

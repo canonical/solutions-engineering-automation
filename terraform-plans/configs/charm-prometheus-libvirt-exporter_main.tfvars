@@ -26,7 +26,7 @@ templates = {
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
       python_versions    = "['3.8', '3.10']",
-      project            = "charm-prometheus-libvirt-exporter"
+      tics_project       = "charm-prometheus-libvirt-exporter"
     }
   }
   promote = {

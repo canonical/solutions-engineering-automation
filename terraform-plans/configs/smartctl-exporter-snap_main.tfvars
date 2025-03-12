@@ -18,7 +18,7 @@ templates = {
     vars = {
       python_versions = "['3.10']",
       runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
-      project         = "smartctl-exporter-snap"
+      tics_project    = "smartctl-exporter-snap"
     }
   }
   promote = {

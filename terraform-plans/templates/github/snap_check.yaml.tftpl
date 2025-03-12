@@ -202,7 +202,7 @@ jobs:
         uses: tiobe/tics-github-action@v3
         with:
           mode: qserver
-          project: ${project}
+          project: ${tics_project}
           viewerUrl: https://canonical.tiobe.com/tiobeweb/TICS/api/cfg?name=default
           branchdir: $${{ github.workspace }}
           ticsAuthToken: $${{ secrets.TICSAUTHTOKEN }}

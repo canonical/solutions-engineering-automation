@@ -18,7 +18,7 @@ templates = {
     vars = {
       python_versions = "['3.10']",
       runs_on         = "[['self-hosted', 'linux', 'x64', 'large', 'jammy']]",
-      project         = "juju-backup-all"
+      tics_project    = "juju-backup-all"
     }
   }
   jira_sync_config = {

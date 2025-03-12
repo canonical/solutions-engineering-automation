@@ -20,8 +20,8 @@ templates = {
       test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
-      python_versions    = "['3.8', '3.10']",
-      tics_project       = "charm-logrotated"
+      python_versions    = "['3.8', '3.10', '3.12']",
+      tics_project       = "charm-logrotated",
     }
   }
   promote = {

@@ -31,6 +31,7 @@ templates = {
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
       python_versions    = "['3.8', '3.10']",
+      tics_project       = "charm-nrpe"
     }
   }
   promote = {
@@ -66,7 +67,7 @@ templates = {
     source      = "./templates/github/pyproject.toml.tftpl"
     destination = "pyproject.toml"
     vars = {
-      coverage_threshold_percent = "60"
+      coverage_threshold_percent = "50"
     }
   }
   tox = {

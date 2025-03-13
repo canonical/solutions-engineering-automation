@@ -2,6 +2,11 @@ repository             = "prometheus-openstack-exporter"
 repository_description = "OpenStack exporter for the prometheus monitoring system"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

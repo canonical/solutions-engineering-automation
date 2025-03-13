@@ -2,6 +2,11 @@ repository             = "charm-juju-backup-all"
 repository_description = "Juju Backup All - a charm to perform Juju and database backups"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

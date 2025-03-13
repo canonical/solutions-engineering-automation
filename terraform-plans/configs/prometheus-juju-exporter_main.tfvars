@@ -2,6 +2,11 @@ repository             = "prometheus-juju-exporter"
 repository_description = "prometheus-juju-exporter snap collects machines' running status in all models under a Juju controller."
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

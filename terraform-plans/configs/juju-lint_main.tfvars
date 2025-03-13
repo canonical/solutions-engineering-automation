@@ -2,6 +2,11 @@ repository             = "juju-lint"
 repository_description = "Run checks against a juju model"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

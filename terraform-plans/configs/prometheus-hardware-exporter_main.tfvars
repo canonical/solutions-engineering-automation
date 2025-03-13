@@ -2,6 +2,11 @@ repository             = "prometheus-hardware-exporter"
 repository_description = "Prometheus Hardware Exporter is an exporter for Hardware Observer"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

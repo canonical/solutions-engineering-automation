@@ -2,6 +2,11 @@ repository             = "charm-openstack-service-checks"
 repository_description = "Collection of Nagios checks and other utilities that can be used to verify the operation of an OpenStack cluster"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

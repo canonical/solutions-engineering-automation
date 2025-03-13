@@ -21,7 +21,9 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      python_versions = "['3.10']",
+      runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      tics_project    = "headscale-snap"
     }
   }
   promote = {

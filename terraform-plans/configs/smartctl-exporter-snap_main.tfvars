@@ -21,7 +21,9 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      python_versions = "['3.10']",
+      runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      tics_project    = "smartctl-exporter-snap"
     }
   }
   promote = {
@@ -29,13 +31,6 @@ templates = {
     destination = ".github/workflows/promote.yaml"
     vars = {
       promote_options = "['latest/edge -> latest/candidate', 'latest/candidate -> latest/stable']"
-    }
-  }
-  tics = {
-    source      = "./templates/github/snap_tics.yaml.tftpl"
-    destination = ".github/workflows/tics.yaml"
-    vars = {
-      project = "smartctl-exporter-snap",
     }
   }
   release = {

@@ -17,6 +17,15 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
+  check = {
+    source      = "./templates/github/snap_check.yaml.tftpl"
+    destination = ".github/workflows/check.yaml"
+    vars = {
+      python_versions = "['3.10']",
+      runs_on         = "[[ubuntu-22.04]]",
+      tics_project    = "charmed-openstack-upgrader"
+    }
+  }
   promote = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"

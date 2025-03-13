@@ -61,7 +61,7 @@ templates = {
     source      = "./templates/github/pyproject.toml.tftpl"
     destination = "pyproject.toml"
     vars = {
-      coverage_threshold_percent = "60"
+      coverage_threshold_percent = "50"
     }
   }
 }

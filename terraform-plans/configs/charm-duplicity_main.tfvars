@@ -2,6 +2,11 @@ repository             = "charm-duplicity"
 repository_description = "A charm that provides functionality for both manual and automatic backups for a deployed application"
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

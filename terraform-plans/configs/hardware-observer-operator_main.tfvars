@@ -2,6 +2,11 @@ repository             = "hardware-observer-operator"
 branch                 = "main"
 repository_description = "A charm to setup prometheus exporter for IPMI, RedFish and RAID devices from different vendors."
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

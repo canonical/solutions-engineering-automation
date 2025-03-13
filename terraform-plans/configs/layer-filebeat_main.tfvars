@@ -2,6 +2,11 @@ repository             = "layer-filebeat"
 repository_description = "Filebeat is a lightweight log shipper. This is the source for the filebeat charm in the Juju charm store."
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   gitignore = {
     source      = "./templates/github/gitignore.tftpl"
     destination = ".gitignore"

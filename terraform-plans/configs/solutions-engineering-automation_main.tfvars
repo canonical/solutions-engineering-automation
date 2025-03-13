@@ -2,6 +2,11 @@ repository             = "solutions-engineering-automation"
 repository_description = "Repo for automating tasks for Solutions Engineering Team."
 branch                 = "main"
 templates = {
+  contributing = {
+    source      = "./templates/github/CONTRIBUTING.md.tftpl"
+    destination = "CONTRIBUTING.md"
+    vars        = {}
+  }
   codeowners = {
     source      = "./templates/github/CODEOWNERS.tftpl"
     destination = ".github/CODEOWNERS"

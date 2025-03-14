@@ -24,6 +24,13 @@ templates = {
       python_versions = "['3.10']",
       runs_on         = "[[ubuntu-22.04]]",
       tics_project    = "charmed-openstack-upgrader"
+      extra_steps     = <<EOT
+      - name: Setup Juju 3.6/stable environment
+        uses: charmed-kubernetes/actions-operator@main
+        with:
+          provider: lxd
+          juju-channel: 3.6/stable
+      EOT
     }
   }
   promote = {

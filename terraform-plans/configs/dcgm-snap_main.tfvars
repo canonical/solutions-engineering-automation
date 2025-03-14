@@ -24,6 +24,7 @@ templates = {
       runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
       python_versions = "['3.10']",
       tics_project    = "dcgm-snap"
+      extra_steps     = ""
     }
   }
   promote = {

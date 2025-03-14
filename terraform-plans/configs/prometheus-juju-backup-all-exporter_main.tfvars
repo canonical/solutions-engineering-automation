@@ -24,7 +24,7 @@ templates = {
       python_versions = "['3.10']",
       runs_on         = "[[ubuntu-22.04]]",
       tics_project    = "prometheus-juju-backup-all-exporter"
-      extra_steps     = ""
+      extra_func_steps     = ""
     }
   }
   promote = {

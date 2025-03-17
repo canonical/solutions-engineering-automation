@@ -24,7 +24,7 @@ templates = {
       python_versions  = "['3.10']",
       runs_on          = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
       tics_project     = "prometheus-openstack-exporter"
-      extra_func_steps = ""
+      needs_juju       = ""
     }
   }
   jira_sync_config = {

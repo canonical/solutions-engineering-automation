@@ -24,13 +24,7 @@ templates = {
       python_versions  = "['3.8', '3.10', '3.12']",
       runs_on          = "[[ubuntu-24.04]]",
       tics_project     = "juju-backup-all"
-      extra_func_steps = <<EOT
-      - name: Setup Juju 3.6/stable environment
-        uses: charmed-kubernetes/actions-operator@main
-        with:
-          provider: lxd
-          juju-channel: 3.6/stable
-      EOT
+      needs_juju       = "true"
     }
   }
   jira_sync_config = {

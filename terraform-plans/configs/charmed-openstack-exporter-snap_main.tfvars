@@ -21,10 +21,10 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      runs_on          = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
-      python_versions  = "['3.10']",
-      tics_project     = "charmed-openstack-exporter-snap"
-      needs_juju       = ""
+      runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      python_versions = "['3.10']",
+      tics_project    = "charmed-openstack-exporter-snap"
+      needs_juju      = ""
     }
   }
   promote = {

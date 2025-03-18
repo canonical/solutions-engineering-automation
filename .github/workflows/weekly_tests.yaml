@@ -33,13 +33,17 @@ jobs:
           - charm-storage-connector
           - charm-sysconfig
           - charm-userdir-ldap
+          - charmed-openstack-exporter-snap
           - charmed-openstack-upgrader
+          - dcgm-snap
+          - hardware-observer-operator
           - juju-backup-all
           - juju-lint
           - openstack-exporter-operator
           - prometheus-hardware-exporter
           - prometheus-juju-backup-all-exporter
           - prometheus-juju-exporter
+          - smartctl-exporter-snap
           - snap-tempest
         workflow_file_name:
           - check.yaml

@@ -36,7 +36,6 @@ jobs:
           - charmed-openstack-exporter-snap
           - charmed-openstack-upgrader
           - dcgm-snap
-          - hardware-observer-operator
           - juju-backup-all
           - juju-lint
           - openstack-exporter-operator

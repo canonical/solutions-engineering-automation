@@ -21,9 +21,10 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      python_versions = "['3.10']",
-      runs_on         = "[['self-hosted', 'linux', 'x64', 'large', 'jammy']]",
+      python_versions = "['3.8', '3.10', '3.12']",
+      runs_on         = "[[ubuntu-24.04]]",
       tics_project    = "juju-backup-all"
+      needs_juju      = "true"
     }
   }
   jira_sync_config = {

@@ -65,4 +65,12 @@ templates = {
       runs_on = "ubuntu-24.04",
     }
   }
+  tox = {
+    source      = "./templates/github/tox.ini.tftpl"
+    destination = "tox.ini"
+    vars = {
+      functest_type = "zaza"
+      unittest_type = "pytest"
+    }
+  }
 }

@@ -60,16 +60,17 @@ jobs:
           script: |
             const failedJobs = $${{ toJSON(needs) }};
             let failedJobNames = Object.keys(failedJobs).filter(job => failedJobs[job].result === 'failure');
+            const body = [
+              "# Release workflow: $${{ github.workflow }} failed!",
+              "**Failed jobs**: " + (failedJobNames.join(', ') || 'unknown'),
+              "**Check details**: [View run]($${{ github.server_url }}/$${{ github.repository }}/actions/runs/$${{ github.run_id }})",
+              "@canonical/solutions-engineering"
+            ].join('\n');
             await github.rest.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: context.sha,
-              body: `
-                Release workflow \`$${{ github.workflow }}\` failed!
-                Failed jobs: $${failedJobNames.join(', ') || 'unknown'}
-                Check details: $${{ github.server_url }}/$${{ github.repository }}/actions/runs/$${{ github.run_id }}
-                @canonical/solutions-engineering
-              `
+              body: body
             });
         env:
           GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}

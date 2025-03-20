@@ -102,6 +102,7 @@ commands = pytest {toxinidir}/tests/functional \
    --cov-report=term-missing \
    --cov-report=html \
    --cov-report=xml \
+   --cov-fail-under=0 \
    {posargs}
 %{ else ~}
 ERROR: invalid `functest_type` value

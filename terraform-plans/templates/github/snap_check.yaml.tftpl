@@ -163,7 +163,7 @@ jobs:
           name: coverage-functional-$${{ env.SYSTEM_ARCH }}
           path: .coverage-func
 
-%{ if tics_project ~}
+%{ if tics_project != "" ~}
   tics-analysis:
     runs-on: ubuntu-22.04
     if: >

@@ -57,4 +57,5 @@ templates = {
       unittest_type = "none"
     }
   }
+  # Snap under maintenance mode. No need of release
 }

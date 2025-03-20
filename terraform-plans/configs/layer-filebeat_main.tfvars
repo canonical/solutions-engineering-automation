@@ -47,4 +47,5 @@ templates = {
       unittest_type = "none"
     }
   }
+  # layer does not need a release template
 }

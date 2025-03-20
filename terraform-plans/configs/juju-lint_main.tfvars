@@ -47,4 +47,12 @@ templates = {
       unittest_type = "pytest"
     }
   }
+  release = {
+    source      = "./templates/github/snap_release.yaml.tftpl"
+    destination = ".github/workflows/release.yaml"
+    vars = {
+      runs_on  = "[[ubuntu-22.04]]",
+      channels = "latest/edge"
+    }
+  }
 }

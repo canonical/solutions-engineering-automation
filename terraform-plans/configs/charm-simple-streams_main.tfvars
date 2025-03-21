@@ -39,6 +39,16 @@ templates = {
       coverage_threshold_percent = "90"
     }
   }
+  # Temporarily disable it since the charm uses a different template
+  # check = {
+  #   source      = "./templates/github/charm_check.yaml.tftpl"
+  #   destination = ".github/workflows/check.yaml"
+  #   vars = {
+  #     runs_on       = "[[ubuntu-22.04]]",
+  #     test_commands = "['tox -e func -- -v --series focal', 'tox -e func -- -v --series jammy']",
+  #     juju_channels = "[\"3.4/stable\"]",
+  #   }
+  # }
   tox = {
     source      = "./templates/github/tox.ini.tftpl"
     destination = "tox.ini"

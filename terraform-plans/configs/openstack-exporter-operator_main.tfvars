@@ -59,6 +59,13 @@ templates = {
       repository = "openstack-exporter-operator"
     }
   }
+  pyproject = {
+    source      = "./templates/github/pyproject.toml.tftpl"
+    destination = "pyproject.toml"
+    vars = {
+      coverage_threshold_percent = "100"
+    }
+  }
   tox = {
     source      = "./templates/github/tox.ini.tftpl"
     destination = "tox.ini"

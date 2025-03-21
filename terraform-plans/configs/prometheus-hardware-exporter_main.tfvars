@@ -53,8 +53,11 @@ templates = {
     source      = "./templates/github/tox.ini.tftpl"
     destination = "tox.ini"
     vars = {
-      functest_type = "pytest"
-      unittest_type = "pytest"
+      functest_type         = "pytest"
+      unittest_type         = "pytest"
+      root_requirements_txt = "yes"
+      unit_requirements_txt = "yes"
+      func_requirements_txt = "yes"
     }
   }
   # this python package does not need a release template

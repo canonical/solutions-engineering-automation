@@ -38,8 +38,12 @@ deps =
     pep8-naming
     pylint
     # so pylint and mypy can reason about the code
+%{ if unittest_type != "none" ~}
     {[testenv:unit]deps}
+%{ endif ~}
+%{ if functest_type != "none" ~}
     {[testenv:func]deps}
+%{ endif ~}
 
 [testenv:reformat]
 commands =
@@ -70,8 +74,12 @@ commands = pytest {toxinidir}/tests/unit \
 deps =
   pytest
   pytest-cov
+%{ if root_requirements_txt == "yes" ~}
   -r {toxinidir}/requirements.txt
+%{ endif ~}
+%{ if unittest_type != "none" && unit_requirements_txt == "yes" ~}
   -r {toxinidir}/tests/unit/requirements.txt
+%{ endif ~}
 %{ else ~}
 ERROR: invalid `unittest_type` value
 %{ endif ~}
@@ -90,8 +98,12 @@ deps =
   pytest
   pytest-cov
   pytest-operator
+%{ if root_requirements_txt == "yes" ~}
   -r {toxinidir}/requirements.txt
+%{ endif ~}
+%{ if functest_type != "none" && func_requirements_txt == "yes" ~}
   -r {toxinidir}/tests/functional/requirements.txt
+%{ endif ~}
 %{ if functest_type == "zaza" ~}
 changedir = {toxinidir}/tests/functional
 commands = functest-run-suite {posargs:--keep-model}

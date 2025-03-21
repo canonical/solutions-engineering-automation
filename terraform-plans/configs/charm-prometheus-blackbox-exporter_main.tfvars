@@ -69,8 +69,11 @@ templates = {
     source      = "./templates/github/tox.ini.tftpl"
     destination = "tox.ini"
     vars = {
-      functest_type = "zaza"
-      unittest_type = "none"
+      functest_type         = "zaza"
+      unittest_type         = "none"
+      root_requirements_txt = "yes"
+      unit_requirements_txt = "yes"
+      func_requirements_txt = "yes"
     }
   }
 }

@@ -47,4 +47,5 @@ templates = {
       unittest_type = "pytest"
     }
   }
+  # layer does not need a release template
 }

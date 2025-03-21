@@ -57,4 +57,5 @@ templates = {
       unittest_type = "pytest"
     }
   }
+  # this python package does not need a release template
 }

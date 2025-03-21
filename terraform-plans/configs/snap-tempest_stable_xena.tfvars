@@ -32,4 +32,5 @@ templates = {
       unittest_type = "none"
     }
   }
+  # release is done by launchpad
 }

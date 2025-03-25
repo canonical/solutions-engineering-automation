@@ -22,10 +22,10 @@ commands =
     black --check --diff --color .
     isort --check --diff --color .
     flake8
-%{ if enable_pylint == "yes" ~}
+%{ if enable_pylint == "true" ~}
     pylint --recursive=y .
 %{ endif ~}
-%{ if enable_mypy == "yes" ~}
+%{ if enable_mypy == "true" ~}
     mypy --install-types --non-interactive .
 %{ endif ~}
 deps =
@@ -37,11 +37,11 @@ deps =
     flake8-import-order
     flake8-pyproject
     isort
-%{ if enable_mypy == "yes" ~}
+%{ if enable_mypy == "true" ~}
     mypy
 %{ endif ~}
     pep8-naming
-%{ if enable_pylint == "yes" ~}
+%{ if enable_pylint == "true" ~}
     pylint
 %{ endif ~}
     # so pylint and mypy can reason about the code
@@ -81,7 +81,7 @@ commands = pytest {toxinidir}/tests/unit \
 deps =
   pytest
   pytest-cov
-%{ if is_python_project == "yes" ~}
+%{ if is_python_project == "true" ~}
   -r {toxinidir}/requirements.txt
 %{ endif ~}
   -r {toxinidir}/tests/unit/requirements.txt
@@ -103,7 +103,7 @@ deps =
   pytest
   pytest-cov
   pytest-operator
-%{ if is_python_project == "yes" ~}
+%{ if is_python_project == "true" ~}
   -r {toxinidir}/requirements.txt
 %{ endif ~}
   -r {toxinidir}/tests/functional/requirements.txt

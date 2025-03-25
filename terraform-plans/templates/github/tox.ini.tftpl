@@ -22,9 +22,12 @@ commands =
     black --check --diff --color .
     isort --check --diff --color .
     flake8
+%{ if enable_pylint == "yes" ~}
     pylint --recursive=y .
-    # mypy temporarily disabled because it doesn't gracefully recursively find files like the others
-    #mypy --install-types --non-interactive .
+%{ endif ~}
+%{ if enable_mypy == "yes" ~}
+    mypy --install-types --non-interactive .
+%{ endif ~}
 deps =
     black
     colorama
@@ -34,12 +37,20 @@ deps =
     flake8-import-order
     flake8-pyproject
     isort
-    #mypy
+%{ if enable_mypy == "yes" ~}
+    mypy
+%{ endif ~}
     pep8-naming
+%{ if enable_pylint == "yes" ~}
     pylint
+%{ endif ~}
     # so pylint and mypy can reason about the code
+%{ if unittest_type != "none" ~}
     {[testenv:unit]deps}
+%{ endif ~}
+%{ if functest_type != "none" ~}
     {[testenv:func]deps}
+%{ endif ~}
 
 [testenv:reformat]
 commands =
@@ -70,7 +81,9 @@ commands = pytest {toxinidir}/tests/unit \
 deps =
   pytest
   pytest-cov
+%{ if is_python_project == "yes" ~}
   -r {toxinidir}/requirements.txt
+%{ endif ~}
   -r {toxinidir}/tests/unit/requirements.txt
 %{ else ~}
 ERROR: invalid `unittest_type` value
@@ -90,7 +103,9 @@ deps =
   pytest
   pytest-cov
   pytest-operator
+%{ if is_python_project == "yes" ~}
   -r {toxinidir}/requirements.txt
+%{ endif ~}
   -r {toxinidir}/tests/functional/requirements.txt
 %{ if functest_type == "zaza" ~}
 changedir = {toxinidir}/tests/functional

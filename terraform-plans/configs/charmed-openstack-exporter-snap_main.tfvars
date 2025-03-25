@@ -73,8 +73,11 @@ templates = {
     source      = "./templates/github/tox.ini.tftpl"
     destination = "tox.ini"
     vars = {
-      functest_type = "pytest"
-      unittest_type = "none"
+      functest_type     = "pytest"
+      unittest_type     = "none"
+      is_python_project = "true"
+      enable_pylint     = "false"
+      enable_mypy       = "false"
     }
   }
 }

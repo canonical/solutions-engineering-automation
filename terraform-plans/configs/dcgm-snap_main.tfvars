@@ -75,7 +75,7 @@ templates = {
     vars = {
       functest_type     = "pytest"
       unittest_type     = "none"
-      is_python_project = "true"
+      is_python_project = "false"
       enable_pylint     = "false"
       enable_mypy       = "false"
     }

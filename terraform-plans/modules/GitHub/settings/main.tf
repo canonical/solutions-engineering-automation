@@ -48,6 +48,8 @@ resource "github_actions_repository_permissions" "repo" {
       "snapcore/*",
       "charmed-kubernetes/*",
       "tiobe/*",
+      "convictional/*",
+      "mattermost/*",
     ]
   }
 }

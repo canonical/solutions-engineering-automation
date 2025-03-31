@@ -129,3 +129,34 @@ jobs:
           GITHUB_APP_PEM_FILE: ${{ secrets.SOLENG_APP_PEM_FILE }}
         run: |
           terraform apply ./tf.plan -no-color
+
+      - name: Update PR description with commit info
+        if: ${{ github.ref_name == 'main' }}
+        working-directory: ./scripts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          pip3 install requests
+
+          COMMIT_SHA="${{ github.sha }}"
+
+          PR_URL=$(terraform output -raw pr_url)
+          PR_CREATED=$(terraform output -raw pr_created)
+
+          echo "Commit SHA: $COMMIT_SHA"
+          echo "PR URL: $PR_URL"
+          echo "PR Created: $PR_CREATED"
+
+          if [[ "$PR_URL" == "No PR created" ]]; then
+            echo "No PR was created — skipping PR update step."
+            exit 0
+          fi
+
+          SCRIPT_ARGS="--url $PR_URL --commit $COMMIT_SHA --token $GITHUB_TOKEN"
+          if [[ "$PR_CREATED" == "false" ]]; then
+            SCRIPT_ARGS="$SCRIPT_ARGS -a"
+          fi
+
+          python3 update-pr-desc.py $SCRIPT_ARGS

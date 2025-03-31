@@ -130,7 +130,7 @@ jobs:
         run: |
           terraform apply ./tf.plan -no-color
 
-      - name: Update PR description with commit info
+      - name: Update PR description with commit info (if running from main branch)
         if: ${{ github.ref_name == 'main' }}
         working-directory: ./scripts
         env:

@@ -141,7 +141,6 @@ jobs:
           pip3 install requests
 
           COMMIT_SHA="${{ github.sha }}"
-
           PR_URL=$(terraform output -raw pr_url)
           PR_CREATED=$(terraform output -raw pr_created)
 
@@ -156,7 +155,7 @@ jobs:
 
           SCRIPT_ARGS="--url $PR_URL --commit $COMMIT_SHA --token $GITHUB_TOKEN"
           if [[ "$PR_CREATED" == "false" ]]; then
-            SCRIPT_ARGS="$SCRIPT_ARGS -a"
+            SCRIPT_ARGS="$SCRIPT_ARGS --append"
           fi
 
           python3 update-pr-desc.py $SCRIPT_ARGS

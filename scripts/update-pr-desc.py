@@ -16,6 +16,7 @@ DEFAULT_BODY = (
     "https://github.com/canonical/solutions-engineering-automation "
     "to update centrally managed files."
 )
+CHANGELOG_HEADER = "### Changelog"
 
 logger = logging.getLogger("update-pr-desc")
 logging.basicConfig(level=logging.INFO)
@@ -29,10 +30,12 @@ def get_pr_body(repo: str, pr_number: int, token: str) -> Optional[str]:
             "Authorization": f"Bearer {token}",
         },
     )
+
     if resp.status_code == 403 or resp.status_code == 401:
         raise PermissionError("Request to get the PR's information was unauthorized")
     if resp.status_code == 404:
         raise ValueError("PR not found")
+
     return resp.json().get("body", None)
 
 
@@ -45,6 +48,7 @@ def update_pr_body(repo: str, pr_number: int, token: str, body: str) -> None:
         },
         json={"body": body},
     )
+
     if resp.status_code == 403 or resp.status_code == 401:
         raise PermissionError("Request to update the PR's information was unauthorized")
     if resp.status_code == 404:
@@ -61,6 +65,7 @@ def get_commit_pr_url(commit: str, token: str) -> Optional[str]:
             "Authorization": f"Bearer {token}",
         },
     )
+
     if resp.status_code == 403 or resp.status_code == 401:
         raise PermissionError("Request to get the Commits's information was unauthorized")
     if resp.status_code == 404:
@@ -83,6 +88,7 @@ def parse_pr_url(url: str) -> tuple:
 
     if not result or len(result.groups()) != 2:
         raise ValueError("Invalid PR URL")
+
     return result.groups()
 
 
@@ -97,8 +103,11 @@ def create_new_description(body: Optional[str], commit_url: str, append: bool):
         logger.warning("Commit already in the PR's description")
         return body
 
-    changelog_header = "\n\n### Changelog\n" if not append and "### Changelog" not in body else ""
+    changelog_header = ""
+    if not append and CHANGELOG_HEADER not in body:
+        changelog_header = f"\n\n{CHANGELOG_HEADER}\n"
     new_body = f"{body.rstrip()}{changelog_header}\n- {commit_url}"
+
     return new_body
 
 
@@ -124,7 +133,7 @@ def main():
     """Run the script."""
     parser = argparse.ArgumentParser(
         prog="Update PR description",
-        description="Updates the provided PR's description with the commuit",
+        description="Updates the provided PR's description with the commit",
     )
     parser.add_argument("--url", required=True, help="URL of the PR to be updated")
     parser.add_argument(

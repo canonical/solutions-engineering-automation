@@ -143,10 +143,6 @@ def main():
         help="The Commit SHA which will be included in the PR's description",
     )
     parser.add_argument(
-        "--token",
-        help="Github Token to use for the authorization (can also use GITHUB_TOKEN env var)",
-    )
-    parser.add_argument(
         "-a",
         "--append",
         default=False,
@@ -155,11 +151,11 @@ def main():
     )
 
     args = parser.parse_args()
-    token = args.token or os.getenv("GITHUB_TOKEN")
+    token = os.getenv("GITHUB_TOKEN")
 
     if not token:
         parser.error(
-            "Github token is required. Provide it with --token or set GITHUB_TOKEN environment variable."
+            "Github token is required. Provide it by setting the GITHUB_TOKEN environment variable."
         )
 
     update_description(args.url, args.commit, args.token, args.append)

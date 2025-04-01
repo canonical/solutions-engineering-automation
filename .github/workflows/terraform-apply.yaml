@@ -131,7 +131,7 @@ jobs:
           terraform apply ./tf.plan -no-color
 
       - name: Update PR description with commit info (if running from main branch)
-        if: ${{ github.ref_name == 'main' }}
+        if: ${{ github.ref_name == 'main' && github.event_name != 'workflow_dispatch' }}
         working-directory: ./scripts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -153,7 +153,7 @@ jobs:
             exit 0
           fi
 
-          SCRIPT_ARGS="--url $PR_URL --commit $COMMIT_SHA --token $GITHUB_TOKEN"
+          SCRIPT_ARGS="--url $PR_URL --commit $COMMIT_SHA"
           if [[ "$PR_CREATED" == "false" ]]; then
             SCRIPT_ARGS="$SCRIPT_ARGS --append"
           fi

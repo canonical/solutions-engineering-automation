@@ -3,14 +3,19 @@
 """The script updates the provided PR's description with the commit."""
 
 import argparse
-from typing import Any, Optional
-import requests
-import re
 import logging
+import re
+from typing import Optional
+
+import requests
 
 OWNER = "canonical"
 SOURCE_REPO = "solutions-engineering-automation"
-DEFAULT_BODY = "This is an automated pull request from https://github.com/canonical/solutions-engineering-automation to update centrally managed files."
+DEFAULT_BODY = (
+    "This is an automated pull request from "
+    "https://github.com/canonical/solutions-engineering-automation "
+    "to update centrally managed files."
+)
 
 logger = logging.getLogger("update-pr-desc")
 logging.basicConfig(level=logging.INFO)
@@ -57,9 +62,7 @@ def get_commit_pr_url(commit: str, token: str) -> Optional[str]:
         },
     )
     if resp.status_code == 403 or resp.status_code == 401:
-        raise PermissionError(
-            "Request to get the Commits's information was unauthorized"
-        )
+        raise PermissionError("Request to get the Commits's information was unauthorized")
     if resp.status_code == 404:
         raise ValueError("Commit not found")
 
@@ -94,14 +97,13 @@ def create_new_description(body: Optional[str], commit_url: str, append: bool):
         logger.warning("Commit already in the PR's description")
         return body
 
-    changelog_header = (
-        "\n\n### Changelog\n" if not append and "### Changelog" not in body else ""
-    )
+    changelog_header = "\n\n### Changelog\n" if not append and "### Changelog" not in body else ""
     new_body = f"{body.rstrip()}{changelog_header}\n- {commit_url}"
     return new_body
 
 
 def update_description(url: str, sha: str, token: str, append: bool = False):
+    """Update the PR's description with the commit URL."""
     try:
         repo, pr_number = parse_pr_url(url)
         pr_body = get_pr_body(repo, pr_number, token)
@@ -119,6 +121,7 @@ def update_description(url: str, sha: str, token: str, append: bool = False):
 
 
 def main():
+    """Run the script."""
     parser = argparse.ArgumentParser(
         prog="Update PR description",
         description="Updates the provided PR's description with the commuit",
@@ -129,9 +132,7 @@ def main():
         required=True,
         help="The Commit SHA which will be included in the PR's description",
     )
-    parser.add_argument(
-        "--token", required=True, help="Github Token to use for the authorization"
-    )
+    parser.add_argument("--token", required=True, help="Github Token to use for the authorization")
     parser.add_argument(
         "-a",
         "--append",

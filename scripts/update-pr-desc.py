@@ -10,8 +10,9 @@ import logging
 
 OWNER = "canonical"
 SOURCE_REPO = "solutions-engineering-automation"
+DEFAULT_BODY = "This is an automated pull request from https://github.com/canonical/solutions-engineering-automation to update centrally managed files."
 
-logger = logging.getLogger("update-pr-body")
+logger = logging.getLogger("update-pr-desc")
 logging.basicConfig(level=logging.INFO)
 
 
@@ -82,8 +83,13 @@ def parse_pr_url(url: str) -> tuple:
     return result.groups()
 
 
-def create_new_description(body: str, commit_url: str, append: bool):
+def create_new_description(body: Optional[str], commit_url: str, append: bool):
     """Create a new description for the PR."""
+    if not body:
+        logger.warning("No description found. Creating a new one.")
+        body = DEFAULT_BODY
+        append = False
+
     if commit_url in body:
         logger.warning("Commit already in the PR's description")
         return body
@@ -100,8 +106,8 @@ def update_description(url: str, sha: str, token: str, append: bool = False):
         repo, pr_number = parse_pr_url(url)
         pr_body = get_pr_body(repo, pr_number, token)
         commit_pr_url = get_commit_pr_url(sha, token)
-        if not pr_body or not commit_pr_url:
-            raise ValueError("Failed to get the PR's body or the commit's PR URL")
+        if not commit_pr_url:
+            raise ValueError("No PR URL found for the commit")
 
         new_desc = create_new_description(pr_body, commit_pr_url, append)
         logger.info("New description:\n%s", new_desc)

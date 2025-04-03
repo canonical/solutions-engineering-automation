@@ -32,11 +32,7 @@ def get_pr_body(repo: str, pr_number: int, token: str) -> Optional[str]:
         },
     )
 
-    if resp.status_code == 403 or resp.status_code == 401:
-        raise PermissionError("Request to get the PR's information was unauthorized")
-    if resp.status_code == 404:
-        raise ValueError("PR not found")
-
+    resp.raise_for_status()
     return resp.json().get("body", None)
 
 
@@ -50,12 +46,7 @@ def update_pr_body(repo: str, pr_number: int, token: str, body: str) -> None:
         json={"body": body},
     )
 
-    if resp.status_code == 403 or resp.status_code == 401:
-        raise PermissionError("Request to update the PR's information was unauthorized")
-    if resp.status_code == 404:
-        raise ValueError("PR not found")
-    if resp.status_code != 200:
-        raise ValueError(f"Failed to update the PR: {resp.json()}")
+    resp.raise_for_status()
 
 
 def get_commit_pr_url(commit: str, token: str) -> Optional[str]:
@@ -67,10 +58,7 @@ def get_commit_pr_url(commit: str, token: str) -> Optional[str]:
         },
     )
 
-    if resp.status_code == 403 or resp.status_code == 401:
-        raise PermissionError("Request to get the Commits's information was unauthorized")
-    if resp.status_code == 404:
-        raise ValueError("Commit not found")
+    resp.raise_for_status()
 
     result = resp.json()
     if not result:
@@ -158,7 +146,7 @@ def main():
             "Github token is required. Provide it by setting the GITHUB_TOKEN environment variable."
         )
 
-    update_description(args.url, args.commit, args.token, args.append)
+    update_description(args.url, args.commit, token, args.append)
 
 
 if __name__ == "__main__":

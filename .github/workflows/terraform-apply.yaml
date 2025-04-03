@@ -155,6 +155,7 @@ jobs:
 
           SCRIPT_ARGS="--url $PR_URL --commit $COMMIT_SHA"
           if [[ "$PR_CREATED" == "false" ]]; then
+            # If the PR_CREATED is false and the PR_URL exists, we want to append the commit info
             SCRIPT_ARGS="$SCRIPT_ARGS --append"
           fi
 

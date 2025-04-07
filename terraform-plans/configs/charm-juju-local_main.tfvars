@@ -24,7 +24,7 @@ templates = {
       runs_on            = "[[ubuntu-22.04]]",
       test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.4/stable\"]",
-      charmcraft_channel = "2.x/stable",
+      charmcraft_channel = "3.x/stable",
       python_versions    = "['3.8', '3.10']",
       tics_project       = ""
     }

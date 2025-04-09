@@ -130,11 +130,20 @@ jobs:
         run: |
           terraform apply ./tf.plan -no-color
 
+      - name: Create GitHub App Token
+        if: ${{ github.ref_name == 'main' && github.event_name != 'workflow_dispatch' }}
+        uses: actions/create-github-app-token@v1
+        id: app_token
+        with:
+          app_id: ${{ secrets.SOLENG_APP_ID }}
+          installation_id: ${{ secrets.SOLENG_APP_INSTALLATION_ID }}
+          private_key: ${{ secrets.SOLENG_APP_PEM_FILE }}
+
       - name: Update PR description with commit info (if running from main branch)
         if: ${{ github.ref_name == 'main' && github.event_name != 'workflow_dispatch' }}
         working-directory: ./scripts
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app_token.outputs.token }}
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip

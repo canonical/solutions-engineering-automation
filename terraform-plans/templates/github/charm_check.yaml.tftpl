@@ -93,7 +93,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: ${ runs_on }
+        runs-on: ${ builds_on }
     steps:
       - uses: actions/checkout@v4
         with:
@@ -130,7 +130,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: ${ runs_on }
+        runs-on: ${ tests_on }
         test-command: ${ test_commands }
         juju-channel: ${ juju_channels }
     steps:

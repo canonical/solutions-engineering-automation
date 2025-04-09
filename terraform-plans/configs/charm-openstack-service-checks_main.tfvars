@@ -21,8 +21,8 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      tests_on            = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
-      builds_on            = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
+      tests_on           = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
+      builds_on          = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
       test_commands      = "[ \"TEST_MODEL_SETTINGS='update-status-hook-interval=30s' tox -e func -- --keep-model -b jammy-yoga\", \"TEST_MODEL_SETTINGS='update-status-hook-interval=30s' tox -e func -- --keep-model -b focal-yoga\" ]"
       juju_channels      = "['3.4/stable']",
       charmcraft_channel = "3.x/stable",

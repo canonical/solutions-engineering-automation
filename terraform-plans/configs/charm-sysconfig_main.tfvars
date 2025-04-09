@@ -21,9 +21,11 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      tests_on            = "[[self-hosted, jammy, X64, large], [Ubuntu_ARM64_4C_16G_01]]",
-      builds_on            = "[[self-hosted, jammy, X64, large], [Ubuntu_ARM64_4C_16G_01]]",
-      test_commands      = "['if [ \"$(uname -m)\" = \"aarch64\" ]; then echo \"skipping func tests on arm64\"; else tox -e func; fi']",
+      # Cannot test on s390x because setup-python action does not support s390x
+      # Cannot test on arm64 because charms in the test bundle does not support arm64
+      tests_on           = "[[self-hosted, jammy, X64, large]]",
+      builds_on          = "[[self-hosted, jammy, X64, large], [Ubuntu_ARM64_4C_16G_01], [self-hosted, linux, s390x]]",
+      test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
       python_versions    = "['3.8', '3.10']",

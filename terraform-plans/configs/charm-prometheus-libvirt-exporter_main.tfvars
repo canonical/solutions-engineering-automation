@@ -26,8 +26,10 @@ templates = {
       # We prefer the github runners because they are smaller machines and save resources.
       # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
       # - runs-on: [self-hosted, jammy, ARM64]
-      tests_on            = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
-      builds_on            = "[[ubuntu-22.04], [Ubuntu_ARM64_4C_16G_01]]",
+      #
+      # Cannot test on s390x because setup-python action does not support s390x
+      tests_on           = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01]]",
+      builds_on          = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01], [self-hosted, linux, s390x]]",
       test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",

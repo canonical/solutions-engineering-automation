@@ -22,8 +22,8 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       python_versions = "['3.10']",
-      tests_on         = "[[ubuntu-22.04]]",
-      builds_on         = "[[ubuntu-22.04]]",
+      tests_on        = "[[ubuntu-22.04]]",
+      builds_on       = "[[ubuntu-22.04]]",
       tics_project    = "charmed-openstack-upgrader"
       needs_juju      = "true"
     }

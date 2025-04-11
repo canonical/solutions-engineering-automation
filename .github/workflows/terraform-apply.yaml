@@ -135,9 +135,8 @@ jobs:
         uses: actions/create-github-app-token@v1
         id: app_token
         with:
-          app_id: ${{ secrets.SOLENG_APP_ID }}
-          installation_id: ${{ secrets.SOLENG_APP_INSTALLATION_ID }}
-          private_key: ${{ secrets.SOLENG_APP_PEM_FILE }}
+          app-id: ${{ secrets.SOLENG_APP_ID }}
+          private-key: ${{ secrets.SOLENG_APP_PEM_FILE }}
 
       - name: Update PR description with commit info (if running from main branch)
         if: ${{ github.ref_name == 'main' && github.event_name != 'workflow_dispatch' }}
@@ -147,17 +146,20 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip
+          sudo apt-get install jq
           pip3 install requests
 
+          OUTPUT_JSON=$(terraform -chdir=../terraform-plans output -json)
+
           COMMIT_SHA="${{ github.sha }}"
-          PR_URL=$(terraform output -raw pr_url)
-          PR_CREATED=$(terraform output -raw pr_created)
+          PR_URL=$(echo "$OUTPUT_JSON" | jq -r '.pr_url.value // empty')
+          PR_CREATED=$(echo "$OUTPUT_JSON" | jq -r '.pr_created.value // empty')
 
           echo "Commit SHA: $COMMIT_SHA"
           echo "PR URL: $PR_URL"
           echo "PR Created: $PR_CREATED"
 
-          if [[ "$PR_URL" == "No PR created" ]]; then
+          if [[ -z "$PR_URL" || "$PR_URL" == "No PR created" ]]; then
             echo "No PR was created — skipping PR update step."
             exit 0
           fi

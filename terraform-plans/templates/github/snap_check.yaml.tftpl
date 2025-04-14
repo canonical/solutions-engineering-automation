@@ -75,6 +75,14 @@ jobs:
 
     - name: Determine system architecture
       run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV
+    
+    - name: Rename Unit Test Coverage Artifact
+      run: |
+        if [ -e ".coverage-unit" ]; then
+          mv .coverage-unit .coverage-unit-$${{ matrix.python-version }}-$${{ env.SYSTEM_ARCH }}
+        else
+          echo "No coverage file found, skipping rename"
+        fi     
 
     - name: Upload Unit Test Coverage File
       uses: actions/upload-artifact@v4
@@ -82,7 +90,7 @@ jobs:
         include-hidden-files: true
         if-no-files-found: ignore
         name: coverage-unit-$${{ matrix.python-version }}-$${{ env.SYSTEM_ARCH }}
-        path: .coverage-unit
+        path: .coverage-unit-$${{ matrix.python-version }}-$${{ env.SYSTEM_ARCH }}
 
   build:
     needs:
@@ -155,13 +163,21 @@ jobs:
           echo "$TEST_SNAP"
           tox -e func
 
+      - name: Rename Functional Test Coverage Artifact
+        run: |
+          if [ -e ".coverage-func" ]; then
+            mv .coverage-func .coverage-func-$${{ matrix.runs_on }}-$${{ env.SYSTEM_ARCH }}
+          else
+            echo "No coverage file found, skipping rename"
+          fi 
+
       - name: Upload Functional Test Coverage Artifact
         uses: actions/upload-artifact@v4
         with:
           include-hidden-files: true
           if-no-files-found: ignore
-          name: coverage-functional-$${{ env.SYSTEM_ARCH }}
-          path: .coverage-func
+          name: coverage-functional-$${{ matrix.runs_on }}-$${{ env.SYSTEM_ARCH }}
+          path: .coverage-func-$${{ matrix.runs_on }}-$${{ env.SYSTEM_ARCH }}
 
 %{ if tics_project != "" ~}
   tics-analysis:
@@ -200,6 +216,7 @@ jobs:
           if [ -e "$${coverage_files[0]}" ]; then
             echo "Merging coverage files: $${coverage_files[*]}"
             coverage combine "$${coverage_files[@]}"
+            coverage report --show-missing
 
             # Check if there is actual data to report before generating XML with merged reports
             if coverage report > /dev/null 2>&1; then

@@ -22,7 +22,9 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       python_versions = "['3.10']",
-      runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      # Cannot test on s390x because setup-python action does not support s390x
+      tests_on        = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      builds_on       = "[[ubuntu-22.04], [self-hosted, jammy, ARM64], [self-hosted, linux, s390x]]",
       tics_project    = "smartctl-exporter-snap"
       needs_juju      = ""
     }

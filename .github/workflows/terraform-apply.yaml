@@ -121,7 +121,7 @@ jobs:
           -out ./tf.plan
 
       - name: Terraform apply (if running from main branch)
-        if: ${{ github.ref_name == '208/merge' }}
+        if: ${{ github.ref_name == 'main' }}
         working-directory: ./terraform-plans
         env:
           GITHUB_APP_ID: ${{ secrets.SOLENG_APP_ID }}
@@ -131,7 +131,7 @@ jobs:
           terraform apply ./tf.plan -no-color
 
       - name: Create GitHub App Token
-        if: ${{ github.ref_name == '208/merge' && github.event_name != 'workflow_dispatch' }}
+        if: ${{ github.ref_name == 'main' && github.event_name != 'workflow_dispatch' }}
         uses: actions/create-github-app-token@v1
         id: app_token
         with:
@@ -141,7 +141,7 @@ jobs:
           permission-pull-requests: write
 
       - name: Update PR description with commit info (if running from main branch)
-        if: ${{ github.ref_name == '208/merge' && github.event_name != 'workflow_dispatch' }}
+        if: ${{ github.ref_name == 'main' && github.event_name != 'workflow_dispatch' }}
         working-directory: ./scripts
         env:
           GITHUB_TOKEN: ${{ steps.app_token.outputs.token }}
@@ -153,7 +153,7 @@ jobs:
 
           OUTPUT_JSON=$(terraform -chdir=../terraform-plans output -json)
 
-          COMMIT_SHA="29d0181ccbf837dab6427ddba2e8589bf4aff47e"
+          COMMIT_SHA="${{ github.sha }}"
           PR_URL=$(echo "$OUTPUT_JSON" | jq -r '.pr_url.value // empty')
           PR_CREATED=$(echo "$OUTPUT_JSON" | jq -r '.pr_created.value // empty')
 

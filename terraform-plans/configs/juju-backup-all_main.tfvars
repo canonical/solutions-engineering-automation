@@ -22,7 +22,8 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       python_versions = "['3.8', '3.10', '3.12']",
-      runs_on         = "[[ubuntu-24.04]]",
+      tests_on        = "[[ubuntu-24.04]]",
+      builds_on       = "[[ubuntu-24.04]]",
       tics_project    = "juju-backup-all"
       needs_juju      = "true"
     }

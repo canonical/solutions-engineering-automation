@@ -137,6 +137,8 @@ jobs:
         with:
           app-id: ${{ secrets.SOLENG_APP_ID }}
           private-key: ${{ secrets.SOLENG_APP_PEM_FILE }}
+          owner: ${{ github.repository_owner }}
+          permission-pull-requests: write
 
       - name: Update PR description with commit info (if running from main branch)
         if: ${{ github.ref_name == 'main' && github.event_name != 'workflow_dispatch' }}

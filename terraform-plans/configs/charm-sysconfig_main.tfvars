@@ -21,7 +21,7 @@ templates = {
     source      = "./templates/github/charm_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      # Cannot test on s390x because setup-python action does not support s390x
+      # Cannot test on s390x because setup-python action does not support s390x (see issue #206)
       # Cannot test on arm64 because charms in the test bundle does not support arm64
       tests_on           = "[[self-hosted, jammy, X64, large]]",
       builds_on          = "[[self-hosted, jammy, X64, large], [Ubuntu_ARM64_4C_16G_01], [self-hosted, linux, s390x]]",

@@ -22,7 +22,8 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       python_versions = "['3.10']",
-      runs_on         = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      tests_on        = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      builds_on       = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
       tics_project    = ""
       needs_juju      = ""
     }

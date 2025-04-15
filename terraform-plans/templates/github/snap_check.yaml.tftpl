@@ -76,21 +76,26 @@ jobs:
     - name: Determine system architecture
       run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV
     
+    - name: Create artifact name suffix
+      run: |  
+        PYTHON_VERSION_SANITIZED=$${matrix.python-version//./-}
+        echo "ARTIFACT_SUFFIX=$PYTHON_VERSION_SANITIZED-$${{ env.SYSTEM_ARCH }}" >> $GITHUB_ENV
+
     - name: Rename Unit Test Coverage Artifact
-      run: |
-        if [ -e ".coverage-unit" ]; then
-          mv .coverage-unit .coverage-unit-$${{ matrix.python-version }}-$${{ env.SYSTEM_ARCH }}
-        else
-          echo "No coverage file found, skipping rename"
-        fi     
+      run: |  
+        if [ -e ".coverage-unit" ]; then  
+          mv .coverage-unit .coverage-unit-$${{ env.ARTIFACT_SUFFIX }}
+        else  
+          echo "No coverage file found, skipping rename"  
+        fi  
 
     - name: Upload Unit Test Coverage File
       uses: actions/upload-artifact@v4
       with:
         include-hidden-files: true
         if-no-files-found: ignore
-        name: coverage-unit-$${{ matrix.python-version }}-$${{ env.SYSTEM_ARCH }}
-        path: .coverage-unit-$${{ matrix.python-version }}-$${{ env.SYSTEM_ARCH }}
+        name: coverage-unit-$${{ env.ARTIFACT_SUFFIX }}
+        path: .coverage-unit-$${{ env.ARTIFACT_SUFFIX }}
 
   build:
     needs:
@@ -163,10 +168,15 @@ jobs:
           echo "$TEST_SNAP"
           tox -e func
 
+      - name: Create artifact name suffix
+        run: |
+          BASE_VERSION_SANITIZED=$${matrix.runs_on//./-}
+          echo "ARTIFACT_SUFFIX=$BASE_VERSION_SANITIZED-$${{ env.SYSTEM_ARCH }}" >> $GITHUB_ENV 
+
       - name: Rename Functional Test Coverage Artifact
         run: |
           if [ -e ".coverage-func" ]; then
-            mv .coverage-func .coverage-func-$${{ matrix.runs_on }}-$${{ env.SYSTEM_ARCH }}
+            mv .coverage-func .coverage-func-$${{ env.ARTIFACT_SUFFIX }}
           else
             echo "No coverage file found, skipping rename"
           fi 
@@ -176,8 +186,8 @@ jobs:
         with:
           include-hidden-files: true
           if-no-files-found: ignore
-          name: coverage-functional-$${{ matrix.runs_on }}-$${{ env.SYSTEM_ARCH }}
-          path: .coverage-func-$${{ matrix.runs_on }}-$${{ env.SYSTEM_ARCH }}
+          name: coverage-functional-$${{ env.ARTIFACT_SUFFIX }}
+          path: .coverage-func-$${{ env.ARTIFACT_SUFFIX }}
 
 %{ if tics_project != "" ~}
   tics-analysis:

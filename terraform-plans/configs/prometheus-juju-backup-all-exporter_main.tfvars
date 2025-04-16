@@ -22,7 +22,8 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       python_versions = "['3.10']",
-      runs_on         = "[[ubuntu-22.04]]",
+      tests_on        = "[[ubuntu-22.04]]",
+      builds_on       = "[[ubuntu-22.04]]",
       tics_project    = "prometheus-juju-backup-all-exporter"
       needs_juju      = ""
     }

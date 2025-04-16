@@ -116,7 +116,7 @@ def update_description(url: str, sha: str, token: str, append: bool = False):
         logger.info("Updated the PR's description successfully")
     except Exception as e:
         logger.error("Failed to update the description: %s", e)
-
+        exit(1)
 
 def main():
     """Run the script."""

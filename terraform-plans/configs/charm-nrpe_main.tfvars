@@ -27,9 +27,9 @@ templates = {
       # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
       # - runs-on: [self-hosted, jammy, ARM64]
       #
-      # Cannot test on s390x because setup-python action does not support s390x (see issue #206)
+      # Cannot test on s390x and ppc64el because setup-python action does not support s390x and ppc64el (see issue #206)
       tests_on           = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01]]",
-      builds_on          = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01], [self-hosted, linux, s390x]]",
+      builds_on          = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
       test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",

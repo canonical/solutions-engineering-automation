@@ -23,8 +23,8 @@ templates = {
     vars = {
       python_versions = "['3.10']",
       # Cannot test on s390x and ppc64el because setup-python action does not support s390x and ppc64el (see issue #206)
-      tests_on     = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
-      builds_on    = "[[ubuntu-22.04], [self-hosted, jammy, ARM64], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
+      tests_on     = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
+      builds_on    = "[[ubuntu-24.04], [self-hosted, jammy, ARM64], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
       tics_project = "smartctl-exporter-snap"
       needs_juju   = ""
     }
@@ -40,7 +40,7 @@ templates = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on  = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
       channels = "latest/edge"
     }
   }

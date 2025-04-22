@@ -29,6 +29,7 @@ templates = {
       python_versions    = "['3.8', '3.10']",
       # Temporary remove because of issue: https://warthogs.atlassian.net/browse/TICSISSUES-58
       # tics_project       = "charm-duplicity"
+      tics_project = ""
     }
   }
   promote = {

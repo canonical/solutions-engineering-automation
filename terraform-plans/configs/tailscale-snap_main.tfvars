@@ -22,8 +22,8 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       python_versions = "['3.10']",
-      tests_on        = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
-      builds_on       = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      tests_on        = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
+      builds_on       = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
       tics_project    = ""
       needs_juju      = ""
     }
@@ -39,7 +39,7 @@ templates = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on  = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
       channels = "latest/edge"
     }
   }

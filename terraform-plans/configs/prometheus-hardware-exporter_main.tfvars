@@ -44,7 +44,7 @@ templates = {
   #   source      = "./templates/github/charm_check.yaml.tftpl"
   #   destination = ".github/workflows/check.yaml"
   #   vars = {
-  #     runs_on       = "[[ubuntu-22.04]]",
+  #     runs_on       = "[[ubuntu-24.04]]",
   #     test_commands = "['tox -e func']",
   #     juju_channels = "[\"3.4/stable\"]",
   #   }

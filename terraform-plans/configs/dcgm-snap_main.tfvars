@@ -21,8 +21,8 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
-      tests_on        = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
-      builds_on       = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      tests_on        = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
+      builds_on       = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
       python_versions = "['3.10']",
       tics_project    = "dcgm-snap"
       needs_juju      = ""
@@ -39,7 +39,7 @@ templates = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on  = "[[ubuntu-22.04], [self-hosted, jammy, ARM64]]",
+      runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
       channels = "core24/edge,latest/edge"
     }
   }

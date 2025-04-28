@@ -40,7 +40,7 @@ templates = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
+      runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64], [self-hosted, ppc64el]]",
       channels = "latest/edge"
     }
   }

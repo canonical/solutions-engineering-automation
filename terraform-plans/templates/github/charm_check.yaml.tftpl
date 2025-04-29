@@ -284,10 +284,16 @@ jobs:
           pip install coverage
 
       # Install everything from all requirements.txt files otherwise TICS errors.
-      - name: Install all snap dependencies
+      - name: Install all charm dependencies
         run: |
           for f in $(find -name '*requirements.txt'); do
-              echo "${f}"
+              echo "$${f}"
+              pip3 install --requirement "$${f}"
+          done
+
+          # For reactive charms
+          for f in $(find -name 'wheelhouse.txt'); do
+              echo "$${f}"
               pip3 install --requirement "$${f}"
           done
 

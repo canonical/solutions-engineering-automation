@@ -84,6 +84,8 @@ jobs:
             - snap-tempest_stable_xena
             - snap-tempest_stable_yoga
             - snap-tempest_stable_zed
+            - snap-tempest_stable_dalmatian
+            - snap-tempest_stable_epoxy
             - solutions-engineering-automation_main
             - tailscale-snap_main
             - headscale-snap_main

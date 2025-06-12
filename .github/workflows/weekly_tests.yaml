@@ -20,14 +20,12 @@ jobs:
           - charm-cloudsupport
           - charm-duplicity
           - charm-juju-backup-all
-          - charm-juju-local
           - charm-local-users
           - charm-logrotated
           - charm-nginx
           - charm-nrpe
           - charm-openstack-service-checks
           - charm-prometheus-blackbox-exporter
-          - charm-prometheus-juju-exporter
           - charm-prometheus-libvirt-exporter
           - charm-simple-streams
           - charm-storage-connector
@@ -37,11 +35,9 @@ jobs:
           - charmed-openstack-upgrader
           - dcgm-snap
           - juju-backup-all
-          - juju-lint
           - openstack-exporter-operator
           - prometheus-hardware-exporter
           - prometheus-juju-backup-all-exporter
-          - prometheus-juju-exporter
           - smartctl-exporter-snap
           - snap-tempest
         workflow_file_name:

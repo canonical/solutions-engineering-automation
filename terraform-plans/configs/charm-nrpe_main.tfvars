@@ -34,9 +34,7 @@ templates = {
       juju_channels      = "[\"3.4/stable\"]",
       charmcraft_channel = "3.x/stable",
       python_versions    = "['3.8', '3.10']",
-      # Temporary remove because of issue: https://warthogs.atlassian.net/browse/TICSISSUES-58
-      # tics_project       = "charm-nrpe"
-      tics_project = ""
+      tics_project       = "charm-nrpe"
     }
   }
   promote = {

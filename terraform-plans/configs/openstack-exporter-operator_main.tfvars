@@ -25,7 +25,7 @@ templates = {
       tests_on           = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
       builds_on          = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
       test_commands      = "['TEST_MODEL_SETTINGS=\"update-status-hook-interval=30s\" tox -e func']",
-      juju_channels      = "['3.4/stable']",
+      juju_channels      = "['3.6/stable']",
       charmcraft_channel = "3.x/stable",
       python_versions    = "['3.10']",
       tics_project       = "openstack-exporter-operator"

@@ -43,7 +43,6 @@ jobs:
           repository:
             # The naming convention of the files is $REPO_$BRANCH.tfvars
             - charm-advanced-routing_main
-            - charm-apt-mirror_main
             - charm-duplicity_main
             - charm-juju-backup-all_main
             - charm-local-users_main
@@ -51,7 +50,6 @@ jobs:
             - charm-nrpe_main
             - charm-openstack-service-checks_main
             - charm-prometheus-libvirt-exporter_main
-            - charm-simple-streams_main
             - charm-sysconfig_main
             - charm-userdir-ldap_main
             - charmed-openstack-exporter-snap_main

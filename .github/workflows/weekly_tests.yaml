@@ -16,7 +16,6 @@ jobs:
       matrix:
         repo:
           - charm-advanced-routing
-          - charm-apt-mirror
           - charm-duplicity
           - charm-juju-backup-all
           - charm-local-users
@@ -24,7 +23,6 @@ jobs:
           - charm-nrpe
           - charm-openstack-service-checks
           - charm-prometheus-libvirt-exporter
-          - charm-simple-streams
           - charm-sysconfig
           - charm-userdir-ldap
           - charmed-openstack-exporter-snap

@@ -17,18 +17,14 @@ jobs:
         repo:
           - charm-advanced-routing
           - charm-apt-mirror
-          - charm-cloudsupport
           - charm-duplicity
           - charm-juju-backup-all
           - charm-local-users
           - charm-logrotated
-          - charm-nginx
           - charm-nrpe
           - charm-openstack-service-checks
-          - charm-prometheus-blackbox-exporter
           - charm-prometheus-libvirt-exporter
           - charm-simple-streams
-          - charm-storage-connector
           - charm-sysconfig
           - charm-userdir-ldap
           - charmed-openstack-exporter-snap

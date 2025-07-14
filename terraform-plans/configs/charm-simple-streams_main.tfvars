@@ -47,7 +47,7 @@ templates = {
   #     tests_on       = "[[ubuntu-24.04]]",
   #     builds_on       = "[[ubuntu-24.04]]",
   #     test_commands = "['tox -e func -- -v --series focal', 'tox -e func -- -v --series jammy']",
-  #     juju_channels = "[\"3.6/stable\"]",
+  #     juju_channels = "[\"3.4/stable\"]",
   #   }
   # }
   tox = {

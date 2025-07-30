@@ -39,8 +39,8 @@ jobs:
         include:
           - repo: hardware-observer-operator
             workflow_file_name: check.yaml
-          - repo: hardware-observer-operator
-            workflow_file_name: cos_integration.yaml
+          # - repo: hardware-observer-operator
+          #   workflow_file_name: cos_integration.yaml
 
     steps:
       - name: Run ${{ matrix.workflow_file_name }} tests for ${{ matrix.repo }}

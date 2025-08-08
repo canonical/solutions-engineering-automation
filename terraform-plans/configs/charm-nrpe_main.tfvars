@@ -22,14 +22,14 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       # github hosted runners are amd64
-      # Ubuntu_ARM64_4C_16G_01 is the github-hosted arm64 runner we have access to.
+      # ubuntu-24.04-arm is the github-hosted arm64 runner we have access to.
       # We prefer the github runners because they are smaller machines and save resources.
       # If we have issues with it, we can switch to the larger and more numerous self-hosted options:
       # - runs-on: [self-hosted, jammy, ARM64]
       #
       # Cannot test on s390x and ppc64el because setup-python action does not support s390x and ppc64el (see issue #206)
-      tests_on           = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01]]",
-      builds_on          = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
+      tests_on           = "[[ubuntu-24.04], [ubuntu-24.04-arm]]",
+      builds_on          = "[[ubuntu-24.04], [ubuntu-24.04-arm], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
       test_commands      = "['tox -e func']",
       juju_channels      = "[\"3.6/stable\"]",
       charmcraft_channel = "3.x/stable",

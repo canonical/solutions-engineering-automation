@@ -22,8 +22,8 @@ templates = {
     destination = ".github/workflows/check.yaml"
     vars = {
       # Cannot test on s390x and ppc64el because setup-python action does not support s390x and ppc64el (see issue #206)
-      tests_on           = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01]]",
-      builds_on          = "[[ubuntu-24.04], [Ubuntu_ARM64_4C_16G_01], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
+      tests_on           = "[[ubuntu-24.04], [ubuntu-24.04-arm]]",
+      builds_on          = "[[ubuntu-24.04], [ubuntu-24.04-arm], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
       test_commands      = "['tox -e func -- -v --base ubuntu@20.04 --keep-models', 'tox -e func -- -v --base ubuntu@22.04 --keep-models', 'tox -e func -- -v --base ubuntu@24.04 --keep-models' ]",
       juju_channels      = "[\"3.6/stable\"]",
       charmcraft_channel = "3.x/stable",

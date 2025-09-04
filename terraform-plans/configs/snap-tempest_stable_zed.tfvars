@@ -36,4 +36,8 @@ templates = {
     }
   }
   # release is done by launchpad
+  bug_report = {
+    source      = "./templates/github/snap_bug_report.yaml.tftpl"
+    destination = ".github/ISSUE_TEMPLATE/bug_report.yaml"
+  }
 }

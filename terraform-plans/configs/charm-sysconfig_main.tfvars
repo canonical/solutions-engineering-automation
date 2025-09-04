@@ -82,5 +82,6 @@ templates = {
   bug_report = {
     source      = "./templates/github/charm_bug_report.yaml.tftpl"
     destination = ".github/ISSUE_TEMPLATE/bug_report.yaml"
+    vars        = {}
   }
 }

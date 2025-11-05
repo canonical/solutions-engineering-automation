@@ -16,7 +16,6 @@ jobs:
       matrix:
         repo:
           - charm-advanced-routing
-          - charm-duplicity
           - charm-juju-backup-all
           - charm-local-users
           - charm-logrotated

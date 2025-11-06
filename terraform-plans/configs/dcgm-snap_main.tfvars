@@ -8,7 +8,7 @@ templates = {
     vars        = {}
   }
   gitignore = {
-    source      = "./templates/github/gitignore.tftpl"
+    source      = "./templates/github/dcgm_gitignore.tftpl"
     destination = ".gitignore"
     vars        = {}
   }
@@ -18,7 +18,7 @@ templates = {
     vars        = {}
   }
   check = {
-    source      = "./templates/github/snap_check.yaml.tftpl"
+    source      = "./templates/github/dcgm_snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
       tests_on        = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
@@ -36,7 +36,7 @@ templates = {
     }
   }
   release = {
-    source      = "./templates/github/snap_release.yaml.tftpl"
+    source      = "./templates/github/dcgm_snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
       runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",

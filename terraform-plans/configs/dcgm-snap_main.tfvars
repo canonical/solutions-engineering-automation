@@ -32,7 +32,7 @@ templates = {
     source      = "./templates/github/snap_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
     vars = {
-      promote_options = "['latest/edge -> latest/candidate', 'latest/candidate -> latest/stable', 'core24/edge -> core24/candidate', 'core24/candidate -> core24/stable']"
+      promote_options = "['v4-cuda11/edge -> v4-cuda11/candidate', 'v4-cuda11/candidate -> v4-cuda11/stable', 'v4-cuda12/edge -> v4-cuda12/candidate', 'v4-cuda12/candidate -> v4-cuda12/stable', 'v4-cuda13/edge -> v4-cuda13/candidate', 'v4-cuda13/candidate -> v4-cuda13/stable']"
     }
   }
   release = {
@@ -40,7 +40,7 @@ templates = {
     destination = ".github/workflows/release.yaml"
     vars = {
       runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
-      channels = "core24/edge,latest/edge"
+      channels = "v4-cuda11/edge, v4-cuda12/edge, v4-cuda13/edge"
     }
   }
   yamllint = {

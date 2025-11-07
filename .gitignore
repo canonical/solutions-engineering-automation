@@ -11,3 +11,6 @@ terraform.rc
 
 # Ignore hcl file
 .terraform.lock.hcl
+
+# Ignore SBOM manifest file
+sbom_manifest.yaml

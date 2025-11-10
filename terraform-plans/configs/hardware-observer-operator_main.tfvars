@@ -50,7 +50,7 @@ templates = {
     destination = ".github/.jira_sync_config.yaml"
     vars = {
       component = "hardware-observer",
-      epic_key  = "SOLENG-190"
+      epic_key  = "SOLENG-46"
     }
   }
   security = {

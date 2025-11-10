@@ -54,7 +54,7 @@ templates = {
     destination = ".github/.jira_sync_config.yaml"
     vars = {
       component = "smartctl-exporter",
-      epic_key  = "SOLENG-190"
+      epic_key  = "SOLENG-46"
     }
   }
   security = {

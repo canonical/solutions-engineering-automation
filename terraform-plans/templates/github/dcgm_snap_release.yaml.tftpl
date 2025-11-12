@@ -18,13 +18,13 @@ jobs:
 
   release:
     runs-on: $${{ matrix.runs-on }}
-    cuda-version: [11, 12, 13]
     needs: check
     strategy:
       fail-fast: false
       matrix:
         runs-on: ${runs_on}
-    steps:
+        cuda-version: [11, 12, 13]
+steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Complete git history is required to generate the version from git tags.

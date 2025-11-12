@@ -24,7 +24,7 @@ jobs:
       matrix:
         runs-on: ${runs_on}
         cuda-version: [11, 12, 13]
-steps:
+    steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Complete git history is required to generate the version from git tags.

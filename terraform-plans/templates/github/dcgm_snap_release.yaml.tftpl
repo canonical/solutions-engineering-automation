@@ -18,12 +18,12 @@ jobs:
 
   release:
     runs-on: $${{ matrix.runs-on }}
-    cuda-version: [11, 12, 13]
     needs: check
     strategy:
       fail-fast: false
       matrix:
         runs-on: ${runs_on}
+        cuda-version: [11, 12, 13]
     steps:
       - uses: actions/checkout@v4
         with:

@@ -1,0 +1,100 @@
+name: Run SBOM and secscan
+
+on:
+  workflow_dispatch:
+    inputs:
+      cycle:
+        description: 'The release cycle (e.g. 25.10)'
+        required: true
+      risk:
+        description: 'The risk level for the scan (e.g. stable, candidate, edge)'
+        required: false
+        type: choice
+        options:
+          - stable
+          - candidate
+          - edge
+        default: stable
+      arch:
+        description: 'The architecture for the scan (e.g. amd64, arm64)'
+        required: false
+        type: choice
+        options:
+          - amd64
+          - arm64
+        default: amd64
+
+jobs:
+  scan:
+    name: Security Scan
+    runs-on: [self-hosted, self-hosted-linux-amd64-jammy-private-endpoint-medium]
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+
+      - name: Download and setup dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libapt-pkg-dev
+          sudo apt install -y python3-apt
+
+          sudo snap install juju
+          sudo snap install astral-uv --classic
+          sudo snap install canonical-secscan-client
+          sudo snap connect canonical-secscan-client:home snapd
+
+      - name: Install SBOMber
+        uses: actions/checkout@v5
+        with:
+          repository: canonical/sbomber
+          path: scanner
+          persist-credentials: false
+
+      - name: Generate SBOM matrix
+        working-directory: ./scripts
+        run: |
+          OUTPUT_FILE="../sbom_manifest.yaml"
+          echo "Generating SBOM matrix to $OUTPUT_FILE"
+
+          python3 generate-sbom-matrix.py \
+            --cycle ${{ github.event.inputs.cycle }} \
+            --risk ${{ github.event.inputs.risk }} \
+            --arch ${{ github.event.inputs.arch }} \
+            --output $OUTPUT_FILE
+          
+          echo "Generated SBOM matrix:"
+          cat $OUTPUT_FILE
+
+      - name: Prepare SBOMs
+        working-directory: ./scanner
+        run: |
+          echo "Running sbomber prepare..."
+          ./sbomber prepare ../sbom_manifest.yaml
+          echo "Artifacts prepared; state saved in ./.statefile.yaml"
+
+      - name: Submit SBOMs for scanning
+        working-directory: ./scanner
+        run: |
+          echo "Submitting SBOMs..."
+          ./sbomber submit
+          echo "Submission complete; state updated"
+
+      - name: Poll for scan results
+        working-directory: ./scanner
+        run: |
+          echo "Polling for scan completion..."
+          ./sbomber poll --wait --timeout 30
+          echo "Polling complete"
+
+      - name: Download and prepare results
+        working-directory: ./scanner
+        run: |
+          echo "Downloading scan results..."
+          ./sbomber download
+          echo "Reports downloaded to ./reports"
+
+      - name: Upload results as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ github.event.inputs.cycle }}-${{ github.event.inputs.arch }}-${{ github.event.inputs.risk }}
+          path: ./scanner/reports

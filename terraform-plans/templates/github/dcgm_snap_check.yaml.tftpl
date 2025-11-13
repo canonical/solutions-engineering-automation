@@ -91,7 +91,7 @@ jobs:
         fi
 
     - name: Upload Unit Test Coverage File
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         include-hidden-files: true
         if-no-files-found: ignore
@@ -124,7 +124,7 @@ jobs:
         run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV
 
       - name: Upload the built snap
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: snap_$${{ matrix.cuda-version }}_$${{ env.SYSTEM_ARCH }}
           path: $${{ steps.build.outputs.snap }}
@@ -190,7 +190,7 @@ jobs:
           fi
 
       - name: Upload Functional Test Coverage Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           include-hidden-files: true
           if-no-files-found: ignore

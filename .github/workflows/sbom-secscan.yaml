@@ -94,7 +94,7 @@ jobs:
           echo "Reports downloaded to ./reports"
 
       - name: Upload results as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: reports-${{ github.event.inputs.cycle }}-${{ github.event.inputs.arch }}-${{ github.event.inputs.risk }}
           path: ./scanner/reports

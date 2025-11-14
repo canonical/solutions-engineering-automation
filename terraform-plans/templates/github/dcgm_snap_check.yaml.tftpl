@@ -147,7 +147,7 @@ jobs:
         run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV
 
       - name: Download snap file artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: snap_$${{ matrix.cuda-version }}_$${{ env.SYSTEM_ARCH }}
 
@@ -228,7 +228,7 @@ jobs:
         run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV
 
       - name: Download Coverage Files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           pattern: coverage-*-$${{ env.SYSTEM_ARCH }}
           merge-multiple: true

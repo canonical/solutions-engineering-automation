@@ -33,7 +33,7 @@ jobs:
         run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV
 
       - name: Download the built snap from check workflow
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: snap_$${{ matrix.cuda-version }}_$${{ env.SYSTEM_ARCH }}
 

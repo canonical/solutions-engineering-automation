@@ -5,7 +5,7 @@
   ],
   "github-actions": {
     "managerFilePatterns": [
-      "^terraform-plans/templates/github/.*\\.tftpl$"
+      "/^terraform-plans/templates/github/.*\\.tftpl$/"
     ]
   }  
 }

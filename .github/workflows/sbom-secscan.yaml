@@ -30,7 +30,7 @@ jobs:
     runs-on: [self-hosted, self-hosted-linux-amd64-jammy-private-endpoint-medium]
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download and setup dependencies
         run: |
@@ -44,7 +44,7 @@ jobs:
           sudo snap connect canonical-secscan-client:home snapd
 
       - name: Install SBOMber
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: canonical/sbomber
           path: scanner

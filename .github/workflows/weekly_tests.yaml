@@ -76,7 +76,7 @@ jobs:
     name: Notify SolEng with results
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Collect results
         uses: actions/download-artifact@v6

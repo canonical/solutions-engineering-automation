@@ -25,7 +25,7 @@ jobs:
         runs-on: ${runs_on}
         cuda-version: [11, 12, 13]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Complete git history is required to generate the version from git tags.
 

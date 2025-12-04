@@ -26,8 +26,8 @@ templates = {
       # Arm64 using 24.04 had a regression and machines on 22.04 stuck on waiting.
       # See https://bugs.launchpad.net/snapd/+bug/2133827
 
-      tests_on           = "[[ubuntu-24.04], [ubuntu-24.04-arm]]",
-      builds_on          = "[[ubuntu-24.04], [ubuntu-22.04-arm], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
+      tests_on           = "[[ubuntu-24.04], [ubuntu-22.04-arm]]",
+      builds_on          = "[[ubuntu-24.04], [ubuntu-24.04-arm], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",
       test_commands      = "['tox -e func -- -v --base ubuntu@20.04 --keep-models', 'tox -e func -- -v --base ubuntu@22.04 --keep-models', 'tox -e func -- -v --base ubuntu@24.04 --keep-models' ]",
       juju_channels      = "[\"3.6/stable\"]",
       charmcraft_channel = "3.x/stable",

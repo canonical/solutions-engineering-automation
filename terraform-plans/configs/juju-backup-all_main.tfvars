@@ -17,12 +17,17 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
+
+  # Nested LXD is broken with snapd 2.72+ubuntu22.04 using noble and kernel > 6.14.
+  # We should use runners for func tests on ubuntu 22.04 until fix lands on snapd and apparmor.
+  # Gh runners on amd64 are using kernel 6.11 and this might be why it didn't break other func tests
+  # See https://bugs.launchpad.net/snapd/+bug/2127244
   check = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
       python_versions = "['3.8', '3.10', '3.12']",
-      tests_on        = "[[self-hosted-linux-amd64-noble-xlarge]]",
+      tests_on        = "[[self-hosted-linux-amd64-jammy-xlarge]]",
       builds_on       = "[[ubuntu-24.04]]",
       tics_project    = "juju-backup-all"
       needs_juju      = "true"

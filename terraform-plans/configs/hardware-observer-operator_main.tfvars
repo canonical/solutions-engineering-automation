@@ -23,8 +23,10 @@ templates = {
     vars = {
       # Cannot test on s390x and ppc64el because setup-python action does not support s390x and ppc64el (see issue #206)
 
-      # Arm64 using 24.04 had a regression and machines on 22.04 stuck on waiting.
-      # See https://bugs.launchpad.net/snapd/+bug/2133827
+      # Nested LXD is broken with snapd 2.72+ubuntu22.04 using noble and kernel > 6.14.
+      # We should use runners for func tests on ubuntu 22.04 until fix lands on snapd and apparmor.
+      # Gh runners on amd64 are using kernel 6.11 and this might be why it didn't break other func tests
+      # See https://bugs.launchpad.net/snapd/+bug/2127244
 
       tests_on           = "[[ubuntu-24.04], [ubuntu-22.04-arm]]",
       builds_on          = "[[ubuntu-24.04], [ubuntu-24.04-arm], [self-hosted, linux, s390x],[self-hosted, ppc64el]]",

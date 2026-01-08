@@ -18,7 +18,6 @@ jobs:
           - charm-advanced-routing
           - charm-juju-backup-all
           - charm-local-users
-          - charm-nrpe
           - charm-userdir-ldap
           - charmed-openstack-exporter-snap
           - charmed-openstack-upgrader

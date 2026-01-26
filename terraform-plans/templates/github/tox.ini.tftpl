@@ -32,6 +32,9 @@ commands =
     mypy --install-types --non-interactive .
 %{ endif ~}
 deps =
+    # Pin black and isort because newer versions of black no longer support Python 3.8 and 3.9.
+    # This ensures consistent formatting and linting across all CI-tested Python versions
+    # (3.8, 3.10, and 3.12).
     black==24.8.0
     isort==5.13.2
     colorama

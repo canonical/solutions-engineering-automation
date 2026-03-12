@@ -37,8 +37,8 @@ PROJECTS: List[dict] = [
 SBOM_MATRIX: dict = {
     "clients": {
         "sbom": {
-            "department": "managed_services",
-            "email": "eric.chen@canonical.com",
+            "department": "operations",
+            "email": "james.lin@canonical.com",
             "team": "solutions_engineering",
         },
         "secscan": {},

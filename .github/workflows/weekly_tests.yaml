@@ -40,6 +40,7 @@ jobs:
       - name: Run ${{ matrix.workflow_file_name }} tests for ${{ matrix.repo }}
         uses: convictional/trigger-workflow-and-wait@v1.6.5
         id: dispatched-tests
+        timeout-minutes: 300 # 5 hours for the run to complete
         with:
           owner: canonical
           repo: ${{ matrix.repo }}

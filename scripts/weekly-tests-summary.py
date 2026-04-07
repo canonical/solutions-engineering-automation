@@ -19,11 +19,14 @@ def load_results() -> list[dict[str, str]]:
 
 def format_result(result: dict[str, str]) -> str:
     """Take a result and return a markdown string"""
-    icon = (
-        ":gh-success-octicon-checkcirclefillicon:"
-        if result["conclusion"] == "success"
-        else ":gh-failure-octicon-xcirclefillicon:"
-    )
+    conclusion = result["conclusion"]
+    if conclusion == "success":
+        icon = ":gh-success-octicon-checkcirclefillicon:"
+    elif conclusion == "cancelled":
+        icon = ":gh-cancelled-octicon-stopicon:"
+    else:
+        icon = ":gh-failure-octicon-xcirclefillicon:"
+
     repo = result["repo"]
     branch = result["branch"]
     workflow = result["workflow_file_name"]

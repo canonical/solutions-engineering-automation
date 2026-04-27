@@ -225,6 +225,8 @@ jobs:
               pip3 install --requirement "$${f}"
           done
 
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+
       - name: Determine system architecture
         run: echo "SYSTEM_ARCH=$(uname -m)" >> $GITHUB_ENV
 

@@ -21,8 +21,9 @@ templates = {
     source      = "./templates/github/snap_check.yaml.tftpl"
     destination = ".github/workflows/check.yaml"
     vars = {
+      # Cannot test on s390x and ppc64el because setup-python action does not support s390x and ppc64el (see issue #206)
       tests_on        = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
-      builds_on       = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
+      builds_on       = "[[ubuntu-24.04], [self-hosted, jammy, ARM64], [self-hosted, linux, s390x]]",
       python_versions = "['3.10']",
       tics_project    = "charmed-openstack-exporter-snap"
       needs_juju      = ""
@@ -39,7 +40,7 @@ templates = {
     source      = "./templates/github/snap_release.yaml.tftpl"
     destination = ".github/workflows/release.yaml"
     vars = {
-      runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64]]",
+      runs_on  = "[[ubuntu-24.04], [self-hosted, jammy, ARM64], [self-hosted, linux, s390x]]",
       channels = "latest/edge"
     }
   }

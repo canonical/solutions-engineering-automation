@@ -27,11 +27,7 @@ PROJECTS: List[dict] = [
     {"name": "dcgm", "type": "snap"},
     {"name": "tailscale", "type": "snap"},
     {"name": "headscale", "type": "snap"},
-    {
-        "name": "derper",
-        "type": "snap",
-        "risk": "edge",  # override risk for derper snap, only available on edge
-    },
+    {"name": "derper", "type": "snap"},
 ]
 
 SBOM_MATRIX: dict = {

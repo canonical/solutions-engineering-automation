@@ -18,19 +18,6 @@ templates = {
     destination = ".github/CODEOWNERS"
     vars        = {}
   }
-  check = {
-    source      = "./templates/github/charm_check.yaml.tftpl"
-    destination = ".github/workflows/check.yaml"
-    vars = {
-      tests_on           = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
-      builds_on          = "[['self-hosted', 'jammy', 'amd64', 'two-xlarge']]",
-      test_commands      = "['TEST_MODEL_SETTINGS=\"update-status-hook-interval=30s\" tox -e func']",
-      juju_channels      = "['3.6/stable']",
-      charmcraft_channel = "3.x/stable",
-      python_versions    = "['3.10']",
-      tics_project       = "openstack-exporter-operator"
-    }
-  }
   promote = {
     source      = "./templates/github/charm_promote.yaml.tftpl"
     destination = ".github/workflows/promote.yaml"
@@ -58,24 +45,6 @@ templates = {
     destination = "SECURITY.md"
     vars = {
       repository = "openstack-exporter-operator"
-    }
-  }
-  pyproject = {
-    source      = "./templates/github/pyproject.toml.tftpl"
-    destination = "pyproject.toml"
-    vars = {
-      coverage_threshold_percent = "100"
-    }
-  }
-  tox = {
-    source      = "./templates/github/tox.ini.tftpl"
-    destination = "tox.ini"
-    vars = {
-      functest_type     = "zaza"
-      unittest_type     = "pytest"
-      is_python_project = "true"
-      enable_pylint     = "false"
-      enable_mypy       = "false"
     }
   }
   bug_report = {

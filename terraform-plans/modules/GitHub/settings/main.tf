@@ -50,8 +50,7 @@ resource "github_actions_repository_permissions" "repo" {
       "tiobe/*",
       "convictional/*",
       "mattermost/*",
-      "astral-sh/setup-uv@*",
-      "extractions/setup-just@*"
+      "astral-sh/setup-uv@*"
     ]
   }
 }

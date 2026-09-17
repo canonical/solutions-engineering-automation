@@ -67,7 +67,7 @@ templates = {
     source      = "./templates/github/pyproject.toml.tftpl"
     destination = "pyproject.toml"
     vars = {
-      coverage_threshold_percent = "100"
+      coverage_threshold_percent = "70"
     }
   }
   tox = {
@@ -75,7 +75,7 @@ templates = {
     destination = "tox.ini"
     vars = {
       functest_type     = "pytest"
-      unittest_type     = "none"
+      unittest_type     = "pytest"
       is_python_project = "false"
       enable_pylint     = "false"
       enable_mypy       = "false"

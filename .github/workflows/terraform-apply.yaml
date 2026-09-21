@@ -59,6 +59,7 @@ jobs:
             - snap-tempest_stable_caracal
             - snap-tempest_stable_dalmatian
             - snap-tempest_stable_epoxy
+            - snap-tempest_stable_gazpacho
             - solutions-engineering-automation_main
             - tailscale-snap_main
             - headscale-snap_main

@@ -29,8 +29,11 @@ resource "github_repository" "repo" {
 
   allow_update_branch    = true
   delete_branch_on_merge = true
-  vulnerability_alerts   = true
+}
 
+resource "github_repository_vulnerability_alerts" "vulnerability_alerts" {
+  repository = var.repository
+  enabled    = true
 }
 
 resource "github_actions_repository_permissions" "repo" {
